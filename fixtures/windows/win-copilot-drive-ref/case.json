@@ -1,0 +1,15 @@
+{
+  "case_id": "win-copilot-drive-ref",
+  "cwd": "repo",
+  "env": {},
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "Copilot drive-letter reference is blocked at the syntactic level (IMPORT_ESCAPE).",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "copilot .github/copilot-instructions.md references C:\\shared\\drive-note.md -> IMPORT_ESCAPE, BLOCK",
+  "windows_note": "NOT_RUN: real drive-letter resolution. The escape verdict would still hold on Windows (outside the repo).",
+  "working_files": []
+}

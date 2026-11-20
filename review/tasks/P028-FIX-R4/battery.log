@@ -1,0 +1,145 @@
+=== pytest ===
+Thu Nov 19 23:50:50 UTC 2026
+..........................................................ss............ [ 45%]
+........................................................................ [ 68%]
+........................................................................ [ 91%]
+...................ssss.....                                             [100%]
+310 passed, 6 skipped in 7.32s
+=== S0 gate ===
+  S23  -> s0-git-missing-import, unit:test_deleted_tracked_file
+  S24  -> s0-git-rename
+  S25  -> codex-norepo
+known_escape_detection=15/15
+junction: fs/windows pure-string probes executed; real junction resolution NOT_RUN on Linux (T011, Windows runner) -- not faked
+== 10. regression: pytest + cargo test + compare_oracle --all ==
+  pytest: ........................................................................ [ 91%]
+  pytest: ...................ssss.....                                             [100%]
+  pytest: 310 passed, 6 skipped in 7.55s
+  cargo: test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+  cargo: test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+  compare_oracle: resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+  compare_oracle: source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+  compare_oracle: fs_parity=100.0% git_scenarios=PASS
+== manifest: review/S0_FIXTURE_MANIFEST.json ==
+manifest entries=60
+S0_GATE
+fixtures=60
+production_oracle_parity=100%
+receipt_hash_parity=100%
+determinism=100/100
+fail_closed=PASS
+network_access=0
+human_labels=0
+RESULT=PASS
+S0 exit: 0
+=== cargo test --locked ===
+error: could not find `Cargo.toml` in `/home/hatch/workspace/p028-instructionroot` or any parent directory
+cargo exit: 0
+=== compare_oracle --all ===
+resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+fs_parity=100.0% git_scenarios=PASS
+=== cargo test --locked (03_oracle/rust) ===
+warning: fields `exists`, `depth`, and `error` are never read
+71 |     pub error: Option<String>,
+test paths::tests::lexical_errors ... ok
+test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test resolve_error_exit_codes ... ok
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+=== Windows corpus (Linux sim) ===
+exit: 0
+== 2. pure-string probes: win-probes ==
+[PASS] win-probes (10 probes)
+== 3. determinism spot check (win-drive-import x10+10) ==
+determinism=PASS distinct_hashes=1
+receipt_cases=15 passed=15 failed=0
+source_parity=15/15
+trust_parity=15/15
+edge_parity=15/15
+verdict_parity=15/15
+hash_parity=15/15
+probes=10 passed=True
+RESULT=PASS
+=== security static check ===
+
+shell_true=0
+network_runtime=0
+telemetry=0
+secret_fixture_leaks=0
+RESULT=PASS
+=== CI simulation (system python3) ===
+   discovered_by: codex.repo-chain
+   sha256: 853797948eb0
+
+receipt_hash: 234752a5f41caecd73ad77e5692efc50238e2f00795f0e0f9ec63e4ad0c6fcf5
+SIMULATION: PASS (2/2 cases)
+=== dashboard smoke ===
+/ -> 200
+index.html -> 000
+app.js -> 000
+style.css -> 000
+receipt.json -> 000
+receipt-pass.json -> 000
+receipt-block.json -> 000
+=== dashboard smoke (corrected URL form; earlier 000s were my missing-slash bug: 8770index.html = malformed port, curl exit 3) ===
+/ -> 200
+index.html -> 000
+app.js -> 000
+style.css -> 000
+receipt.json -> 000
+receipt-pass.json -> 000
+receipt-block.json -> 000
+=== dashboard smoke (correct URLs http://127.0.0.1:8771/<path>) ===
+/ -> 200
+/index.html -> 200
+/app.js -> 200
+/style.css -> 200
+/receipt.json -> 200
+/receipt-pass.json -> 200
+/receipt-block.json -> 200
+=== freeze ===
+freeze commit: b2f9ceb2a24a61211304bd9af357c4c5d314935a
+freeze short: b2f9ceb
+-rw-rw---- 1 root root 951147 Nov 19 23:58 07_release/source.zip
+source.zip files: 549
+=== wheel build (system python3, offline, --no-build-isolation) ===
+  Created wheel for instructionroot: filename=instructionroot-1.0.0-py3-none-any.whl size=82964 sha256=c4b5bf6e2ab165c94526c835e0195cff6c88376034fc521f89b42e239f4b93eb
+  Stored in directory: /home/hatch/.cache/pip/wheels/40/34/84/aa08ccfa4639fbb77f2ac5fc37c0ff1f2147aba1a0ebd9a818
+Successfully built instructionroot
+total 84
+-rw-rw---- 1 root root 82964 Nov 19 23:58 instructionroot-1.0.0-py3-none-any.whl
+=== oracle build (cargo --release --locked --offline) ===
+
+warning: `instructionroot-oracle` (bin "instructionroot-oracle") generated 6 warnings
+    Finished `release` profile [optimized] target(s) in 0.36s
+-rwxrwx--- 2 root root 1178272 Nov 19 23:14 03_oracle/rust/target/release/instructionroot-oracle
+c4ddc0dee15bdcf4c0fe80ed7dcc057f3a40e5642e1967218fe09fbdf823b517  03_oracle/rust/target/release/instructionroot-oracle
+=== bundle clone checks ===
+freeze commit present
+release commit present
+HEAD: 04195cf814f0182bddcf11b23d518ae48b0db6fb
+status empty (clean)
+fresh git archive byte-identical to source.zip
+OK  05_release_FIXR4_b2f9ceb source.zip
+OK  05_release_FIXR4_b2f9ceb dist.zip
+OK  05_release_FIXR4_b2f9ceb P028-instructionroot-bundle.zip
+OK  05_release_FIXR4_b2f9ceb RELEASE_MANIFEST.json
+OK  05_release_FIXR4_b2f9ceb FREEZE_REPORT.md
+OK  05_release_FIXR4_b2f9ceb p028-instructionroot-b2f9ceb.bundle
+OK  05_release_FIXR4_b2f9ceb SHA256SUMS.txt
+OK  04_review_FIXR4_b2f9ceb TASK_RESULT.md
+OK  04_review_FIXR4_b2f9ceb battery.log
+OK  04_review_FIXR4_b2f9ceb verify_release.log
+OK  03_evidence_FIXR4_b2f9ceb S0_GATE.md
+OK  03_evidence_FIXR4_b2f9ceb S0_LOG.txt
+OK  03_evidence_FIXR4_b2f9ceb S0_ORACLE_SUMMARY.json
+OK  03_evidence_FIXR4_b2f9ceb S0_FIXTURE_MANIFEST.json
+OK  03_evidence_FIXR4_b2f9ceb S0_RECEIPT_HASHES.txt
+OK  03_evidence_FIXR4_b2f9ceb windows_corpus.log
+WROTE /home/hatch/workspace/p028-instructionroot/review/tasks/P028-FIX-R4/drive-archive.json — 16/16 verified
+=== V4 pack build ===
+pack staged from freeze commit b2f9ceb (git show, 6 files); substitutions: TASK §0 + branch + OQ-8, AGENT_PROMPT identity, EVIDENCE_INDEX identity + E01-1, CONSISTENCY §1 rows
+pack: ~/workspace/your_files/P028_WIN_JUNCTION_PACK_V4.zip 841806 B sha 8146241310ca4a93e6e5f592122d73196e6bb209b25bfc65caa5c5eabdd95547
+inner source.zip sha 1adcd3e3ad3a2532e0a334fe9bc86d3965655b549982e193bd6678b41ed3a735 == frozen source.zip: True
+.ps1 BOM: ef bb bf; runner os.lstat line 123; staged-vs-frozen diff lines: TASK 18, AGENT_PROMPT 2, EVIDENCE 6, CONSISTENCY 4, ps1 0, runner 0
+§0 table: freeze b2f9ceb2a24a61211304bd9af357c4c5d314935a, release 04195cf814f0182bddcf11b23d518ae48b0db6fb, HEAD 04195cf; no stale §0 values (one remaining 0110fa8 is the historical P1-01 note, same as V3 pack); 00_control/ clean

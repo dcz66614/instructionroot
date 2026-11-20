@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-cycle",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "import cycle a<->b terminates (each file expanded once)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "import cycle a<->b terminates (each file expanded once)",
+  "working_files": []
+}

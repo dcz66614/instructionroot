@@ -1,0 +1,6 @@
+{
+  "case_id": "separators",
+  "os": "linux",
+  "synthetic": true,
+  "title": "plain tree; tests use // and trailing /"
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-git-staged-new",
+  "cwd": "repo/services",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "git ls-files matches a staged file, and status is non-empty: GIT_MODIFIED.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "staged-new services AGENTS.md: tracked + modified -> WARN (T004 ruling)",
+  "working_files": []
+}

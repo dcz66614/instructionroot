@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-git-unicode",
+  "cwd": "repo/\u4e2d\u6587",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Unicode is passed through byte-for-byte (Q3); no NFC/NFD normalisation.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "unicode directory (\u4e2d\u6587) with AGENTS.md, committed -> PASS (S21)",
+  "working_files": []
+}

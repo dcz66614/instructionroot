@@ -1,0 +1,63 @@
+# P028-T011 command log (all commands run from ~/workspace/p028-instructionroot)
+
+## Baseline
+.venv/bin/python -m pytest -q
+# 239 passed, 2 skipped in 1.65s (task-start baseline; T008's test_cli.py landed later in parallel)
+
+## Corpus build + first runner pass
+.venv/bin/python fixtures/windows/build_windows_fixtures.py
+# windows receipt cases=13
+.venv/bin/python scripts/run_windows_corpus.py -v
+# 9/13 receipt cases PASS; 4 failures investigated (see TASK_RESULT.md):
+#   win-case-variant (fixture bug: services/AGENTS.md present by mistake),
+#   win-copilot-drive-ref (hand-derivation bug: ref relative to repo/.github/),
+#   win-junction-inside / win-junction-escape (real F6 divergence + one fixture bug:
+#   escape symlink "../../outside/Downloads" dangled -- wrong depth, fixed to "../outside/Downloads")
+
+## Grounding the junction mechanism (read-only inspection, no production patch)
+.venv/bin/python -c "build_production_receipt + run_oracle_resolve for win-junction-inside/escape"
+# inside: both sources repo/AGENTS.md + repo/shared/AGENTS.md, PASS;
+#   only diff: workspace.cwd (production lexical repo/linked, Oracle resolved repo/shared)
+# escape: both one source outside/Downloads/AGENTS.md OUTSIDE_REPO, BLOCK;
+#   only diff: workspace.cwd
+# Mechanism: resolver.discover_with_report canonicalises the CWD and builds the
+# ResolveContext on cwd_resolved; build_receipt records the lexical CWD (production)
+# vs the resolved CWD (Oracle).
+
+## After fixes (generator: case-variant fixture, copilot ref, escape symlink;
+## index: junction expectations, copilot syntax, 2 new import-junction cases;
+## runner: bounded known-gap support, determinism case -> win-drive-import)
+.venv/bin/python scripts/run_windows_corpus.py -v
+# receipt_cases=15 passed=15 failed=0
+# source_parity=15/15 trust_parity=15/15 edge_parity=15/15 verdict_parity=15/15 hash_parity=13/15
+# probes=10 passed=True
+# determinism=PASS distinct_hashes=1
+# RESULT=PASS
+
+## Unit tests
+.venv/bin/python -m pytest 05_tests/unit/test_windows_corpus.py -q
+# 16 passed, 4 skipped in 0.03s
+
+## Full regression
+.venv/bin/python -m pytest -q
+# 283 passed, 6 skipped in 6.92s
+# (= task-start baseline 239/2 + T008 test_cli.py 28 committed in parallel + T011 16 passed / 4 skipped)
+cargo test --manifest-path 03_oracle/rust/Cargo.toml
+# test result: ok. 26 passed; test result: ok. 5 passed
+.venv/bin/python scripts/compare_oracle.py --all
+# resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+# source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+# fs_parity=100.0% git_scenarios=PASS
+.venv/bin/python scripts/s0_gate.py
+# S0_GATE / fixtures=60 / production_oracle_parity=100% / receipt_hash_parity=100%
+# determinism=100/100 / fail_closed=PASS / network_access=0 / human_labels=0 / RESULT=PASS
+
+## Cleanliness checks
+git status --short
+# only .gitignore modified; new: fixtures/windows/, scripts/run_windows_corpus.py,
+# 05_tests/unit/test_windows_corpus.py, review/tasks/P028-T011/
+# (review/COORDINATOR_LOG.md + web/ are parallel tasks' files, not T011's)
+git diff --stat -- 01_s0/expected/ scripts/s0_gate.py 02_src/ 03_oracle/ 00_contract/
+# (empty -- frozen areas untouched)
+git check-ignore -v fixtures/windows/win-junction-inside/repo/AGENTS.md
+# .gitignore:21:fixtures/windows/*/repo/ (nested repo/ trees correctly ignored)

@@ -1,0 +1,25 @@
+{
+  "case_id": "fs/unicode",
+  "expected_probes": [
+    {
+      "canonical": "{case}/repo/ünïcode-✓/AGENTS-✓.md",
+      "exists": true,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "repo/ünïcode-✓/AGENTS-✓.md",
+      "resolved": "{case}/repo/ünïcode-✓/AGENTS-✓.md"
+    },
+    {
+      "canonical": "{case}/repo/中文/说明.md",
+      "exists": true,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "repo/中文/说明.md",
+      "resolved": "{case}/repo/中文/说明.md"
+    }
+  ],
+  "kind": "fs",
+  "notes": "Unified S0 expected index (T007). Canonicalize probes transcribed from the T002 fixture tree; {case} is the case directory. Windows probes are pure-string (real junction/drive resolution is NOT_RUN on Linux)."
+}

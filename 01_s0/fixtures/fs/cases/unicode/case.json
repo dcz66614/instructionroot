@@ -1,0 +1,6 @@
+{
+  "case_id": "unicode",
+  "os": "linux",
+  "synthetic": true,
+  "title": "Unicode directory / file names"
+}

@@ -1,0 +1,25 @@
+{
+  "case_id": "fs/dir-symlink",
+  "expected_probes": [
+    {
+      "canonical": "{case}/repo/linkdir/AGENTS.md",
+      "exists": true,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": true,
+      "raw": "repo/linkdir/AGENTS.md",
+      "resolved": "{case}/repo/services/AGENTS.md"
+    },
+    {
+      "canonical": "{case}/repo/loopdir-a/x",
+      "exists": false,
+      "is_broken_symlink": false,
+      "is_loop": true,
+      "is_symlink": true,
+      "raw": "repo/loopdir-a/x",
+      "resolved": null
+    }
+  ],
+  "kind": "fs",
+  "notes": "Unified S0 expected index (T007). Canonicalize probes transcribed from the T002 fixture tree; {case} is the case directory. Windows probes are pure-string (real junction/drive resolution is NOT_RUN on Linux)."
+}

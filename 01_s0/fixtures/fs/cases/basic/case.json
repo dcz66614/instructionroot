@@ -1,0 +1,6 @@
+{
+  "case_id": "basic",
+  "os": "linux",
+  "synthetic": true,
+  "title": "repo + home + outside trees, plain files"
+}

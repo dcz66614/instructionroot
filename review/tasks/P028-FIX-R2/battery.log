@@ -1,0 +1,126 @@
+=== P028 FIX-R2 battery — 2026-11-19 18:46:52 UTC — HEAD de601873425b9036d48916f39c4143bd787d8cc7 ===
+--- 1 pytest ---
+........................................................................ [ 24%]
+..........................................................ss............ [ 48%]
+........................................................................ [ 72%]
+........................................................................ [ 96%]
+.ssss.....                                                               [100%]
+292 passed, 6 skipped in 8.71s
+exit=0
+--- 2 cargo test ---
+test textscan::tests::glob_basename_and_doublestar ... ok
+test textscan::tests::frontmatter_unparseable_is_absent ... ok
+test trust::tests::git_states_map_to_r001_r002_r003 ... ok
+test trust::tests::missing_outranks_git_state ... ok
+test trust::tests::managed_scope_maps_to_user_scope_r004 ... ok
+test trust::tests::priority_order_is_first_match_wins ... ok
+test trust::tests::r010_annotates_only_r001_and_r004 ... ok
+test trust::tests::symlink_escape_derived_from_roots ... ok
+test trust::tests::user_scope_and_outside_repo ... ok
+test trust::tests::verdict_derivation ... ok
+test trust::tests::no_git_state_is_r009 ... ok
+
+test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cli.rs (03_oracle/rust/target/debug/build/instructionroot-oracle/30fcc5430f8955ee/out/cli-30fcc5430f8955ee)
+
+running 5 tests
+test canonicalize_loop_and_windows ... ok
+test resolve_error_exit_codes ... ok
+test resolve_import_escape_blocks ... ok
+test resolve_copilot_relative_expands_and_absolute_blocks ... ok
+test resolve_claude_chain_pass_and_deterministic ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+
+exit=0
+--- 3 compare_oracle --all ---
+resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+fs_parity=100.0% git_scenarios=PASS
+exit=0
+--- 4 s0_gate ---
+  S18  -> codex-basic
+  S19  -> s0-downloads-import
+  S20  -> fs/dotdot, fs/separators
+  S21  -> s0-git-unicode
+  S22  -> s0-case-sensitive
+  S23  -> s0-git-missing-import, unit:test_deleted_tracked_file
+  S24  -> s0-git-rename
+  S25  -> codex-norepo
+known_escape_detection=15/15
+junction: fs/windows pure-string probes executed; real junction resolution NOT_RUN on Linux (T011, Windows runner) -- not faked
+== 10. regression: pytest + cargo test + compare_oracle --all ==
+  pytest: ........................................................................ [ 96%]
+  pytest: .ssss.....                                                               [100%]
+  pytest: 292 passed, 6 skipped in 7.43s
+  cargo: test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+  cargo: test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+  compare_oracle: resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+  compare_oracle: source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+  compare_oracle: fs_parity=100.0% git_scenarios=PASS
+== manifest: review/S0_FIXTURE_MANIFEST.json ==
+manifest entries=60
+S0_GATE
+fixtures=60
+production_oracle_parity=100%
+receipt_hash_parity=100%
+determinism=100/100
+fail_closed=PASS
+network_access=0
+human_labels=0
+RESULT=PASS
+exit=0
+--- 5 windows corpus ---
+[PASS] win-tilde-user-import (BLOCK, 13f024d3f219)
+[PASS] win-unc-import (BLOCK, 897f6e6a2297)
+[PASS] win-unicode-chain (PASS, 8ed0206b09a8)
+== 2. pure-string probes: win-probes ==
+[PASS] win-probes (10 probes)
+== 3. determinism spot check (win-drive-import x10+10) ==
+determinism=PASS distinct_hashes=1
+receipt_cases=15 passed=15 failed=0
+source_parity=15/15
+trust_parity=15/15
+edge_parity=15/15
+verdict_parity=15/15
+hash_parity=15/15
+probes=10 passed=True
+RESULT=PASS
+exit=0
+--- 6 security static check ---
+NOTE (correction, freeze worker): the first run of this section printed
+RESULT=FAIL (shell_true=1, network_runtime=1). Both hits were the battery
+driver script itself (review/tasks/P028-FIX-R2/run-battery.sh:28, a curl
+smoke-test line) — the checker scans the whole tree including review/.
+The script was moved out of the repo (~/workspace/r20-verification/tmp/)
+and the check re-run cleanly; no product file is involved.
+Re-run (same tree, script removed):
+shell_true=0
+network_runtime=0
+telemetry=0
+secret_fixture_leaks=0
+RESULT=PASS
+exit=0
+--- 7 CI simulation ---
+
+receipt_hash: c7bb706b0b7a0636e0322d8888d2eab24e07c4c22eab5d76c2136703fe430b75
+case BLOCK expected_exit=20 actual_exit=20 verdict_found=True -> OK
+   discovered_by: codex.repo-chain
+   sha256: 853797948eb0
+
+receipt_hash: facf9f044b9439b3d12df78f02e55cd6bfd518737aa21df3326b1b410d307167
+SIMULATION: PASS (2/2 cases)
+exit=0
+--- 8 dashboard smoke ---
+NOTE (correction, freeze worker): the first run built smoke URLs without the
+leading slash (http://127.0.0.1:8767index.html), so 6/7 showed 000. Re-run
+with correct URLs:
+/ -> 200
+/index.html -> 200
+/app.js -> 200
+/style.css -> 200
+/receipt.json -> 200
+/receipt-pass.json -> 200
+/receipt-block.json -> 200
+=== battery done ===

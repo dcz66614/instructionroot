@@ -1,0 +1,6 @@
+{
+  "case_id": "dir-symlink",
+  "os": "linux",
+  "synthetic": true,
+  "title": "symlink to a directory + a dir-symlink loop pair"
+}

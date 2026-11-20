@@ -1,0 +1,15 @@
+{
+  "case_id": "win-junction-inside",
+  "cwd": "repo/linked",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Junction analogue: Linux dir symlink stands in for an NTFS junction. Discovery runs on the resolved CWD (repo/shared), so the discovered file is repo/shared/AGENTS.md. Known parity gap F6: production records workspace.cwd lexically, the Oracle resolved, so the receipt hashes differ.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "repo/linked is a dir symlink to in-repo shared -> GIT_TRACKED, PASS (junction analogue)",
+  "windows_note": "NOT_RUN: real NTFS junction resolution (reparse point). The symlink analogue exercises the same lexical/resolved + containment path. Known parity gap F6 (workspace.cwd) applies on Linux too.",
+  "working_files": []
+}

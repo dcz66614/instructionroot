@@ -1,0 +1,199 @@
+P028 T012 security_static_check
+root=/home/hatch/workspace/p028-instructionroot
+files_scanned=859
+
+== 1. shell ==
+subprocess/os-spawn/eval/exec call sites: 33
+  01_s0/fixtures/s0/build_s0_fixtures.py:52 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  02_src/instructionroot/cli.py:652 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  02_src/instructionroot/cli.py:735 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  02_src/instructionroot/cli.py:865 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  02_src/instructionroot/git.py:140 subprocess.run :: shell=False (explicit)
+  03_oracle/rust/src/git.rs:100 Command::new('git') (no shell)
+  03_oracle/rust/tests/cli.rs:31 Command::new('git') (no shell)
+  05_tests/unit/test_cli.py:31 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  05_tests/unit/test_cli.py:38 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  05_tests/unit/test_git.py:53 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  05_tests/unit/test_trust.py:421 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  fixtures/build_demo_fixtures.py:61 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  fixtures/build_demo_fixtures.py:77 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  fixtures/windows/build_windows_fixtures.py:69 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  instructionroot:0 shell launcher: execs python3 -m instructionroot only (eval/curl/wget found: False)
+  scripts/compare_oracle.py:200 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/compare_oracle.py:220 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/compare_oracle.py:221 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/compare_oracle.py:236 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/compare_oracle.py:883 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/run-verify.sh:0 shell launcher: execs python3 -m instructionroot only (eval/curl/wget found: False)
+  scripts/run_windows_corpus.py:366 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:626 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:657 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:759 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:931 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:944 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:956 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:988 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:1139 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/simulate_ci.py:90 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/simulate_ci.py:168 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/simulate_ci.py:173 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+shell=True violations (AST): 0
+shell=True violations (raw code sweep): 0
+
+== 2. network ==
+production network findings: 0
+test/support-only network findings (listed separately, not counted): 0
+accepted local same-origin web fetches (relative receipt file): 1
+  ACCEPTED web/app.js:389 local same-origin fetch (relative receipt file, no external URL): return fetch(fileName).then(function (response) {
+network violations (raw code sweep): 0
+
+== 3. telemetry ==
+telemetry findings: 0
+
+== 4. secrets in receipts/fixtures ==
+secret findings (all scopes): 0
+accepted placeholder assignments: 0
+
+== 5. raw-text sweep: accepted hits (string/comment/docs/data) ==
+accepted raw hits: 115
+  ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:201 shell token 'shell=True' :: shell=True [documentation-prose: documentation prose describing the rule]
+  ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:202 shell token 'os.system(' :: os.system(...) [documentation-prose: documentation prose describing the rule]
+  ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:1032 shell token 'shell=True' :: - `shell=True` 搜索； [documentation-prose: documentation prose describing the rule]
+  ACCEPTED 00_contract/receipt_schema.json:18 network token 'requests' :: "machine username (unless the user explicitly requests it)", [data-value: JSON data value, not executed code]
+  ACCEPTED 05_tests/unit/test_git.py:275 shell token 'shell=True' :: subcommand names, no shell=True, and do use shell=False.""" [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text, "%s contains shell=True" % name [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text, "%s contains shell=True" % name [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED review/S0_LOG.txt:53 network token 'urllib' :: network token: scripts/security_static_check.py: urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:54 network token 'http.client' :: network token: scripts/security_static_check.py: http.client [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:55 network token 'httpx' :: network token: scripts/security_static_check.py: httpx [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:56 network token 'requests' :: network token: scripts/security_static_check.py: requests [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:57 network token 'urlopen' :: network token: scripts/security_static_check.py: urlopen [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:58 network token 'socket.' :: network token: scripts/security_static_check.py: socket. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:59 network token 'TcpStream' :: network token: scripts/security_static_check.py: TcpStream [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:60 network token 'reqwest' :: network token: scripts/security_static_check.py: reqwest [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:61 network token 'std::net' :: network token: scripts/security_static_check.py: std::net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:63 network token 'curl' :: network token: scripts/security_static_check.py: curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/S0_LOG.txt:64 network token 'wget' :: network token: scripts/security_static_check.py: wget [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T004/TASK_RESULT.md:47 shell token 'shell=True' :: $ grep -nE 'fetch|pull|push|checkout|reset|clean|shell=True|os\.system' \ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:205 shell token 'shell=True' :: - 安全静态检查：新模块与改动的 runner / 生成器中 `shell=True` / [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'requests' :: `os.system` / `urllib` / `requests` / `socket` 匹配数为 0；无网络调用， [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'urllib' :: `os.system` / `urllib` / `requests` / `socket` 匹配数为 0；无网络调用， [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007/TASK_RESULT.md:32 shell token 'shell=True' :: - network_access=0 (static grep over 02_src + 03_oracle/rust/src + scripts, 0 tokens, 0 `shell=True` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T009/TASK_RESULT.md:78 network token 'requests' :: ### Zero external requests [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T009/command-log.txt:7 network token 'curl' :: python3 -m http.server 8765 --directory web  # curl 200s for all 7 files [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'curl' :: `curl` / `wget`, which the gate's static grep (`scripts/*.py`) flags. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'wget' :: `curl` / `wget`, which the gate's static grep (`scripts/*.py`) flags. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'curl' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'import socket' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'urllib' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'wget' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 shell token 'shell=True' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'curl' :: (no `eval`/`curl`/`wget`). Accepted. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'wget' :: (no `eval`/`curl`/`wget`). Accepted. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'curl' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'requests' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'socket.' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'urllib' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 shell token 'shell=True' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:75 network token 'requests' :: logs, and JSON data values (e.g. the word "requests" in [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:81 network token 'requests' :: file. Plan §14 forbids *external* network requests; this is the [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:54 network token 'urllib' :: network token: scripts/security_static_check.py: urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:55 network token 'http.client' :: network token: scripts/security_static_check.py: http.client [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:56 network token 'httpx' :: network token: scripts/security_static_check.py: httpx [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:57 network token 'requests' :: network token: scripts/security_static_check.py: requests [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:58 network token 'urlopen' :: network token: scripts/security_static_check.py: urlopen [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:59 network token 'socket.' :: network token: scripts/security_static_check.py: socket. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:60 network token 'TcpStream' :: network token: scripts/security_static_check.py: TcpStream [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:61 network token 'reqwest' :: network token: scripts/security_static_check.py: reqwest [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:62 network token 'std::net' :: network token: scripts/security_static_check.py: std::net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:64 network token 'curl' :: network token: scripts/security_static_check.py: curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:65 network token 'wget' :: network token: scripts/security_static_check.py: wget [documentation-prose: documentation prose describing the rule]
+  ACCEPTED scripts/s0_gate.py:215 network token 'socket.' :: if event.startswith("socket."): [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'from socket' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'http.client' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'httpx' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'import socket' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'urllib' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:848 network token 'curl' :: "UdpSocket", "curl", "wget", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:848 network token 'wget' :: "UdpSocket", "curl", "wget", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:876 shell token 'shell=True' :: if "shell=True" in path.read_text(encoding="utf-8", errors="replace"): [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:883 shell token 'shell=True' :: raise GateFailure("shell=True found: %r" % (shell_true,)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:15 shell token 'shell=True' :: ``shell=True`` would flag the *check-pattern string literals* inside [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.request", "urllib.error", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.request", "urllib.error", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.request", "urllib.error", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:97 network token 'http.client' :: "http.client", "http.server", "http.cookiejar", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:98 network token 'httpx' :: "requests", "httpx", "aiohttp", "urllib3", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:98 network token 'requests' :: "requests", "httpx", "aiohttp", "urllib3", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:98 network token 'urllib' :: "requests", "httpx", "aiohttp", "urllib3", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:103 network token 'httpx' :: "socket.", "urllib.", "requests.", "httpx.", "aiohttp.", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:103 network token 'requests' :: "socket.", "urllib.", "requests.", "httpx.", "aiohttp.", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:103 network token 'socket.' :: "socket.", "urllib.", "requests.", "httpx.", "aiohttp.", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:103 network token 'urllib' :: "socket.", "urllib.", "requests.", "httpx.", "aiohttp.", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", "socket.create_connection", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", "socket.create_connection", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:104 network token 'urlopen' :: "urlopen", "socket.socket", "socket.create_connection", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:107 network token 'std::net' :: re.compile(r"\bstd::net\b"), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:108 network token 'TcpStream' :: re.compile(r"\bTcpStream\b"), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:112 network token 'reqwest' :: re.compile(r"\breqwest\b"), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:117 network token 'curl' :: "reqwest", "hyper", "tokio", "curl", "ureq", "tungstenite", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:117 network token 'reqwest' :: "reqwest", "hyper", "tokio", "curl", "ureq", "tungstenite", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:131 telemetry token 'mixpanel' :: "sentry_sdk", "posthog", "mixpanel", "segment", "analytics", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:131 telemetry token 'posthog' :: "sentry_sdk", "posthog", "mixpanel", "segment", "analytics", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:131 telemetry token 'sentry' :: "sentry_sdk", "posthog", "mixpanel", "segment", "analytics", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:178 network token 'urllib' :: ("network", re.compile(r"urllib")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:182 network token 'urlopen' :: ("network", re.compile(r"urlopen")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:184 network token 'TcpStream' :: ("network", re.compile(r"TcpStream")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:185 network token 'reqwest' :: ("network", re.compile(r"reqwest")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:186 network token 'std::net' :: ("network", re.compile(r"std::net")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:189 telemetry token 'sentry' :: ("telemetry", re.compile(r"sentry")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:190 telemetry token 'posthog' :: ("telemetry", re.compile(r"posthog")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:191 telemetry token 'mixpanel' :: ("telemetry", re.compile(r"mixpanel")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:343 shell token 'shell=True' :: ``shell=True`` (or a non-constant ``shell=``) in real code. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:373 shell token 'shell=True' :: status = "shell=True  <-- VIOLATION" [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:396 network token 'curl' :: # Shell launcher(s) at repo root: eval / curl / wget would be a finding. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:396 network token 'wget' :: # Shell launcher(s) at repo root: eval / curl / wget would be a finding. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:408 network token 'curl' :: "only (eval/curl/wget found: %s)" % bad)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:408 network token 'wget' :: "only (eval/curl/wget found: %s)" % bad)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:448 network token 'curl' :: # tool (curl/wget/...) as argv[0] would be a network call. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:448 network token 'wget' :: # tool (curl/wget/...) as argv[0] would be a network call. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:455 network token 'curl' :: if el.split("/")[-1] in ("curl", "wget", "nc", "telnet", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:455 network token 'wget' :: if el.split("/")[-1] in ("curl", "wget", "nc", "telnet", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:661 shell token 'shell=True' :: numbers (a shell=True in code would land here as well as in AST). [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:927 shell token 'shell=True' :: print("shell=True violations (AST): %d" % len(shell_true)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:930 shell token 'shell=True' :: print("shell=True violations (raw code sweep): %d" % len(extra_shell)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED web/README.md:18 network token 'requests' :: `receipt.edges` arrays, so they cannot disagree. No external requests: [documentation-prose: documentation prose describing the rule]
+  ACCEPTED web/app.js:5 network token 'requests' :: * that served this page. No CDN, fonts, analytics, or other requests. [comment: comment describing the rule]
+  ACCEPTED web/index.html:38 network token 'requests' :: <p class="scope-note" id="scope-note">This dashboard only shows <em>which</em> instruction files a h [documentation-prose: documentation prose describing the rule]
+
+== 6. license / packaging ==
+  LICENSE present: MIT License, grant clause present
+  CLI_VERSION=1.0.0
+  pyproject name=instructionroot
+  pyproject version=1.0.0 (== CLI_VERSION)
+  pyproject license=MIT
+  requires-python=>=3.12
+  console entry point: instructionroot = instructionroot.cli:main
+  entry-point target instructionroot.cli:main resolves (callable)
+  dependencies=[] (stdlib only)
+  build-system: setuptools
+  oracle Cargo.toml license=MIT
+license_package_ok=true
+
+== 7. receipt privacy (PROJECT_BOOK §18.1/§18.2) ==
+  receipt JSON files checked: 64 (no content/username/commit-message keys, no multiline values)
+  receipt.py source fields ['canonical_path', 'discovery_rule', 'git', 'is_symlink', 'phase', 'precedence', 'raw_path', 'resolved_path', 'scope', 'sha256', 'source_id', 'symlink_target', 'trust']: no content field (paths/hashes/git/trust only)
+  cli.py uses redact_home ($HOME shown as <HOME>/...)
+receipt_privacy_ok=true
+
+shell_true=0
+network_runtime=0
+telemetry=0
+secret_fixture_leaks=0
+RESULT=PASS

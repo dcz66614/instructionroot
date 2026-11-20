@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-symlink-escape",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "import target is a symlink inside the repo pointing outside (S07/S09)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "import target is a symlink inside the repo pointing outside (S07/S09)",
+  "working_files": []
+}

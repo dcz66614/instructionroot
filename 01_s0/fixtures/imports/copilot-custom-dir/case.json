@@ -1,0 +1,16 @@
+{
+  "case_id": "copilot-custom-dir",
+  "cwd": "repo",
+  "env": {
+    "COPILOT_CUSTOM_INSTRUCTIONS_DIRS": "{case}/extra"
+  },
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "custom-dir AGENTS.md: in-dir + in-repo references allowed, escape outside both BLOCKs",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "custom-dir AGENTS.md: in-dir + in-repo references allowed, escape outside both BLOCKs",
+  "working_files": []
+}

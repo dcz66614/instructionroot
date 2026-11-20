@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-import-depth5",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "import chain of 5 hops: the 5th hop is enumerated but BLOCKed (S14)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "import chain of 5 hops: the 5th hop is enumerated but BLOCKed (S14)",
+  "working_files": []
+}

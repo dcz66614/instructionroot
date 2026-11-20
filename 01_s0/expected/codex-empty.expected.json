@@ -1,0 +1,17 @@
+{
+  "case_id": "codex-empty",
+  "expected_edges": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 0,
+  "expected_sources": [],
+  "expected_verdict": "PASS",
+  "forbidden_trust": [
+    "NOT_OBSERVED",
+    "SYMLINK_ESCAPE",
+    "IMPORT_ESCAPE",
+    "OUTSIDE_REPO",
+    "MISSING"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). Sources/edges transcribed from the T003 stage expected file; trust/verdict hand-derived from the frozen contracts (see build_s0_expected.py)."
+}

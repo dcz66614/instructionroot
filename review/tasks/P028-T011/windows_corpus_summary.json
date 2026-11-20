@@ -1,0 +1,124 @@
+{
+  "buckets": {
+    "edge": 15,
+    "hash": 15,
+    "source": 15,
+    "trust": 15,
+    "verdict": 15
+  },
+  "determinism_spot_check": true,
+  "per_case": [
+    {
+      "case_id": "win-case-both",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "c2f5672aca15ec3b1428a43ffdd6d9a6059c4089a9cc09f35b5f3c10b4a77d87",
+      "verdict": "PASS"
+    },
+    {
+      "case_id": "win-case-variant",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "d0f9aa90ae2ce9b400f6b34cd607c2614590c8082c12497cfba1fdf3714511dc",
+      "verdict": "PASS"
+    },
+    {
+      "case_id": "win-copilot-drive-ref",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "6cdc412f21591952a84ce303220b7ee6e1539e55f47dd90c99cc13ac46319274",
+      "verdict": "BLOCK"
+    },
+    {
+      "case_id": "win-drive-import",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "a6df68286c80d4bc03a5e6f7f8e0f01725aff2cfb6e924d5a97eec1288f7949c",
+      "verdict": "BLOCK"
+    },
+    {
+      "case_id": "win-drive-relative-import",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "385e924d6d6864430d79d0a0a55f512e69dd18d36c5bd179b985fcfe41df0473",
+      "verdict": "BLOCK"
+    },
+    {
+      "case_id": "win-git-case-rename",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "87e95d4ab3429f1f2788f68c19fb6c02987d867ee5f7d62e3fda68b83bee79ea",
+      "verdict": "PASS"
+    },
+    {
+      "case_id": "win-git-deleted-chain",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "5c2c449367cb6d5080c60b7ed6808540b43cfd2a7c0eb196e5906063e36e46dc",
+      "verdict": "PASS"
+    },
+    {
+      "case_id": "win-git-deleted-import",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "102a648058fafd52209ea93fd91ce9063d481037db7d914aba575233466738c2",
+      "verdict": "BLOCK"
+    },
+    {
+      "case_id": "win-junction-escape",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "a197f5fb610cc2a36e02f7e858c2e59e18fa6daf518d48048259a55889ad66de",
+      "verdict": "BLOCK"
+    },
+    {
+      "case_id": "win-junction-import-escape",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "06382c65897d16e1453775efc259ecee04a8cd839f43d4aa8f46454380dcac72",
+      "verdict": "BLOCK"
+    },
+    {
+      "case_id": "win-junction-import-inside",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "5358a99dd2b6cf704165b3a95cc3d118bea3ac0d6ca2e8ba24923e46d4bb163d",
+      "verdict": "PASS"
+    },
+    {
+      "case_id": "win-junction-inside",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "a1d8ca2c47679c4b50b83d1af431056bfc94bdd618eff143e87201c40fe089e9",
+      "verdict": "PASS"
+    },
+    {
+      "case_id": "win-tilde-user-import",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "13f024d3f219bb02871ae4373259963eb9d04dcd0e9af7951a3989becae528b1",
+      "verdict": "BLOCK"
+    },
+    {
+      "case_id": "win-unc-import",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "897f6e6a2297ac92ea393c72e7ffec5bf6955b9de0ceceb8865cee43cc1cc478",
+      "verdict": "BLOCK"
+    },
+    {
+      "case_id": "win-unicode-chain",
+      "failures": [],
+      "passed": true,
+      "receipt_hash": "8ed0206b09a8dc733fd9b2d51228b5899d4b2694fab83174b699a19b7f078b79",
+      "verdict": "PASS"
+    }
+  ],
+  "probe_failures": [],
+  "probes": 10,
+  "probes_passed": true,
+  "receipt_cases": 15,
+  "receipt_passed": 15,
+  "result": "PASS",
+  "task": "P028-T011"
+}

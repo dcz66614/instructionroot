@@ -1,0 +1,103 @@
+P028 FIX-R5 acceptance battery — coordinator log (2026-11-20, Linux VM)
+Freeze base: FIX-R4 post-release 49e1d44, tree clean at start.
+All commands from ~/workspace/p028-instructionroot unless noted.
+TMPDIR=~/workspace/r20-verification/tmp for full runs.
+
+--- Reproduction (pre-fix, /tmp/fixr5-repro/) ---
+repro_cli_vs_library.py (5 fixtures: plain repo + 4 win-junction Linux sims):
+  claude-code plain/import-inside/import-escape MATCH with explicit
+  --home/--repo-root; codex inside/escape MATCH on sources/verdict but
+  DIFFER on receipt_hash (F6). Manual-CLI-defaults repro also matched
+  on Linux — the claude 0-source divergence does NOT reproduce on Linux.
+prove_mechanism.py (fake FS + ntpath emulation): T1-T4 all pass —
+  ntpath.normpath("/C:/x") -> UNC "\\C:\x" (never exists);
+  drive-form "C:/x" resolves; "/C:/..." chain entries unconsumable;
+  stop-collapsed [cwd] walk finds the file. Root cause proven.
+
+--- New tests, pre-fix (confirm failure) ---
+.venv/bin/python -m pytest 05_tests/unit/test_cli_library_parity.py \
+  05_tests/unit/test_resolver.py::test_fixr5_ancestor_chain_windows_drive_form \
+  05_tests/unit/test_paths.py::test_fixr5_leading_slash_drive_spelling_unconsumable_on_windows -q
+  => 5 failed, 7 passed (4x codex-junction hash mismatch F6 in both
+     parity tests; 1x ancestor_chain os_name param missing). The 7
+     passes: plain + 2 claude cases (both tests) + mechanism test.
+
+--- Fixes ---
+Production: 02_src/instructionroot/profiles/_common.py::ancestor_chain
+  (os_name param, drive-form chain on nt); 02_src/instructionroot/cli.py
+  build_receipt_for (lexical workspace, ancestor_stop threaded,
+  repo_root=None means no repo; auto-detect moved to _run_receipt_command);
+  scripts/compare_oracle.py::build_production_receipt delegates to
+  build_receipt_for (UnsupportedProfileError re-raised, not folded).
+Oracle: 03_oracle/rust/src/profiles.rs::ancestor_chain (+ for_host inner
+  fn, drive-form under cfg!(windows)) + 1 unit test.
+Tests: 05_tests/unit/test_cli_library_parity.py (new, 11 tests),
+  test_fixr5_ancestor_chain_windows_drive_form (test_resolver.py),
+  test_fixr5_leading_slash_drive_spelling_unconsumable_on_windows (test_paths.py).
+Docs: 00_control/WIN_JUNCTION/CONSISTENCY_CHECK.md new §6 (FIX-R5);
+  WIN_JUNCTION_TASK.md §4 V5 note.
+
+--- New tests, post-fix ---
+.venv/bin/python -m pytest 05_tests/unit/test_cli_library_parity.py \
+  test_resolver.py::test_fixr5_ancestor_chain_windows_drive_form \
+  test_paths.py::test_fixr5_leading_slash_drive_spelling_unconsumable_on_windows -q
+  => 12 passed.
+
+--- S0 gate, first run (AFTER repo_root=None fix, BEFORE UnsupportedProfileError fix) ---
+.venv/bin/python scripts/s0_gate.py
+  => receipt_cases=48 passed=48 (codex-norepo fixed by the repo_root=None
+     change), determinism=100/100, BUT fail_closed=6/8:
+     FC-02 production=INPUT_ERROR oracle=UNSUPPORTED_PROFILE,
+     FC-03 production=INPUT_ERROR oracle=UNSUPPORTED_PROFILE.
+     Root cause: the delegation wrapped the whole build_receipt_for
+     call in try/except and folded UnsupportedProfileError into the
+     (None, "production build_receipt failed: ...") pair, which the
+     gate maps to INPUT_ERROR. The old code only wrapped build_receipt,
+     so discovery errors propagated. Fixed by re-raising
+     UnsupportedProfileError in build_production_receipt.
+  (An earlier S0 run, before the repo_root=None fix, failed at the
+   receipt index check on codex-norepo: production 3 sources / PASS
+   vs oracle+expected 2 sources / BLOCK — build_receipt_for had
+   auto-detected the enclosing P028 git repo as repo_root. Fixed by
+   moving auto-detection to _run_receipt_command; repo_root=None now
+   means no repo in the shared assembly function.)
+
+--- S0 gate, final run ---
+.venv/bin/python scripts/s0_gate.py
+  => RESULT=PASS: fixtures=60, production_oracle_parity=100%,
+     receipt_hash_parity=100%, determinism=100/100, fail_closed=8/8,
+     network_access=0, human_labels=0. Golden 20/20 + 16/16;
+     receipt_cases 48/48; fs_cases 12/12 (25 probes).
+
+--- Full pytest (final tree) ---
+.venv/bin/python -m pytest 05_tests -q => 323 passed, 6 skipped.
+  (FIX-R4: 310 passed, 6 skipped; +13 new tests.)
+
+--- cargo test (final tree) ---
+cd 03_oracle/rust && cargo test --release --locked
+  => 39 passed + 5 passed, 0 failed. (FIX-R4: 38+5; +1 ancestor test.)
+
+--- compare_oracle --all ---
+.venv/bin/python scripts/compare_oracle.py --all
+  => resolver 20, imports 16, fs 12, fs_probes 25;
+     source/trust/edge/verdict/hash parity 100.0%; fs_parity 100.0%;
+     git_scenarios PASS.
+
+--- Windows corpus (Linux simulation) ---
+.venv/bin/python scripts/run_windows_corpus.py
+  => RESULT=PASS: receipt_cases 15/15, parity 15/15, probes 10/10.
+
+--- Security static check ---
+.venv/bin/python scripts/security_static_check.py => RESULT=PASS
+  (shell_true=0, network_runtime=0, telemetry=0, secret_fixture_leaks=0).
+
+--- CI simulation (system python3) ---
+python3 scripts/simulate_ci.py => SIMULATION: PASS (2/2 cases).
+
+--- Dashboard smoke ---
+python3 -m http.server 8771 --directory web + curl 7 paths
+  First attempt: / -> 200, the other six -> 000. Root cause: my own
+  URL bug — loop built http://127.0.0.1:8771index.html (missing "/",
+  same bug the FIX-R4 battery notes). Re-ran with correct
+  http://127.0.0.1:8771/<path> URLs: 7/7 HTTP 200, confirmed in the
+  server log (7 GET lines).

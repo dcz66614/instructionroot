@@ -1,0 +1,17 @@
+{
+  "case_id": "claude-code-span",
+  "expected_edge_count": 1,
+  "expected_edges": [
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "repo/CLAUDE.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/real.md",
+      "relative_target": "repo/shared/real.md",
+      "syntax": "@shared/real.md"
+    }
+  ],
+  "expected_verdict": "PASS",
+  "notes": "Imports-stage expected file: asserts import edges (from + syntax + depth + targets + allowed + reason) and the verdict under synthetic trust (in-repo files are treated as GIT_TRACKED, home files as USER_SCOPE; real Git state is T004/T007's job, not this stage's). No receipt_hash is asserted here."
+}

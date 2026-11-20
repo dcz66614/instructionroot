@@ -1,0 +1,57 @@
+=== T008 final verification 2026-11-18T07:25:13Z ===
+--- pytest ---
+.....................................................                    [100%]
+267 passed, 2 skipped in 6.10s
+--- cargo test ---
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+--- compare_oracle --all ---
+resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+fs_parity=100.0% git_scenarios=PASS
+compare exit=0
+--- acceptance: --help (exit 0) ---
+help exit=0
+--- profile list ---
+InstructionRoot profiles (frozen contract):
+
+codex  codex-2026-11
+  OpenAI Codex CLI
+--- verify demo (spec cmd) ---
+InstructionRoot Resolve 1.0.0
+Harness: codex (codex-2026-11)
+CWD:     <HOME>/workspace/p028-instructionroot/fixtures/demo
+Repo:    <HOME>/workspace/p028-instructionroot/fixtures/demo
+
+VERDICT: PASS (exit 0)
+sources=1 blocked=0 warnings=0
+
+1  <HOME>/workspace/p028-instructionroot/fixtures/demo/AGENTS.md
+   GIT_TRACKED / project / startup / tracked
+   discovered_by: codex.repo-chain
+   sha256: 15fea277c488
+
+receipt_hash: 93b9bf333185ada8bdb31afa06c2797413ee9bf848db404b999037b92edae9ef
+exit=0
+--- verify demo payments w/ home ---
+VERDICT: PASS (exit 0)
+receipt_hash: efd5e4a02f41935b71e97cb40979fe9d48050e506001bfb0d47d7af81d3b9f90
+exit=0
+--- verify demo-block ---
+VERDICT: BLOCK (exit 20)
+receipt_hash: aeb13c64e6c46988a2b80429c9927ba590bd62d1db43f3a62dfce94f95741d8a
+exit=0
+--- oracle demo ---
+production verdict: PASS / oracle verdict: PASS
+  sources_parity=100%
+  trust_parity=100%
+  edges_parity=100%
+  verdict_parity=100%
+  receipt_hash_parity=100%
+RESULT: PARITY
+exit=0
+--- oracle demo-block ---
+  verdict_parity=100%
+  receipt_hash_parity=100%
+RESULT: PARITY
+exit=0

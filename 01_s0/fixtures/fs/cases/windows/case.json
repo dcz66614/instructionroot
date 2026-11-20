@@ -1,0 +1,6 @@
+{
+  "case_id": "windows",
+  "os": "linux",
+  "synthetic": true,
+  "title": "Windows-style spellings (pure string, NOT_RUN on Linux)"
+}

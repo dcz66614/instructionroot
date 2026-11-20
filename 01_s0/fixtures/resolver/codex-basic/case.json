@@ -1,0 +1,14 @@
+{
+  "case_id": "codex-basic",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "user + repo-root-to-CWD chain, root-to-leaf order (S03/S17)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "user + repo-root-to-CWD chain, root-to-leaf order (S03/S17)",
+  "working_files": []
+}

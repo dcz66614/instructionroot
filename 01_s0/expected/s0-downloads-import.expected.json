@@ -1,0 +1,45 @@
+{
+  "case_id": "s0-downloads-import",
+  "expected_edges": [
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "repo/CLAUDE.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/ok.md",
+      "relative_target": "repo/shared/ok.md",
+      "syntax": "@shared/ok.md"
+    },
+    {
+      "allowed": false,
+      "depth": 1,
+      "from_relative_path": "repo/CLAUDE.md",
+      "reason": "IMPORT_ESCAPE",
+      "relative_resolved_target": "outside/Downloads/shared-note.md",
+      "relative_target": "outside/Downloads/shared-note.md",
+      "syntax": "@../outside/Downloads/shared-note.md"
+    }
+  ],
+  "expected_not_applicable": [],
+  "expected_source_count": 1,
+  "expected_sources": [
+    {
+      "discovery_rule": "claude-code.project",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/CLAUDE.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "forbidden_trust": [
+    "NOT_OBSERVED",
+    "SYMLINK_ESCAPE",
+    "IMPORT_ESCAPE",
+    "OUTSIDE_REPO",
+    "MISSING"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). S09/S19: in-repo import allowed; Downloads import escapes -> BLOCK."
+}

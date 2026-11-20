@@ -1,0 +1,30 @@
+{
+  "case_id": "s0-git-symlink-escape",
+  "expected_edges": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 2,
+  "expected_sources": [
+    {
+      "discovery_rule": "codex.repo-chain",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/AGENTS.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "discovery_rule": "codex.repo-chain",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/services/AGENTS.md",
+      "scope": "project",
+      "trust": "SYMLINK_ESCAPE"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "forbidden_trust": [
+    "NOT_OBSERVED"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). S07: symlink target is outside/Downloads -> SYMLINK_ESCAPE, BLOCK."
+}

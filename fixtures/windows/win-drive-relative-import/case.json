@@ -1,0 +1,15 @@
+{
+  "case_id": "win-drive-relative-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "Drive-relative import becomes a relative path (colon/backslash as filename chars) and is MISSING, not UNRESOLVABLE (finding F4).",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "claude CLAUDE.md imports C:shared\\note.md (drive-relative) -> MISSING, BLOCK (finding F4)",
+  "windows_note": "NOT_RUN: real drive-relative resolution (C: means 'current directory on drive C:' on Windows). The spelling is misclassified before any filesystem access.",
+  "working_files": []
+}

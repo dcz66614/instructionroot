@@ -1,0 +1,43 @@
+{
+  "case_id": "fs/windows",
+  "expected_probes": [
+    {
+      "canonical": "C:/repo/AGENTS.md",
+      "exists": false,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "C:\\repo\\services\\..\\AGENTS.md",
+      "resolved": "/C:/repo/AGENTS.md"
+    },
+    {
+      "canonical": "C:/repo/services/AGENTS.md",
+      "exists": false,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "C:/repo//services///AGENTS.md",
+      "resolved": "/C:/repo/services/AGENTS.md"
+    },
+    {
+      "canonical": "//server/share/repo/AGENTS.md",
+      "exists": false,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "\\\\server\\share\\repo\\AGENTS.md",
+      "resolved": "/server/share/repo/AGENTS.md"
+    },
+    {
+      "canonical": "D:/Downloads/AGENTS.md",
+      "exists": false,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "D:\\Downloads\\AGENTS.md",
+      "resolved": "/D:/Downloads/AGENTS.md"
+    }
+  ],
+  "kind": "fs",
+  "notes": "Unified S0 expected index (T007). Canonicalize probes transcribed from the T002 fixture tree; {case} is the case directory. Windows probes are pure-string (real junction/drive resolution is NOT_RUN on Linux)."
+}

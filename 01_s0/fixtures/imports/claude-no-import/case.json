@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-no-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "no imports at all (depth 0): no edges, PASS",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "no imports at all (depth 0): no edges, PASS",
+  "working_files": []
+}

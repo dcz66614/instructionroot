@@ -1,0 +1,17 @@
+{
+  "case_id": "copilot-tilde-user",
+  "expected_edge_count": 1,
+  "expected_edges": [
+    {
+      "allowed": false,
+      "depth": 1,
+      "from_relative_path": "repo/.github/copilot-instructions.md",
+      "reason": "UNRESOLVABLE",
+      "relative_resolved_target": null,
+      "relative_target": null,
+      "syntax": "@~user/evil.md"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "notes": "Imports-stage expected file: asserts import edges (from + syntax + depth + targets + allowed + reason) and the verdict under synthetic trust (in-repo files are treated as GIT_TRACKED, home files as USER_SCOPE; real Git state is T004/T007's job, not this stage's). No receipt_hash is asserted here."
+}

@@ -1,0 +1,35 @@
+{
+  "case_id": "copilot-custom-dir",
+  "expected_edge_count": 3,
+  "expected_edges": [
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "extra/AGENTS.md",
+      "reason": "WITHIN_CUSTOM_DIR",
+      "relative_resolved_target": "extra/local.md",
+      "relative_target": "extra/local.md",
+      "syntax": "@local.md"
+    },
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "extra/AGENTS.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/x.md",
+      "relative_target": "repo/shared/x.md",
+      "syntax": "@../repo/shared/x.md"
+    },
+    {
+      "allowed": false,
+      "depth": 1,
+      "from_relative_path": "extra/AGENTS.md",
+      "reason": "IMPORT_ESCAPE",
+      "relative_resolved_target": "outside/y.md",
+      "relative_target": "outside/y.md",
+      "syntax": "@../outside/y.md"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "notes": "Imports-stage expected file: asserts import edges (from + syntax + depth + targets + allowed + reason) and the verdict under synthetic trust (in-repo files are treated as GIT_TRACKED, home files as USER_SCOPE; real Git state is T004/T007's job, not this stage's). No receipt_hash is asserted here."
+}

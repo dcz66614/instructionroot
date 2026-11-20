@@ -1,0 +1,16 @@
+{
+  "case_id": "claude-nested",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "working file in a subdir triggers nested CLAUDE.md / AGENTS.md on demand",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "working file in a subdir triggers nested CLAUDE.md / AGENTS.md on demand",
+  "working_files": [
+    "repo/services/payments/app.py"
+  ]
+}

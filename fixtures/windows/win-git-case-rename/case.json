@@ -1,0 +1,15 @@
+{
+  "case_id": "win-git-case-rename",
+  "cwd": "repo/services",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Case-only rename: the new path is untracked AND undiscoverable on Linux.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "services/AGENTS.md renamed to Agents.md (worktree): new spelling not discovered -> PASS (S24, case variant)",
+  "windows_note": "NOT_RUN: real Windows Git case-only rename (core.ignorecase). On Windows the rename is a filesystem no-op and the file would still be found as AGENTS.md.",
+  "working_files": []
+}

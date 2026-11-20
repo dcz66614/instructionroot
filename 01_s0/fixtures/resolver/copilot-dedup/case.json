@@ -1,0 +1,16 @@
+{
+  "case_id": "copilot-dedup",
+  "cwd": "repo",
+  "env": {
+    "COPILOT_CUSTOM_INSTRUCTIONS_DIRS": "{case}/repo"
+  },
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "same AGENTS.md via agents rule and custom-dirs: one source, second rule recorded (S10)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "same AGENTS.md via agents rule and custom-dirs: one source, second rule recorded (S10)",
+  "working_files": []
+}

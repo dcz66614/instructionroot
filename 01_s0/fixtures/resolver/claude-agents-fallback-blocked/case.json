@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-agents-fallback-blocked",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "one CLAUDE.md at the root disables the AGENTS.md fallback everywhere",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "one CLAUDE.md at the root disables the AGENTS.md fallback everywhere",
+  "working_files": []
+}

@@ -1,0 +1,6 @@
+{
+  "case_id": "symlink-inside",
+  "os": "linux",
+  "synthetic": true,
+  "title": "in-repo symlink -> in-repo target"
+}

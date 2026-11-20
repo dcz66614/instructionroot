@@ -1,0 +1,14 @@
+{
+  "case_id": "copilot-basic",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "user + repo-wide (incl. intermediate dir) + agents + claude + gemini, all COMBINE_UNORDERED",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "user + repo-wide (incl. intermediate dir) + agents + claude + gemini, all COMBINE_UNORDERED",
+  "working_files": []
+}

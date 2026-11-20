@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-code-span",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "imports in fenced code / inline code / quotes are not expanded",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "imports in fenced code / inline code / quotes are not expanded",
+  "working_files": []
+}

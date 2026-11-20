@@ -1,0 +1,20 @@
+# P028-T010 command log (commands run; outputs summarized in TASK_RESULT.md)
+./instructionroot verify --harness codex --cwd fixtures/demo --home fixtures/demo/home
+./instructionroot verify --harness codex --cwd fixtures/demo-block/services/payments --home fixtures/demo-block/home
+./instructionroot verify --harness codex --cwd fixtures/demo/services/payments --home fixtures/demo/home
+python3 -c "import yaml; ..."  # YAML parse check on the three new YAML files
+./scripts/run-verify.sh  # defaults: PASS exit 0
+INSTRUCTIONROOT_HARNESS=claude-code INSTRUCTIONROOT_CWD=fixtures/demo ./scripts/run-verify.sh  # PASS exit 0
+INSTRUCTIONROOT_CONFIG=/tmp/t010-probe/.instructionroot.json ./scripts/run-verify.sh  # malformed config: exit 30
+INSTRUCTIONROOT_CONFIG=/tmp/nonexistent.json ./scripts/run-verify.sh  # missing config: exit 0
+python3 scripts/simulate_ci.py  # SIMULATION PASS 2/2, exit 0 (run 3x; first run caught tar -C missing-dir bug, fixed)
+.venv/bin/pytest -q  # 283 passed, 6 skipped
+cargo test --manifest-path 03_oracle/rust/Cargo.toml  # 26 passed + 5 passed (PATH=$HOME/.cargo/bin:$PATH)
+python3 scripts/compare_oracle.py --all  # exit 0, all parities 100%
+python3 scripts/run_golden.py --stage imports  # 16/16
+python3 scripts/run_golden.py --stage resolver  # 20/20
+python3 scripts/s0_gate.py  # 1st run: FAIL on 2 network tokens in scripts/simulate_ci.py (own defect, fixed);
+                             # 2nd run: FAIL on 12 tokens in parallel T012 scripts/security_static_check.py;
+                             # 3rd run (T012 file held aside, SHA-verified restore; PATH=.venv/bin): RESULT=PASS
+grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 files
+git status --short; git diff --stat  # change inventory

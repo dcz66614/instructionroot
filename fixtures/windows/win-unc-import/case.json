@@ -1,0 +1,15 @@
+{
+  "case_id": "win-unc-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "UNC import degrades to MISSING: parse_imports collapses \\\\ to \\, so the UNC spelling is lost before canonicalisation (finding F2).",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "claude CLAUDE.md imports \\\\server\\share\\note.md (natural UNC spelling) -> MISSING, BLOCK (finding F2)",
+  "windows_note": "NOT_RUN: real UNC share access. The misparse happens before any filesystem access, so it would occur on Windows too (a rooted \\server\\... path is not a UNC path there either).",
+  "working_files": []
+}

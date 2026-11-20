@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "case_id": "basic",
+      "title": "repo + home + outside trees, plain files"
+    },
+    {
+      "case_id": "deep-chain",
+      "title": "a/b/c/d/e/f chain"
+    },
+    {
+      "case_id": "dir-symlink",
+      "title": "symlink to a directory + a dir-symlink loop pair"
+    },
+    {
+      "case_id": "dotdot",
+      "title": "deep tree exercised with .. spellings"
+    },
+    {
+      "case_id": "missing",
+      "title": "empty tree; tests address paths that do not exist"
+    },
+    {
+      "case_id": "separators",
+      "title": "plain tree; tests use // and trailing /"
+    },
+    {
+      "case_id": "symlink-broken",
+      "title": "symlink -> missing target"
+    },
+    {
+      "case_id": "symlink-escape",
+      "title": "in-repo symlink -> outside-repo target (S07 shape)"
+    },
+    {
+      "case_id": "symlink-inside",
+      "title": "in-repo symlink -> in-repo target"
+    },
+    {
+      "case_id": "symlink-loop",
+      "title": "a <-> b symlink loop (must not hang)"
+    },
+    {
+      "case_id": "unicode",
+      "title": "Unicode directory / file names"
+    },
+    {
+      "case_id": "windows",
+      "title": "Windows-style spellings (pure string, NOT_RUN on Linux)"
+    }
+  ],
+  "generated_by": "01_s0/fixtures/fs/build_fs_fixtures.py",
+  "synthetic": true
+}

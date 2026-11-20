@@ -1,0 +1,202 @@
+{
+  "folders": {
+    "05_release_FIXR1_0110fa8": "1f92vk30XVXz683Qs-RhN61ZtyYBVkBPx",
+    "04_review_FIXR1_0110fa8": "1mA_E-Ri7tQZ3T2gMqJKh2LhCHmQoyOix",
+    "03_evidence_FIXR1_0110fa8": "1EfuK0TBkMdDLSXUZKho5JFXBkpMPO1Fx"
+  },
+  "files": [
+    {
+      "folder": "05_release_FIXR1_0110fa8",
+      "name": "source.zip",
+      "id": "18Ypt9hZW3-geMhPQnhJ0d7c7450f4X4G",
+      "size_bytes": 866129,
+      "md5": "37fd089787830292a2ffad525fbabb64",
+      "drive_size": "866129",
+      "drive_md5": "37fd089787830292a2ffad525fbabb64",
+      "verified": true
+    },
+    {
+      "folder": "05_release_FIXR1_0110fa8",
+      "name": "dist.zip",
+      "id": "16oJoylg3Q1q0xRgwYtNT6FLKJXkR_0dL",
+      "size_bytes": 570918,
+      "md5": "2b635807b7fd44e199ddf5bb4ca897df",
+      "drive_size": "570918",
+      "drive_md5": "2b635807b7fd44e199ddf5bb4ca897df",
+      "verified": true
+    },
+    {
+      "folder": "05_release_FIXR1_0110fa8",
+      "name": "P028-instructionroot-bundle.zip",
+      "id": "1Sp2wI65fXH1ZwMr2Ei1PDa7zhJO0i2v0",
+      "size_bytes": 1310701,
+      "md5": "bad31c8a247179887303bf218e57a344",
+      "drive_size": "1310701",
+      "drive_md5": "bad31c8a247179887303bf218e57a344",
+      "verified": true
+    },
+    {
+      "folder": "05_release_FIXR1_0110fa8",
+      "name": "RELEASE_MANIFEST.json",
+      "id": "1Cbj7yT2YKCPgHnMl_ppe_DNWP4EO4lUF",
+      "size_bytes": 3601,
+      "md5": "8ca5e34b64b82d9fc1e7a721bce10c2d",
+      "drive_size": "3601",
+      "drive_md5": "8ca5e34b64b82d9fc1e7a721bce10c2d",
+      "verified": true
+    },
+    {
+      "folder": "05_release_FIXR1_0110fa8",
+      "name": "FREEZE_REPORT.md",
+      "id": "1k_D8-GAoqZ9mKw5tVCCtNl6a9TF5JrDk",
+      "size_bytes": 7356,
+      "md5": "af1eec59f6e2949e655ef731a5176083",
+      "drive_size": "7356",
+      "drive_md5": "af1eec59f6e2949e655ef731a5176083",
+      "verified": true
+    },
+    {
+      "folder": "05_release_FIXR1_0110fa8",
+      "name": "p028-instructionroot-0110fa8.bundle",
+      "id": "1ft7jGoZLzDK3f6hzUbTJtXNrvkaY9ROG",
+      "size_bytes": 4851843,
+      "md5": "47f60d0ed90aa98cb61710108756187d",
+      "drive_size": "4851843",
+      "drive_md5": "47f60d0ed90aa98cb61710108756187d",
+      "verified": true
+    },
+    {
+      "folder": "05_release_FIXR1_0110fa8",
+      "name": "SHA256SUMS.txt",
+      "id": "1zxeZpoRmk9I0BaE1ZHTsW6J_cK6HxbfZ",
+      "size_bytes": 523,
+      "md5": "749ea408954370bcdbd68f1cf7eeb9f9",
+      "drive_size": "523",
+      "drive_md5": "749ea408954370bcdbd68f1cf7eeb9f9",
+      "verified": true,
+      "pre_uploaded": true
+    },
+    {
+      "folder": "04_review_FIXR1_0110fa8",
+      "name": "S0_GATE.md",
+      "id": "1JClwYJjXF5YCkfXihBfQAFz7-6A830p_",
+      "size_bytes": 4099,
+      "md5": "de722c5c06c2ceb3f80a7c65141abff6",
+      "drive_size": "4099",
+      "drive_md5": "de722c5c06c2ceb3f80a7c65141abff6",
+      "verified": true
+    },
+    {
+      "folder": "04_review_FIXR1_0110fa8",
+      "name": "S0_LOG.txt",
+      "id": "1uWU_MNDGibXafp0zBwXu77GZzWf_gxy2",
+      "size_bytes": 5618,
+      "md5": "7874c9e1f7b8a0babc4f8a1b66ac2164",
+      "drive_size": "5618",
+      "drive_md5": "7874c9e1f7b8a0babc4f8a1b66ac2164",
+      "verified": true
+    },
+    {
+      "folder": "04_review_FIXR1_0110fa8",
+      "name": "S0_ORACLE_SUMMARY.json",
+      "id": "11SoEm5uPob-usf7jHzzKL-hXinGWPlJD",
+      "size_bytes": 17320,
+      "md5": "248f941a00a2e9b7bfdea32d985600b5",
+      "drive_size": "17320",
+      "drive_md5": "248f941a00a2e9b7bfdea32d985600b5",
+      "verified": true
+    },
+    {
+      "folder": "04_review_FIXR1_0110fa8",
+      "name": "S0_FIXTURE_MANIFEST.json",
+      "id": "1NAg3mz3ezKy8q1AHCMKNJQY7Fp1YQyrJ",
+      "size_bytes": 31575,
+      "md5": "c1cca2b2121d44a17021183c77a6f151",
+      "drive_size": "31575",
+      "drive_md5": "c1cca2b2121d44a17021183c77a6f151",
+      "verified": true
+    },
+    {
+      "folder": "04_review_FIXR1_0110fa8",
+      "name": "S0_RECEIPT_HASHES.txt",
+      "id": "15r16UJCs33c3Fw1JtgCjzamLXKdBFnBp",
+      "size_bytes": 16527,
+      "md5": "2ee8e907eb3942386c3886544378b57b",
+      "drive_size": "16527",
+      "drive_md5": "2ee8e907eb3942386c3886544378b57b",
+      "verified": true
+    },
+    {
+      "folder": "03_evidence_FIXR1_0110fa8",
+      "name": "TASK_RESULT.md",
+      "id": "11hPRW1N03rzjzp_0POmkectwacAQepjs",
+      "size_bytes": 16834,
+      "md5": "88d15ac2a037fa89df787aeb78d3d160",
+      "drive_size": "16834",
+      "drive_md5": "88d15ac2a037fa89df787aeb78d3d160",
+      "verified": true
+    },
+    {
+      "folder": "03_evidence_FIXR1_0110fa8",
+      "name": "battery.log",
+      "id": "1l4c_xvbSG_B7aoPMhBVxyP5ROO5YHTuE",
+      "size_bytes": 1051,
+      "md5": "2a42bbbe360ba3ae37429d68de1f59c9",
+      "drive_size": "1051",
+      "drive_md5": "2a42bbbe360ba3ae37429d68de1f59c9",
+      "verified": true
+    },
+    {
+      "folder": "03_evidence_FIXR1_0110fa8",
+      "name": "cleanroom-A-S0_LOG.txt",
+      "id": "194rDRgrbM5H2EWRhJZP0MdChuE3oeun8",
+      "size_bytes": 5673,
+      "md5": "ba1492a399899cadb6a909dfc65b84b7",
+      "drive_size": "5673",
+      "drive_md5": "ba1492a399899cadb6a909dfc65b84b7",
+      "verified": true
+    },
+    {
+      "folder": "03_evidence_FIXR1_0110fa8",
+      "name": "cleanroom-B-S0_LOG.txt",
+      "id": "1Yxq9wCgOCDvm-sQXguKlqZ0JTGBbbabo",
+      "size_bytes": 5636,
+      "md5": "8f6a0c69b876d5955db429b333b88ffa",
+      "drive_size": "5636",
+      "drive_md5": "8f6a0c69b876d5955db429b333b88ffa",
+      "verified": true
+    },
+    {
+      "folder": "03_evidence_FIXR1_0110fa8",
+      "name": "cleanroom-A-S0_GATE.md",
+      "id": "11drRw8o49BXkaAwHyvqt8RrAcwYkQVyU",
+      "size_bytes": 4099,
+      "md5": "2aed55b3924c93d7ac3767190d6bc562",
+      "drive_size": "4099",
+      "drive_md5": "2aed55b3924c93d7ac3767190d6bc562",
+      "verified": true
+    },
+    {
+      "folder": "03_evidence_FIXR1_0110fa8",
+      "name": "cleanroom-B-S0_GATE.md",
+      "id": "1LU_XOJ2KnKKaigasOue9tmFnVRKzYJK7",
+      "size_bytes": 4099,
+      "md5": "1cf9dd9c1bb27c9d654af2eec4799b93",
+      "drive_size": "4099",
+      "drive_md5": "1cf9dd9c1bb27c9d654af2eec4799b93",
+      "verified": true
+    },
+    {
+      "folder": "03_evidence_FIXR1_0110fa8",
+      "name": "cleanroom-B-run.log",
+      "id": "1FAMAasDDqsp7m_Q5aDIOEys2atspSmdW",
+      "size_bytes": 5667,
+      "md5": "c8f5ebef6bf06f69236430fae37c0744",
+      "drive_size": "5667",
+      "drive_md5": "c8f5ebef6bf06f69236430fae37c0744",
+      "verified": true
+    }
+  ],
+  "all_verified": true,
+  "count": 19
+}

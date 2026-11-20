@@ -1,0 +1,16 @@
+{
+  "case_id": "codex-user-only",
+  "expected_import_candidates": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 1,
+  "expected_sources": [
+    {
+      "discovery_rule": "codex.user",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "home/.codex/AGENTS.md",
+      "scope": "user"
+    }
+  ],
+  "notes": "Resolver-stage expected file: asserts discovery fields only (rule/scope/phase/precedence_kind/relative_path). trust and verdict are T004/T008 concerns and are asserted by T007's full expected files, not here."
+}

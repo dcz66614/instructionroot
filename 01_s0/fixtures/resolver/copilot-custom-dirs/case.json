@@ -1,0 +1,18 @@
+{
+  "case_id": "copilot-custom-dirs",
+  "cwd": "repo",
+  "env": {
+    "COPILOT_CUSTOM_INSTRUCTIONS_DIRS": "{case}/extra"
+  },
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "COPILOT_CUSTOM_INSTRUCTIONS_DIRS: AGENTS.md + applyTo-gated *.instructions.md",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "COPILOT_CUSTOM_INSTRUCTIONS_DIRS: AGENTS.md + applyTo-gated *.instructions.md",
+  "working_files": [
+    "repo/src/app.py"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "case_id": "win-case-both",
+  "cwd": "repo/services",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Only the exact-case AGENTS.md enters the chain.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "services/AGENTS.md + services/AGENTS.MD committed; only exact-case file discovered -> PASS (S22)",
+  "windows_note": "NOT_RUN: the workspace itself is unrepresentable on Windows (AGENTS.md and AGENTS.MD cannot coexist on a case-insensitive filesystem).",
+  "working_files": []
+}

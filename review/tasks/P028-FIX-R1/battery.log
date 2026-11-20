@@ -1,0 +1,33 @@
+=== 1 pytest ===
+.                                                                        [100%]
+283 passed, 6 skipped in 7.90s
+=== 2 cargo ===
+warning: fields `exists`, `depth`, and `error` are never read
+71 |     pub error: Option<String>,
+test paths::tests::lexical_errors ... ok
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test resolve_error_exit_codes ... ok
+=== 3 compare_oracle ===
+resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+fs_parity=100.0% git_scenarios=PASS
+=== 4 S0 gate ===
+receipt_hash_parity=100%
+determinism=100/100
+fail_closed=PASS
+network_access=0
+human_labels=0
+RESULT=PASS
+=== 5 windows corpus ===
+verdict_parity=15/15
+hash_parity=15/15
+probes=10 passed=True
+RESULT=PASS
+=== 6 security ===
+telemetry=0
+secret_fixture_leaks=0
+RESULT=PASS
+=== 7 CI sim ===
+
+receipt_hash: 0bb01fb7501241a7a539bfa5fa23f391c9430a3f1427c1a8b1ed6912c5bcccfe
+SIMULATION: PASS (2/2 cases)

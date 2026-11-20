@@ -1,0 +1,38 @@
+{
+  "case_id": "copilot-custom-dirs",
+  "expected_edges": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 3,
+  "expected_sources": [
+    {
+      "discovery_rule": "copilot-cli.repo-wide",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/.github/copilot-instructions.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "discovery_rule": "copilot-cli.custom-dirs",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "extra/AGENTS.md",
+      "scope": "project",
+      "trust": "OUTSIDE_REPO"
+    },
+    {
+      "discovery_rule": "copilot-cli.custom-dirs",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "extra/team.instructions.md",
+      "scope": "project",
+      "trust": "OUTSIDE_REPO"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "forbidden_trust": [
+    "NOT_OBSERVED"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). Sources/edges transcribed from the T003 stage expected file; trust/verdict hand-derived from the frozen contracts (see build_s0_expected.py)."
+}

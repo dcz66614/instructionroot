@@ -1,0 +1,520 @@
+{
+  "contract_name": "P028 InstructionRoot Resolve - Harness Profile Contract",
+  "contract_version": 1,
+  "project_id": "P028",
+  "frozen_date": "2026-11-18",
+  "source_documents_fetched": "2026-11-18",
+  "primary_sources": [
+    {
+      "purpose": "Codex AGENTS.md discovery",
+      "url": "https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide"
+    },
+    {
+      "purpose": "Claude Code memory / CLAUDE.md loading",
+      "url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory"
+    },
+    {
+      "purpose": "VS Code custom instructions reference (cross-harness locations and combine rules)",
+      "url": "https://code.visualstudio.com/docs/agents/reference/custom-instructions-reference"
+    },
+    {
+      "purpose": "GitHub Copilot custom instructions (concepts, incl. GitHub.com precedence - NOT CLI)",
+      "url": "https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions"
+    },
+    {
+      "purpose": "GitHub Copilot CLI custom instructions",
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions"
+    }
+  ],
+  "scope_enum": [
+    "managed",
+    "user",
+    "project",
+    "nested"
+  ],
+  "phase_enum": [
+    "startup",
+    "on_demand"
+  ],
+  "precedence_kinds": [
+    "ORDERED",
+    "COMBINE_UNORDERED",
+    "UNSPECIFIED"
+  ],
+  "verification_status_enum": [
+    "VERIFIED",
+    "UNVERIFIED"
+  ],
+  "trust_enum": [
+    "GIT_TRACKED",
+    "GIT_MODIFIED",
+    "GIT_UNTRACKED",
+    "USER_SCOPE",
+    "OUTSIDE_REPO",
+    "SYMLINK_ESCAPE",
+    "IMPORT_ESCAPE",
+    "MISSING",
+    "NOT_OBSERVED"
+  ],
+  "profiles": [
+    {
+      "id": "codex",
+      "version": "codex-2026-11",
+      "display_name": "OpenAI Codex CLI",
+      "source_url": "https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide",
+      "source_urls": [
+        "https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide",
+        "https://code.visualstudio.com/docs/agents/reference/custom-instructions-reference"
+      ],
+      "rules": [
+        {
+          "rule_id": "codex.user",
+          "scope": "user",
+          "pattern": "~/.codex/AGENTS.md",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "First in the chain: global instructions are injected before repo instructions."
+          },
+          "source_url": "https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide",
+          "verification_status": "VERIFIED",
+          "notes": "Cookbook: 'Files are pulled from ~/.codex plus each directory from repo root to CWD'. The filename AGENTS.md inside the Codex home directory (default ~/.codex) is attested by the VS Code custom-instructions reference."
+        },
+        {
+          "rule_id": "codex.repo-chain",
+          "scope": "project",
+          "pattern": "<repo_root>/AGENTS.md, <repo_root>/<dir>/AGENTS.md, ..., <cwd>/AGENTS.md (one AGENTS.md per directory, repo root to CWD inclusive)",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "Root-to-leaf order: global first, then repo root, then each deeper directory; later (deeper) directories override earlier ones."
+          },
+          "source_url": "https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide",
+          "verification_status": "VERIFIED",
+          "notes": "Cookbook: 'They are merged in order, later directories overriding earlier ones' and 'in root-to-leaf order: global instructions first, then repo root, then each deeper directory'. Each discovered file becomes its own user-role message '# AGENTS.md instructions for <directory>'."
+        },
+        {
+          "rule_id": "codex.override-fallback",
+          "scope": "project",
+          "pattern": "<dir>/AGENTS.override.md (same repo-root-to-CWD directories as codex.repo-chain)",
+          "phase": "startup",
+          "precedence": {
+            "kind": "UNSPECIFIED",
+            "detail": "Not defined in the fetched source: whether AGENTS.override.md replaces or supplements AGENTS.md in the same directory, and which directory's file wins, are unspecified."
+          },
+          "source_url": "https://developers.openai.com/cookbook/examples/gpt-5/codex_prompting_guide",
+          "verification_status": "UNVERIFIED",
+          "notes": "Only the name is attested: 'If an AGENTS.override.md was used, its directory name still appears in the header'. The doc also says files are pulled 'with optional fallback names' (plural) but names no other fallback file. Do not implement any fallback-selection semantics in T003 until a primary source defines them."
+        }
+      ],
+      "import_syntax": {
+        "syntax": null,
+        "supported": "UNVERIFIED",
+        "max_depth": null,
+        "note": "The fetched Codex source documents no @-import / file-reference mechanism for AGENTS.md. Absence of documentation is not proof of absence; T003 must not implement an import mechanism for codex until a primary source confirms one."
+      },
+      "limits": {
+        "size_cap": {
+          "value": null,
+          "status": "UNVERIFIED",
+          "note": "The doc states files are pulled 'with ... a size cap', but gives no value. No byte/line limit may be enforced from this contract."
+        },
+        "fallback_names": {
+          "known": [
+            "AGENTS.override.md"
+          ],
+          "status": "UNVERIFIED",
+          "note": "Doc says 'optional fallback names' (plural) but names only AGENTS.override.md in the fetched text."
+        },
+        "repo_root_determination": {
+          "status": "UNVERIFIED",
+          "note": "The doc says 'repo root' without defining how it is found (e.g. git top-level). Behaviour for a CWD that is not inside a git repository is undefined in the fetched source."
+        }
+      },
+      "notes": [
+        "Discovery is bounded above by the repo root and below by the CWD: the fetched source gives no rule for AGENTS.md files in directories below the CWD or above the repo root. The VS Code reference confirms: 'To use instructions in a subfolder, start the session with that subfolder as its working directory.'",
+        "Files are injected near the top of the conversation history, before the user prompt, as separate user-role messages."
+      ],
+      "rules_hash": "sha256:a0a03c1cdd77f8d9110ccbc77dae937e30e288a2609e6b04b60d26d15af5dc23"
+    },
+    {
+      "id": "claude-code",
+      "version": "claude-code-2026-11",
+      "display_name": "Anthropic Claude Code",
+      "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+      "source_urls": [
+        "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+        "https://code.visualstudio.com/docs/agents/reference/custom-instructions-reference"
+      ],
+      "rules": [
+        {
+          "rule_id": "claude-code.managed",
+          "scope": "managed",
+          "pattern": "Linux/WSL: /etc/claude-code/CLAUDE.md; macOS: /Library/Application Support/ClaudeCode/CLAUDE.md; Windows: C:\\Program Files\\ClaudeCode\\CLAUDE.md",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "First: loaded before user and project instructions."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Organization-wide managed instructions. Cannot be excluded via claudeMdExcludes. Not loaded if the session is started with CLAUDE.md loading fully off."
+        },
+        {
+          "rule_id": "claude-code.user",
+          "scope": "user",
+          "pattern": "~/.claude/CLAUDE.md",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "After managed, before project instructions."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Personal guidance applying to all projects."
+        },
+        {
+          "rule_id": "claude-code.project",
+          "scope": "project",
+          "pattern": "./CLAUDE.md or ./.claude/CLAUDE.md in the CWD and in every ancestor directory",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "Concatenated from the filesystem root downward to the CWD (ancestors first, CWD last); files are concatenated, not overriding each other. Override semantics between files: UNSPECIFIED."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Table: project instructions are './CLAUDE.md or ./.claude/CLAUDE.md'. Loading section: 'Claude Code loads CLAUDE.md and CLAUDE.local.md from your current working directory and every directory above it.' Troubleshooting confirms .claude/CLAUDE.md counts in CWD-or-above. Conflicting instructions across files may be followed arbitrarily by the model (doc: 'Claude might arbitrarily choose one')."
+        },
+        {
+          "rule_id": "claude-code.local",
+          "scope": "project",
+          "pattern": "./CLAUDE.local.md in the CWD and in every ancestor directory",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "In each directory, CLAUDE.local.md is appended after that directory's CLAUDE.md."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Personal project-specific preferences. Convention is to add it to .gitignore; the harness does not enforce that."
+        },
+        {
+          "rule_id": "claude-code.nested",
+          "scope": "nested",
+          "pattern": "<subdir>/CLAUDE.md and <subdir>/CLAUDE.local.md in subdirectories below the CWD",
+          "phase": "on_demand",
+          "precedence": {
+            "kind": "UNSPECIFIED",
+            "detail": "Trigger is defined; ordering relative to the startup chain is not defined in the fetched source."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Not loaded at startup. Loaded one by one when Claude reads, writes or edits other files in that subdirectory; viewing a file with a Bash command such as cat/head counts as a read."
+        },
+        {
+          "rule_id": "claude-code.rules-user",
+          "scope": "user",
+          "pattern": "~/.claude/rules/**/*.md (all .md files, recursive)",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "Loaded before project rules. On conflict, neither user nor project rules override the other."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Personal rules applying to every project on the machine. Use ~/.claude/rules/ to share rules without the external-import approval that symlinked project rules need."
+        },
+        {
+          "rule_id": "claude-code.rules-startup",
+          "scope": "project",
+          "pattern": "<project>/.claude/rules/**/*.md without a paths frontmatter (all .md files, recursive)",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "Same precedence as .claude/CLAUDE.md."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Rules without a paths field load at startup. Project rules are skipped if the project setting source is excluded."
+        },
+        {
+          "rule_id": "claude-code.rules-path-scoped",
+          "scope": "project",
+          "pattern": "<project>/.claude/rules/**/*.md with a paths YAML frontmatter glob list",
+          "phase": "on_demand",
+          "precedence": {
+            "kind": "UNSPECIFIED",
+            "detail": "Trigger is defined; ordering relative to other sources is not defined in the fetched source."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Loaded only when Claude uses Read/Write/Edit (or a counting Bash read) on a file matching a paths glob. Each pattern is relative to the directory containing the .claude folder (user-level rules: relative to the main working directory). paths is the only frontmatter field read; other fields are ignored. Unparseable YAML frontmatter is ignored and the rule loads as if it had no paths."
+        },
+        {
+          "rule_id": "claude-code.agents-fallback",
+          "scope": "project",
+          "pattern": "<dir>/AGENTS.md and <dir>/.claude/AGENTS.md in the CWD and in every ancestor directory",
+          "phase": "startup",
+          "precedence": {
+            "kind": "ORDERED",
+            "detail": "Root-to-CWD concatenation, same as the CLAUDE.md chain, when the condition holds."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Default project-instructions setting (claude-md-or-agents-md). AGENTS.md is read only when no CLAUDE.md, .claude/CLAUDE.md or CLAUDE.local.md exists in the CWD or above. ~/.claude/CLAUDE.md, the managed CLAUDE.md and .claude/rules files do NOT count for this check. AGENTS.local.md, AGENTS.override.md and anything under .agents/ are never read.",
+          "condition": "No CLAUDE.md, .claude/CLAUDE.md or CLAUDE.local.md exists in the CWD or any ancestor directory."
+        },
+        {
+          "rule_id": "claude-code.agents-nested",
+          "scope": "nested",
+          "pattern": "<subdir>/AGENTS.md in subdirectories below the CWD",
+          "phase": "on_demand",
+          "precedence": {
+            "kind": "UNSPECIFIED",
+            "detail": "Trigger is defined; ordering relative to the startup chain is not defined in the fetched source."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Loaded when Claude works in the subdirectory and that subdirectory contains none of CLAUDE.md, .claude/CLAUDE.md or CLAUDE.local.md. @path imports inside AGENTS.md are expanded; claudeMdExcludes applies.",
+          "condition": "The subdirectory contains none of CLAUDE.md, .claude/CLAUDE.md or CLAUDE.local.md."
+        },
+        {
+          "rule_id": "claude-code.additional-dirs",
+          "scope": "project",
+          "pattern": "<additional-dir>/CLAUDE.md, <additional-dir>/.claude/CLAUDE.md, <additional-dir>/CLAUDE.local.md, <additional-dir>/.claude/rules/*.md",
+          "phase": "startup",
+          "precedence": {
+            "kind": "UNSPECIFIED",
+            "detail": "Ordering relative to the main chain is not defined in the fetched source."
+          },
+          "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+          "verification_status": "VERIFIED",
+          "notes": "Only when --add-dir is used AND the CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD environment variable is set. Rules with a paths field are excluded from additional directories. Skipped for CLAUDE.local.md if the local setting source is excluded via --setting-sources.",
+          "condition": "--add-dir is used and CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD is set."
+        }
+      ],
+      "import_syntax": {
+        "syntax": "@path",
+        "relative_to": "the file containing the import (not the CWD)",
+        "absolute_allowed": true,
+        "max_depth_hops": 4,
+        "status": "VERIFIED",
+        "source_url": "https://docs.anthropic.com/zh-CN/docs/claude-code/memory",
+        "notes": [
+          "Doc (updated 2026-11-17): 'Imported files can recursively import other files, maximum depth four hops.' SPEC-01 RESOLVED in FIX-R1: PROJECT_BOOK.md §15 S13/S14 and IMPLEMENTATION_PLAN.md §3.3/§10.3 now state import depth ≤ 4 (S13 depth 4 PASS, S14 depth 5 BLOCK), matching the fetched official doc (4 hops); depth-5 golden cases encode BLOCK.",
+          "Imports inside Markdown code spans / fenced code blocks are skipped; a path wrapped in quotes is never imported; spaces in a path must be backslash-escaped.",
+          "An @ import resolving outside the working directories requires a per-project approval (interactive dialog). For files read via the AGENTS.md path it loads only if approval was already granted for the project, with no prompt. Approval state is NOT_OBSERVED in a filesystem snapshot and must not be guessed."
+        ]
+      },
+      "limits": {
+        "claude_md_max_bytes": {
+          "value": 4194304,
+          "unit": "bytes",
+          "status": "VERIFIED",
+          "note": "Claude Code skips CLAUDE.md files over 4 MiB."
+        },
+        "on_demand_truncation_chars": {
+          "value": 40000,
+          "unit": "chars",
+          "status": "VERIFIED",
+          "note": "On-demand files (nested CLAUDE.md, @ imports of nested files, .claude/rules, path-scoped rules) are truncated at 40,000 chars on a 200K context window (150,000-200,000 on a 1M window, model-dependent). A load limit, not a discovery rule."
+        }
+      },
+      "notes": [
+        "Default project-instructions setting is claude-md-or-agents-md. The settings claude-md-and-agents-md, claude-md and managed-only change which files load; they are configuration-dependent and out of scope for this default profile.",
+        "Automatic memory (~/.claude/projects/<project>/memory/MEMORY.md, first 200 lines / 25 KB at startup) is machine-written notes, not an instruction file; it is NOT modeled as a discovery rule.",
+        "Symlinked .claude/rules/ targets outside the working directory are treated as external imports: they do not load until the project approves the external import, and then only rules without a paths field load. Symlinks pointing at network paths (UNC \\\\server\\share, /net, /Network) are never followed; \\\\wsl$ paths do not count as network paths.",
+        "claudeMdExcludes (settings) can skip specific CLAUDE.md files by path/glob, but cannot exclude the managed CLAUDE.md. Exclusion configuration is NOT_OBSERVED in a filesystem snapshot."
+      ],
+      "rules_hash": "sha256:7f1d074dc0bb8dde1eace4c01498f8899b8ef58aa47f71c32c649768104f6058"
+    },
+    {
+      "id": "copilot-cli",
+      "version": "copilot-cli-2026-11",
+      "display_name": "GitHub Copilot CLI",
+      "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+      "source_urls": [
+        "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+        "https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions",
+        "https://code.visualstudio.com/docs/agents/reference/custom-instructions-reference"
+      ],
+      "rules": [
+        {
+          "rule_id": "copilot-cli.user",
+          "scope": "user",
+          "pattern": "$HOME/.copilot/copilot-instructions.md (or $COPILOT_HOME/copilot-instructions.md if COPILOT_HOME is set)",
+          "phase": "startup",
+          "precedence": {
+            "kind": "COMBINE_UNORDERED",
+            "detail": "Combined with applicable repository instructions; no general precedence order between files."
+          },
+          "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+          "verification_status": "VERIFIED",
+          "notes": "User-level instructions applying across repositories."
+        },
+        {
+          "rule_id": "copilot-cli.user-modular",
+          "scope": "user",
+          "pattern": "$HOME/.copilot/instructions/**/*.instructions.md (or under $COPILOT_HOME)",
+          "phase": "on_demand",
+          "precedence": {
+            "kind": "COMBINE_UNORDERED",
+            "detail": "Combined with applicable instructions; no general precedence order between files."
+          },
+          "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+          "verification_status": "VERIFIED",
+          "notes": "Modular user-level instructions; path-specific via applyTo.",
+          "condition": "Included only when its applyTo value matches a file Copilot CLI is working with. Behaviour when applyTo is absent is UNVERIFIED for Copilot CLI (the VS Code reference describes manual attachment for Local sessions only)."
+        },
+        {
+          "rule_id": "copilot-cli.repo-wide",
+          "scope": "project",
+          "pattern": ".github/copilot-instructions.md in the standard locations: the repository root, the current working directory, intermediate directories between them, and any directories nested in the path of a file Copilot CLI is working on",
+          "phase": "startup",
+          "precedence": {
+            "kind": "COMBINE_UNORDERED",
+            "detail": "Combined with applicable user and repository instructions; no general precedence order between files."
+          },
+          "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+          "verification_status": "VERIFIED",
+          "notes": "Repository-wide instructions."
+        },
+        {
+          "rule_id": "copilot-cli.repo-modular",
+          "scope": "project",
+          "pattern": ".github/instructions/**/*.instructions.md in the standard locations BUT NOT intermediate directories",
+          "phase": "on_demand",
+          "precedence": {
+            "kind": "COMBINE_UNORDERED",
+            "detail": "Combined with applicable instructions; no general precedence order between files."
+          },
+          "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+          "verification_status": "VERIFIED",
+          "notes": "Modular repository instructions; path-specific via applyTo. Unlike the other repo locations, intermediate directories are explicitly excluded for this location.",
+          "condition": "Included only when its applyTo value matches a file Copilot CLI is working with. Behaviour when applyTo is absent is UNVERIFIED for Copilot CLI."
+        },
+        {
+          "rule_id": "copilot-cli.agents",
+          "scope": "project",
+          "pattern": "AGENTS.md in the standard locations: the repository root, the current working directory, intermediate directories between them, and any directories nested in the path of a file Copilot CLI is working on",
+          "phase": "startup",
+          "precedence": {
+            "kind": "COMBINE_UNORDERED",
+            "detail": "Combined with applicable instructions; no general precedence order between files."
+          },
+          "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+          "verification_status": "VERIFIED",
+          "notes": "Agent instructions."
+        },
+        {
+          "rule_id": "copilot-cli.claude",
+          "scope": "project",
+          "pattern": "CLAUDE.md and .claude/CLAUDE.md in the standard locations: the repository root, the current working directory, intermediate directories between them, and any directories nested in the path of a file Copilot CLI is working on",
+          "phase": "startup",
+          "precedence": {
+            "kind": "COMBINE_UNORDERED",
+            "detail": "Combined with applicable instructions; no general precedence order between files."
+          },
+          "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+          "verification_status": "VERIFIED",
+          "notes": "Agent instructions."
+        },
+        {
+          "rule_id": "copilot-cli.gemini",
+          "scope": "project",
+          "pattern": "GEMINI.md in the standard locations: the repository root, the current working directory, intermediate directories between them, and any directories nested in the path of a file Copilot CLI is working on",
+          "phase": "startup",
+          "precedence": {
+            "kind": "COMBINE_UNORDERED",
+            "detail": "Combined with applicable instructions; no general precedence order between files."
+          },
+          "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+          "verification_status": "VERIFIED",
+          "notes": "Agent instructions. NOTE: @ file references are NOT expanded in GEMINI.md (see import_syntax)."
+        },
+        {
+          "rule_id": "copilot-cli.custom-dirs",
+          "scope": "project",
+          "pattern": "AGENTS.md and *.instructions.md in each directory listed in COPILOT_CUSTOM_INSTRUCTIONS_DIRS (comma-separated)",
+          "phase": "startup",
+          "precedence": {
+            "kind": "COMBINE_UNORDERED",
+            "detail": "Combined with applicable instructions; no general precedence order between files."
+          },
+          "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+          "verification_status": "VERIFIED",
+          "notes": "Additional instruction directories from the environment variable. Whether *.instructions.md files found here are still applyTo-gated is UNVERIFIED in the fetched source."
+        }
+      ],
+      "import_syntax": {
+        "syntax": "@<relative-path>",
+        "supported_in": [
+          ".github/copilot-instructions.md",
+          "AGENTS.md",
+          "CLAUDE.md"
+        ],
+        "not_expanded_in": [
+          "GEMINI.md",
+          "*.instructions.md"
+        ],
+        "relative_to": "UNVERIFIED",
+        "absolute_allowed": false,
+        "home_allowed": false,
+        "must_remain_within": [
+          "repository",
+          "custom instructions directory (for local instructions)"
+        ],
+        "nested_references": true,
+        "status": "VERIFIED",
+        "source_url": "https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions",
+        "notes": [
+          "Doc: 'In .github/copilot-instructions.md, AGENTS.md, or CLAUDE.md, use @ followed by a relative path to include another file. Copilot CLI reads the referenced file immediately and supports references within referenced files.'",
+          "The fetched doc does NOT state the base directory for a relative @ path; do not assume file-relative or CWD-relative. T005 must resolve this from a primary source or mark the edge base UNVERIFIED.",
+          "Whether @ expansion applies to .claude/CLAUDE.md is UNVERIFIED (the doc lists CLAUDE.md only).",
+          "Absolute paths and paths beginning with ~/ are not loaded."
+        ]
+      },
+      "notes": [
+        "Precedence: the GitHub docs state Copilot CLI 'combines their instructions' and 'does not define a general precedence order between these files'. The precedence list on the GitHub concepts page (personal > path-specific > repo-wide > agent > organization) applies to Copilot Chat on GitHub.com, NOT to Copilot CLI; it is explicitly NOT modeled here.",
+        "Identical copies of user-level copilot-instructions.md, repository-wide and agent instructions are de-duplicated.",
+        "Organization custom instructions are not supported in local client sessions; they are NOT_OBSERVED / out of scope for this profile.",
+        "A file disabled via the /instructions command is not included; disabled state is session state and NOT_OBSERVED in a filesystem snapshot.",
+        "The excludeAgent frontmatter keyword targets Copilot cloud agent / code review; its effect inside Copilot CLI is UNVERIFIED.",
+        "Instruction-file changes are not picked up by an active CLI session (restart, --continue or /new required); session behaviour, not a discovery rule.",
+        "applyTo uses glob syntax; multiple patterns are comma-separated; there is no default pattern. VS Code reference glob table applies."
+      ],
+      "rules_hash": "sha256:76a5f6c8fbd7fc4ff910bf5f471ecb9291ab2a575d871f93338fb1b298c73d0e"
+    }
+  ],
+  "known_spec_conflicts": [
+    {
+      "id": "SPEC-01",
+      "topic": "Claude Code @ import maximum depth",
+      "official_doc": "Maximum depth four hops (Anthropic memory doc, updated 2026-11-17).",
+      "spec_text": "PROJECT_BOOK.md §15 S13/S14 and IMPLEMENTATION_PLAN.md §3.3/§10.3 state depth ≤ 4 (S13 depth 4 PASS, S14 depth 5 BLOCK), as fixed in FIX-R1 (previously depth ≤ 5).",
+      "resolution_in_this_contract": "Follow the fetched official doc: max_depth_hops = 4. SPEC-01 RESOLVED in FIX-R1: the spec book and implementation plan now agree with the official doc; depth-5 golden cases encode BLOCK."
+    },
+    {
+      "id": "SPEC-02",
+      "topic": "Default handling of an untracked in-repo source",
+      "official_doc": null,
+      "spec_text": "PROJECT_BOOK.md §7.1 demo shows an untracked in-repo AGENTS.md as WARN, while §14.2 shows an example policy with block_repo_untracked: true (which would make it BLOCK). §15 S04 says WARN/BLOCK.",
+      "resolution_in_this_contract": "policy_schema.json defaults block_repo_untracked to false (WARN, matching the §7.1 demo); setting it true escalates to BLOCK. The §14.2 value is treated as an example policy, not the default."
+    },
+    {
+      "id": "SPEC-03",
+      "topic": "Trust priority list omits NOT_OBSERVED",
+      "official_doc": null,
+      "spec_text": "PROJECT_BOOK.md §13.4 lists a trust priority order that does not include NOT_OBSERVED.",
+      "resolution_in_this_contract": "receipt_schema.json reproduces the §13.4 order and records NOT_OBSERVED as having no priority position (it marks unobserved state, not a source classification)."
+    },
+    {
+      "id": "SPEC-04",
+      "topic": "Per-source applicability state has no schema slot",
+      "official_doc": null,
+      "spec_text": "PROJECT_BOOK.md §15 S16 expects Copilot applyTo no-match to yield NOT_APPLICABLE, but NOT_APPLICABLE appears in neither the trust enum (§8.5) nor the verdict enum (§8.8/§14.3).",
+      "resolution_in_this_contract": "No new enum value invented. A non-matching path-specific file is simply absent from receipt sources; T003/T007 must define an explicit representation (e.g. a considered_but_not_applicable list) if one is needed."
+    }
+  ]
+}

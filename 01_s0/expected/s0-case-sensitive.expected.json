@@ -1,0 +1,34 @@
+{
+  "case_id": "s0-case-sensitive",
+  "expected_edges": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 2,
+  "expected_sources": [
+    {
+      "discovery_rule": "codex.repo-chain",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/AGENTS.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "discovery_rule": "codex.repo-chain",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/services/payments/AGENTS.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    }
+  ],
+  "expected_verdict": "PASS",
+  "forbidden_trust": [
+    "NOT_OBSERVED",
+    "SYMLINK_ESCAPE",
+    "IMPORT_ESCAPE",
+    "OUTSIDE_REPO",
+    "MISSING"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). S22: lowercase services/agents.md is not discovered on Linux; only the two AGENTS.md files enter the chain."
+}

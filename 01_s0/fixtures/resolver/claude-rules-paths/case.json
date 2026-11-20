@@ -1,0 +1,16 @@
+{
+  "case_id": "claude-rules-paths",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "paths-scoped rule matching the working file loads on demand; non-matching rule is absent; unparseable frontmatter loads as no-paths",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "paths-scoped rule matching the working file loads on demand; non-matching rule is absent; unparseable frontmatter loads as no-paths",
+  "working_files": [
+    "repo/src/app.py"
+  ]
+}

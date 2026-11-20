@@ -1,0 +1,14 @@
+{
+  "case_id": "codex-norepo",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "non-git workspace (repo_root null, S25): chain is the CWD only",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": null,
+  "title": "non-git workspace (repo_root null, S25): chain is the CWD only",
+  "working_files": []
+}

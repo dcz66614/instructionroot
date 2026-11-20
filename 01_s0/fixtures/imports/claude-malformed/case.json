@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-malformed",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "URL reference (never fetched) + directory target are MISSING; bare @ and quoted @ produce no edge; malformed never PASSes",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "URL reference (never fetched) + directory target are MISSING; bare @ and quoted @ produce no edge; malformed never PASSes",
+  "working_files": []
+}

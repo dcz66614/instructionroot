@@ -1,0 +1,15 @@
+{
+  "case_id": "win-case-variant",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Linux matching is case-sensitive; the variant file never enters the chain.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "lowercase services/Agents.md is not discovered on Linux -> PASS (S22, Windows variant)",
+  "windows_note": "NOT_RUN: real case-insensitive matching. On Windows the probe for AGENTS.md would find Agents.md (extra source, GIT_UNTRACKED). Finding F1: production has no case-insensitive discovery mode.",
+  "working_files": []
+}

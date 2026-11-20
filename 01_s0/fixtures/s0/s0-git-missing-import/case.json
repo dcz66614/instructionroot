@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-git-missing-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "Real-git counterpart of imports/claude-missing.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "claude CLAUDE.md imports a missing file -> MISSING, BLOCK (S08, real git)",
+  "working_files": []
+}

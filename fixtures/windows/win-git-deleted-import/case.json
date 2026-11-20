@@ -1,0 +1,15 @@
+{
+  "case_id": "win-git-deleted-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "Deleted import target: MISSING edge, BLOCK. Contrast win-git-deleted-chain (silent).",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "claude CLAUDE.md imports a tracked-then-deleted file -> MISSING, BLOCK (S08/S23)",
+  "windows_note": "NOT_RUN: real Windows Git deletion behaviour; the exercised state is Linux git (deleted, unstaged).",
+  "working_files": []
+}

@@ -1,0 +1,66 @@
+{
+  "cases": [
+    {
+      "case_id": "win-case-both",
+      "title": "services/AGENTS.md + services/AGENTS.MD committed; only exact-case file discovered -> PASS (S22)"
+    },
+    {
+      "case_id": "win-case-variant",
+      "title": "lowercase services/Agents.md is not discovered on Linux -> PASS (S22, Windows variant)"
+    },
+    {
+      "case_id": "win-copilot-drive-ref",
+      "title": "copilot .github/copilot-instructions.md references C:\\shared\\drive-note.md -> IMPORT_ESCAPE, BLOCK"
+    },
+    {
+      "case_id": "win-drive-import",
+      "title": "claude CLAUDE.md imports C:\\shared\\drive-note.md -> IMPORT_ESCAPE, BLOCK"
+    },
+    {
+      "case_id": "win-drive-relative-import",
+      "title": "claude CLAUDE.md imports C:shared\\note.md (drive-relative) -> MISSING, BLOCK (finding F4)"
+    },
+    {
+      "case_id": "win-git-case-rename",
+      "title": "services/AGENTS.md renamed to Agents.md (worktree): new spelling not discovered -> PASS (S24, case variant)"
+    },
+    {
+      "case_id": "win-git-deleted-chain",
+      "title": "tracked services AGENTS.md deleted in worktree: chain shrinks to root + payments -> PASS (S23)"
+    },
+    {
+      "case_id": "win-git-deleted-import",
+      "title": "claude CLAUDE.md imports a tracked-then-deleted file -> MISSING, BLOCK (S08/S23)"
+    },
+    {
+      "case_id": "win-junction-escape",
+      "title": "repo/linked is a dir symlink to outside/Downloads -> SYMLINK_ESCAPE, BLOCK (junction analogue)"
+    },
+    {
+      "case_id": "win-junction-import-escape",
+      "title": "claude import @linked/secret.md through a dir symlink to outside/Downloads -> IMPORT_ESCAPE, BLOCK (junction analogue)"
+    },
+    {
+      "case_id": "win-junction-import-inside",
+      "title": "claude import @linked/also.md through a dir symlink to in-repo shared -> WITHIN_REPO, PASS (junction analogue)"
+    },
+    {
+      "case_id": "win-junction-inside",
+      "title": "repo/linked is a dir symlink to in-repo shared -> GIT_TRACKED, PASS (junction analogue)"
+    },
+    {
+      "case_id": "win-tilde-user-import",
+      "title": "claude CLAUDE.md imports ~other/shared.md -> UNRESOLVABLE, BLOCK"
+    },
+    {
+      "case_id": "win-unc-import",
+      "title": "claude CLAUDE.md imports \\\\server\\share\\note.md (natural UNC spelling) -> MISSING, BLOCK (finding F2)"
+    },
+    {
+      "case_id": "win-unicode-chain",
+      "title": "unicode chain (\u65e5\u672c\u8a9e/\u5b50\u76ee\u5f55) with AGENTS.md, committed -> PASS (S21)"
+    }
+  ],
+  "generated_by": "fixtures/windows/build_windows_fixtures.py",
+  "synthetic": true
+}

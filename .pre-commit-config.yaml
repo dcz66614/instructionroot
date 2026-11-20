@@ -1,0 +1,13 @@
+# Example: run InstructionRoot's own verify hook on this repository itself.
+# (The project book does not specify a .pre-commit-config.yaml; this file
+# is a local self-check example only. Consumers add the hook from the
+# published repo instead — see .pre-commit-hooks.yaml.)
+repos:
+  - repo: local
+    hooks:
+      - id: instructionroot-verify
+        name: instructionroot verify
+        entry: scripts/run-verify.sh
+        language: script
+        pass_filenames: false
+        always_run: true

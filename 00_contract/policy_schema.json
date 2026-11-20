@@ -1,0 +1,111 @@
+{
+  "schema_name": "P028 InstructionRoot Resolve - Policy Schema",
+  "policy_schema_version": 1,
+  "schema_version": 1,
+  "project_id": "P028",
+  "frozen_date": "2026-11-18",
+  "fields": {
+    "allow_user_scope": {
+      "type": "boolean",
+      "default": true,
+      "description": "User/global-scope sources (e.g. ~/.codex/AGENTS.md, ~/.claude/CLAUDE.md, ~/.copilot/copilot-instructions.md) are permitted.",
+      "verdict_effect": "False: every user-scope source is BLOCK."
+    },
+    "allow_repo_tracked": {
+      "type": "boolean",
+      "default": true,
+      "description": "Git-tracked in-repo sources are permitted.",
+      "verdict_effect": "False: every tracked in-repo source is BLOCK."
+    },
+    "allow_managed_scope": {
+      "type": "boolean",
+      "default": true,
+      "description": "Organisation-managed scope sources (Claude Code managed CLAUDE.md) are permitted. Only claude-code defines a managed scope.",
+      "verdict_effect": "False: every managed-scope source is BLOCK."
+    },
+    "allow_nested_on_demand": {
+      "type": "boolean",
+      "default": true,
+      "description": "On-demand (nested / path-scoped) sources may enter the chain when their trigger fires.",
+      "verdict_effect": "False: on-demand sources are excluded from the effective chain (recorded as not applicable, not as BLOCK)."
+    },
+    "block_repo_untracked": {
+      "type": "boolean",
+      "default": false,
+      "description": "Escalate a git-untracked in-repo source from WARN to BLOCK. Default false matches the PROJECT_BOOK.md §7.1 demo (untracked in-repo AGENTS.md is WARN). See SPEC-02 in profile_contract.json: §14.2 shows true only as an example policy, not the default.",
+      "verdict_effect": "True: GIT_UNTRACKED in-repo sources are BLOCK. False: they are WARN."
+    },
+    "block_repo_modified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Escalate a git-modified tracked in-repo source from WARN to BLOCK. Default false matches §15 S05 (modified tracked is WARN).",
+      "verdict_effect": "True: GIT_MODIFIED sources are BLOCK. False: they are WARN."
+    },
+    "block_outside_repo": {
+      "type": "boolean",
+      "default": true,
+      "description": "Sources whose resolved path lies outside the repository (and outside the user scope) are blocked.",
+      "verdict_effect": "True: OUTSIDE_REPO sources are BLOCK."
+    },
+    "block_symlink_escape": {
+      "type": "boolean",
+      "default": true,
+      "description": "A source reached through a symlink/junction whose resolved path escapes the approved roots is blocked.",
+      "verdict_effect": "True: SYMLINK_ESCAPE sources are BLOCK."
+    },
+    "block_import_escape": {
+      "type": "boolean",
+      "default": true,
+      "description": "An import/reference edge whose resolved target escapes the approved roots (or the repository / custom instructions directory for Copilot CLI) is blocked.",
+      "verdict_effect": "True: IMPORT_ESCAPE edges make the receipt BLOCK."
+    },
+    "block_missing_reference": {
+      "type": "boolean",
+      "default": true,
+      "description": "T001 addition (no named policy field in the spec; required by §15 S08, missing import is BLOCK). A reference to a file that does not exist is blocked.",
+      "verdict_effect": "True: MISSING edges / MISSING sources are BLOCK."
+    },
+    "warn_on_unspecified_precedence": {
+      "type": "boolean",
+      "default": true,
+      "description": "Raise WARN when the receipt contains a source whose precedence kind is UNSPECIFIED (the harness defines no order for it).",
+      "verdict_effect": "True: any UNSPECIFIED precedence in the chain is WARN (unless a BLOCK condition also applies)."
+    },
+    "treat_warn_as_block": {
+      "type": "boolean",
+      "default": false,
+      "description": "CI strict mode: any WARN condition escalates the verdict to BLOCK.",
+      "verdict_effect": "True: verdict WARN becomes BLOCK."
+    },
+    "allow_additional_directories": {
+      "type": "boolean",
+      "default": false,
+      "description": "Permit Claude Code --add-dir / CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD sources (rule claude-code.additional-dirs). Default false is fail-closed: extra directories are not trusted unless explicitly allowed.",
+      "verdict_effect": "False: additional-directory sources are excluded from the effective chain."
+    }
+  },
+  "default_policy": {
+    "allow_user_scope": true,
+    "allow_repo_tracked": true,
+    "allow_managed_scope": true,
+    "allow_nested_on_demand": true,
+    "block_repo_untracked": false,
+    "block_repo_modified": false,
+    "block_outside_repo": true,
+    "block_symlink_escape": true,
+    "block_import_escape": true,
+    "block_missing_reference": true,
+    "warn_on_unspecified_precedence": true,
+    "treat_warn_as_block": false,
+    "allow_additional_directories": false
+  },
+  "verdict_derivation": {
+    "BLOCK": "Any source whose trust is OUTSIDE_REPO, SYMLINK_ESCAPE or IMPORT_ESCAPE while the corresponding block_* field is true; any edge with allowed=false while block_import_escape or block_missing_reference is true; any user/managed/tracked source while its allow_* field is false; or treat_warn_as_block=true with a WARN condition present.",
+    "WARN": "Any GIT_UNTRACKED in-repo source while block_repo_untracked is false; any GIT_MODIFIED source while block_repo_modified is false; any source with precedence kind UNSPECIFIED while warn_on_unspecified_precedence is true.",
+    "PASS": "No BLOCK and no WARN condition applies.",
+    "INPUT_ERROR": "The harness id/version is unknown, the CWD does not exist, or the policy JSON is invalid. Never a PASS.",
+    "UNSUPPORTED_PROFILE": "The requested harness profile id is not one of codex / claude-code / copilot-cli, or its version is not the frozen version for that id.",
+    "INTERNAL_ERROR": "Any unexpected failure. Fail-closed: never emit PASS/WARN on an internal error.",
+    "note": "Derivation is defined over trust values and policy fields only. Policy never changes which files are discovered; it only changes the verdict for discovered files."
+  }
+}

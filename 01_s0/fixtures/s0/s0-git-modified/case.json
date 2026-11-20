@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-git-modified",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Modified file keeps GIT_MODIFIED trust; default policy warns, does not block.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "tracked payments AGENTS.md modified in the worktree -> WARN (S05)",
+  "working_files": []
+}

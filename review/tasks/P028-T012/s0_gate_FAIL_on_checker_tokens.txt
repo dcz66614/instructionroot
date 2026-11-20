@@ -1,0 +1,75 @@
+P028 S0 GATE -- T007
+workdir=/home/hatch/workspace/p028-instructionroot
+== 0. fixture setup: regenerate S0 fixtures ==
+s0 cases=12
+  s0-case-sensitive
+  s0-downloads-import
+  s0-git-missing-import
+  s0-git-modified
+  s0-git-modified-block
+  s0-git-rename
+  s0-git-staged-new
+  s0-git-symlink-escape
+  s0-git-symlink-inside
+  s0-git-tracked
+  s0-git-unicode
+  s0-git-untracked-block
+s0 fixtures regenerated (12 cases)
+== 1. corpus inventory ==
+fixtures=60 layers={'normal': 20, 'boundary': 20, 'adversarial': 20} expected_index=60 synthetic_only=True human_labels=0
+== 2. golden stages (run_golden.py) ==
+cases=20 passed=20 failed=0
+golden_source_order=100.0%
+golden_source_set=100.0%
+cases=16 passed=16 failed=0
+golden_edge_parity=100.0%
+golden_escape_detection=100.0%
+oracle binary: /home/hatch/workspace/p028-instructionroot/03_oracle/rust/target/release/instructionroot-oracle
+== 3. unified-index check: 48 receipt cases (production + Oracle) ==
+receipt_cases=48 passed=48 failed=0
+source_ok=48/48
+trust_ok=48/48
+edge_ok=48/48
+verdict_ok=48/48
+hash_ok=48/48
+== 4. fs index check: 12 canonicalize cases (production + Oracle) ==
+fs_cases=12 passed=12 fs_probes=25
+== 5. git/trust scenarios (compare_oracle.py) ==
+[PASS] git/trust scenarios (6)
+git_scenarios=6 PASS
+== 6. determinism: 100 runs, same receipt_hash ==
+codex-basic: 100 production + 100 oracle runs, hash=649d415f754ce021 (all identical)
+s0-git-tracked: 25 production + 25 oracle runs, hash=cef656db9669d8d9 (all identical)
+== 7. fail-closed suite FC-01..FC-08 (malformed input never PASSes) ==
+[PASS] FC-01: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- case file is not valid JSON
+[PASS] FC-02: production=UNSUPPORTED_PROFILE oracle=UNSUPPORTED_PROFILE (exit 40) agree=True -- profile version mismatch (codex-2026-10)
+[PASS] FC-03: production=UNSUPPORTED_PROFILE oracle=UNSUPPORTED_PROFILE (exit 40) agree=True -- unknown harness (warp-drive)
+[PASS] FC-04: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- cwd does not exist
+[PASS] FC-05: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- policy has an unknown field
+[PASS] FC-06: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- policy field is not a bool
+[PASS] FC-07: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- repo_root points at a file, not a directory
+[PASS] FC-08: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- case input has no harness field
+fail_closed=8/8
+== 8. network_access=0 (static grep + runtime audit hook) ==
+       network token: scripts/security_static_check.py: urllib
+       network token: scripts/security_static_check.py: http.client
+       network token: scripts/security_static_check.py: httpx
+       network token: scripts/security_static_check.py: requests
+       network token: scripts/security_static_check.py: urlopen
+       network token: scripts/security_static_check.py: socket.
+       network token: scripts/security_static_check.py: TcpStream
+       network token: scripts/security_static_check.py: reqwest
+       network token: scripts/security_static_check.py: std::net
+       network token: scripts/security_static_check.py: UdpSocket
+       network token: scripts/security_static_check.py: curl
+       network token: scripts/security_static_check.py: wget
+GATE FAILURE: network tokens found in production/Oracle code: 12
+S0_GATE
+fixtures=60
+production_oracle_parity=FAILED (see S0_GATE.md / S0_LOG.txt)
+receipt_hash_parity=FAILED (see S0_GATE.md / S0_LOG.txt)
+determinism=100/100
+fail_closed=PASS
+network_access=0
+human_labels=0
+RESULT=FAIL

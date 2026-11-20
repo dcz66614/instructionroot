@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-import-depth4",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "import chain of 4 hops is allowed (SPEC-01: S13 = depth 4 PASS)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "import chain of 4 hops is allowed (SPEC-01: S13 = depth 4 PASS)",
+  "working_files": []
+}

@@ -1,0 +1,21 @@
+{
+  "cases": [
+    {
+      "expected": "C:/repo/AGENTS.md",
+      "raw": "C:\\repo\\services\\..\\AGENTS.md"
+    },
+    {
+      "expected": "C:/repo/services/AGENTS.md",
+      "raw": "C:/repo//services///AGENTS.md"
+    },
+    {
+      "expected": "//server/share/repo/AGENTS.md",
+      "raw": "\\\\server\\share\\repo\\AGENTS.md"
+    },
+    {
+      "expected": "D:/Downloads/AGENTS.md",
+      "raw": "D:\\Downloads\\AGENTS.md"
+    }
+  ],
+  "note": "Pure-string normalisation cases only. Real junction / drive-letter resolution is NOT_RUN on Linux (see test_paths.py); T011 owns the Windows runner cases."
+}

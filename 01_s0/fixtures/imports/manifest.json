@@ -1,0 +1,70 @@
+{
+  "cases": [
+    {
+      "case_id": "claude-no-import",
+      "title": "no imports at all (depth 0): no edges, PASS"
+    },
+    {
+      "case_id": "claude-depth4",
+      "title": "import chain of 4 hops is allowed (SPEC-01: S13 = depth 4 PASS)"
+    },
+    {
+      "case_id": "claude-depth5",
+      "title": "import chain of 5 hops: the 5th hop is BLOCKed (S14)"
+    },
+    {
+      "case_id": "claude-escape",
+      "title": "dotdot escape + absolute outside escape BLOCK; in-repo import PASS (S09)"
+    },
+    {
+      "case_id": "claude-missing",
+      "title": "missing import BLOCKs (S08); in-repo import PASS"
+    },
+    {
+      "case_id": "claude-cycle",
+      "title": "import cycle a<->b terminates (each file expanded once)"
+    },
+    {
+      "case_id": "claude-code-span",
+      "title": "imports in fenced code / inline code / quotes are not expanded"
+    },
+    {
+      "case_id": "claude-symlink-escape",
+      "title": "import target is a symlink inside the repo pointing outside (S07/S09)"
+    },
+    {
+      "case_id": "claude-malformed",
+      "title": "URL reference (never fetched) + directory target are MISSING; bare @ and quoted @ produce no edge; malformed never PASSes"
+    },
+    {
+      "case_id": "claude-home-import",
+      "title": "import resolving inside the home directory is WITHIN_HOME"
+    },
+    {
+      "case_id": "copilot-relative",
+      "title": "repo-relative references allowed, incl. nested references"
+    },
+    {
+      "case_id": "copilot-absolute",
+      "title": "absolute path and ~/ reference are not loaded (IMPORT_ESCAPE)"
+    },
+    {
+      "case_id": "copilot-tilde-user",
+      "title": "Copilot @~user/... reference fails closed: UNRESOLVABLE, no crash (C-08)"
+    },
+    {
+      "case_id": "copilot-no-expand",
+      "title": "@ is NOT expanded in GEMINI.md, *.instructions.md or .claude/CLAUDE.md (UNVERIFIED) \u2014 zero edges"
+    },
+    {
+      "case_id": "copilot-custom-dir",
+      "title": "custom-dir AGENTS.md: in-dir + in-repo references allowed, escape outside both BLOCKs"
+    },
+    {
+      "case_id": "codex-no-import",
+      "title": "Codex documents no @-import syntax: @ text produces no edges"
+    }
+  ],
+  "generated_by": "01_s0/fixtures/imports/build_imports_fixtures.py",
+  "synthetic": true
+}

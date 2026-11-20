@@ -1,0 +1,8 @@
+.venv/bin/python scripts/security_static_check.py  -> exit 0, RESULT=PASS (final run, 855 files)
+.venv/bin/python -m pytest -q  -> 283 passed, 6 skipped
+cargo test --manifest-path 03_oracle/rust/Cargo.toml  -> 26 + 5 passed, 0 failed
+.venv/bin/python scripts/compare_oracle.py --all  -> all parity 100%, git_scenarios PASS
+.venv/bin/python scripts/s0_gate.py  -> RESULT=FAIL, §8 only (12 token hits in scripts/security_static_check.py; known collision)
+python3 -m pip wheel . --no-deps --no-build-isolation -w /tmp/t012_wheel  -> instructionroot-1.0.0-py3-none-any.whl, sha256 1e12d28887002f48a9471dc03f8c93a6b5189419ca558cc6cde01de4f0656253
+PYTHONPATH=/usr/lib/python3/dist-packages .venv/bin/pip install --no-build-isolation -e .  -> installed, validated (instructionroot --help/version/verify PASS from /tmp), then pip uninstall -y instructionroot; build/ and 02_src/instructionroot.egg-info/ removed
+git checkout -- review/S0_GATE.md review/S0_LOG.txt review/S0_ORACLE_SUMMARY.json  -> restored S0 PASS evidence overwritten by the gate run

@@ -1,0 +1,30 @@
+{
+  "case_id": "copilot-custom-dirs",
+  "expected_import_candidates": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 3,
+  "expected_sources": [
+    {
+      "discovery_rule": "copilot-cli.repo-wide",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/.github/copilot-instructions.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "copilot-cli.custom-dirs",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "extra/AGENTS.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "copilot-cli.custom-dirs",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "extra/team.instructions.md",
+      "scope": "project"
+    }
+  ],
+  "notes": "Resolver-stage expected file: asserts discovery fields only (rule/scope/phase/precedence_kind/relative_path). trust and verdict are T004/T008 concerns and are asserted by T007's full expected files, not here."
+}

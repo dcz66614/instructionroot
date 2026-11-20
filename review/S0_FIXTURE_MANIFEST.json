@@ -1,0 +1,1011 @@
+{
+  "entries": [
+    {
+      "case_id": "claude-agents-fallback",
+      "edge_count": 0,
+      "expected_sha256": "07a5632f7bf332992f286a5c301ebbfd1ccd18eea084d3286cbd264776c2d7d0",
+      "fixture_tree_sha256": "06fe20acdbb309a6383975a748076bd3df49759f7ca79f15e805ef7c1fe629d0",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 3
+    },
+    {
+      "case_id": "claude-agents-fallback-blocked",
+      "edge_count": 0,
+      "expected_sha256": "83b2950ac6010c719d31cd16c3fd22e72d4344f3d65416cc52cdf3041415981f",
+      "fixture_tree_sha256": "20d635931192288d0ee923df4319e25b6b40b27e4f8eeb4fa2d9e39b10e42307",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-basic",
+      "edge_count": 0,
+      "expected_sha256": "b8ed8800c103c1d9d88acb5a332e4175ad99342fd09d32a4fc88afa28d505743",
+      "fixture_tree_sha256": "d3a2f6fe880b703c66aef76319a85948bf6398054d9557c33a89ae4fe2a70a21",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "global"
+      ],
+      "section": "resolver",
+      "source_count": 6
+    },
+    {
+      "case_id": "claude-code-span",
+      "edge_count": 1,
+      "expected_sha256": "be1450f893c4894ab2361fed8bc79ddb99911956b9ed6f82da487814b709bfb1",
+      "fixture_tree_sha256": "99d3fa3f92c7bcdcfe6d86fe001195d09bc603f824737135645bc5c952fdf709",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-cycle",
+      "edge_count": 3,
+      "expected_sha256": "a897092c5b8f9a3ba7629b385ab11934307a7820d31fdcf9d6fe26cff1fc7bcd",
+      "fixture_tree_sha256": "a1c1d287078c0527a338672e657d0ae29d9f19e7fb5578dc27f89eb66f37a773",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-depth4",
+      "edge_count": 4,
+      "expected_sha256": "ca563c665337737e8692f7063c41145f1585eaad29d81d9684172662598fb6b1",
+      "fixture_tree_sha256": "36e860d9c61fa211b5aa16b8a30c25ea99c21da2e1d3bda4f13998f75e05eebd",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "normal",
+      "s01_s25": [
+        "S13"
+      ],
+      "scenarios_9_1": [
+        "import"
+      ],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-depth5",
+      "edge_count": 5,
+      "expected_sha256": "35ade6c0205ff68cb0e1397ae1af75bbe1101409f633b05405a61722248c5ff5",
+      "fixture_tree_sha256": "258d81efaa8cb8858ca75de8dc7e093cff6be9dd3c235ab1cf5b0e211d88056a",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [
+        "S14"
+      ],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-escape",
+      "edge_count": 3,
+      "expected_sha256": "bb01cddac760ab58a87d9fc0fcff88b74d45af139689b86026d18dcb39fcd80f",
+      "fixture_tree_sha256": "cddbe7b1fdfe1ad26f099a0f64a44ad120d523c05563835886ed6f553ab873fd",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "import escape"
+      ],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-home-import",
+      "edge_count": 1,
+      "expected_sha256": "11b41ddb1ba5cddddd49acf155d8047b4f72c17aef85fc121f0bc96590f98cf2",
+      "fixture_tree_sha256": "be3869c31486ef7f357a516a7e0aaeda7e7c12ba6874446d614482f2e7448eb4",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-import-depth4",
+      "edge_count": 5,
+      "expected_sha256": "af6ce61c9fe9d4275ec20a2055b2a59bfe2abfa3a137c2f47dbbe5cfd1e37e39",
+      "fixture_tree_sha256": "8b6cbf7ca86ba46a29b786d8f282f7f83ef1dd2eeb07e3fe2f73a8b0431e689a",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "missing"
+      ],
+      "section": "resolver",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-import-depth5",
+      "edge_count": 5,
+      "expected_sha256": "7a0078a61737dde0911ec4fccc85eae2f5d5c5c869e5aa9d0364a17ee470298f",
+      "fixture_tree_sha256": "feba15dc5cef5b14b0788e8de68c39a48cd1db169bde7301333c41d1141bf1d0",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-malformed",
+      "edge_count": 2,
+      "expected_sha256": "8976a87e41647825a690b5652d39ba5318665abc0e7069fca44fb858b4b0bd54",
+      "fixture_tree_sha256": "626ccab19f768eee93311290bd299ee1c7f4a4cbc1951f46758dea7b49771b23",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-missing",
+      "edge_count": 2,
+      "expected_sha256": "6283b8be4bae2355c35e0b4add7732e0d25cea9c5ba561b37d67811de5f8e936",
+      "fixture_tree_sha256": "5c8399cb4cc230bf2ac478030dc3685cee9b426d324fe63ca4d91cbbdffc46cc",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "missing"
+      ],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-nested",
+      "edge_count": 0,
+      "expected_sha256": "faa7f290b6eee847f8b0a9e7db3fbaa3b59f824bbd2723b8bbd5574e335d2f76",
+      "fixture_tree_sha256": "ae0fbcc0215b24b94ebe0dccd28ab61e3eacbc1b65aa07241e37dcd870c3ec5c",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "nested",
+        "ambiguous precedence"
+      ],
+      "section": "resolver",
+      "source_count": 4
+    },
+    {
+      "case_id": "claude-nested-disabled",
+      "edge_count": 0,
+      "expected_sha256": "f8aa56d4c5133291ec1dd92a2b027806cf270d6a0f5672f687ac0bb706b692a0",
+      "fixture_tree_sha256": "940d721806df7b29ad932d9e2d1f858a259118408eb19bc2e59e8a912fd91681",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-no-import",
+      "edge_count": 0,
+      "expected_sha256": "5939cca267717cde83636e56238809b70217985c85454d6893858ed9bc441c08",
+      "fixture_tree_sha256": "b91069c400c9302a921c601646ce86ee4b924ea6e472a31acfe6e334d86f6e3d",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "claude-rules-paths",
+      "edge_count": 0,
+      "expected_sha256": "96505ccad80d57c9b5fd73ce8b2aba4005fabb384b8bdaeac75b181ecce6a580",
+      "fixture_tree_sha256": "67a0fdb6514978b908879af16fbb1056669cf73888da91768228708c28a88c24",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 4
+    },
+    {
+      "case_id": "claude-symlink-escape",
+      "edge_count": 1,
+      "expected_sha256": "9e5ad7154b3e25eed3a8fd08fd46eca5254626ac9ae4fb4260f49aa99f87ff49",
+      "fixture_tree_sha256": "fbe17be447a9342284a21087d5d962e8e39fe58c57bed7a24e9727ac004d26de",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "codex-basic",
+      "edge_count": 0,
+      "expected_sha256": "008ad0ea8d7ae7637033f5c4cef659864478c907067fcb065582d475891c0fd1",
+      "fixture_tree_sha256": "bdd3746d92939ab81ba3b699da720e6d2902fe1b54befc5aaa77ef7076de4657",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "codex",
+      "layer": "normal",
+      "s01_s25": [
+        "S01",
+        "S02",
+        "S03",
+        "S17",
+        "S18"
+      ],
+      "scenarios_9_1": [
+        "nested",
+        "global"
+      ],
+      "section": "resolver",
+      "source_count": 4
+    },
+    {
+      "case_id": "codex-empty",
+      "edge_count": 0,
+      "expected_sha256": "c85d3d6873edce71e223b790fc886346e907c523127898f4c8e037df70d15f05",
+      "fixture_tree_sha256": "928293dd7ccf16a81262952204672e9bfab723987aa2f52702f64e6283ed3c83",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "codex",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 0
+    },
+    {
+      "case_id": "codex-no-import",
+      "edge_count": 0,
+      "expected_sha256": "643b48c40484768d8c223998109c81498236ad3572e8f9dac294b6cf4fe9465a",
+      "fixture_tree_sha256": "2015fc08165e1321ebfd0d12c45870ae309c840104d5bc6a5f04590ba13f99f3",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "codex",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "codex-norepo",
+      "edge_count": 0,
+      "expected_sha256": "423a33e715cd81d0ae3146df93df2a560a279a5a86ae41578173f123ae3c693b",
+      "fixture_tree_sha256": "40f47b152507eafce582e667ce2de8def5ed136f8c1c179ebc8f7048c963982e",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "codex",
+      "layer": "boundary",
+      "s01_s25": [
+        "S25"
+      ],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 2
+    },
+    {
+      "case_id": "codex-override",
+      "edge_count": 0,
+      "expected_sha256": "b27facc9e6eaead28087789ec88a285a3ffeaba16c66e352589827bf0202e41b",
+      "fixture_tree_sha256": "d7adc77d645d74523fe1bcbf01720ee2889b4017dacc39a830d0cd87cbbc92be",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "codex",
+      "layer": "boundary",
+      "s01_s25": [
+        "S11"
+      ],
+      "scenarios_9_1": [
+        "ambiguous precedence"
+      ],
+      "section": "resolver",
+      "source_count": 4
+    },
+    {
+      "case_id": "codex-user-only",
+      "edge_count": 0,
+      "expected_sha256": "2f13540dd660ea1305f8568fc4f1dce68d65f60ddb6fa9b5c130a764f341c4dc",
+      "fixture_tree_sha256": "9cb08955402ee19f4a9c33163bf1c136e386b4f7ab0766a46b52908380f971d8",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "codex",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 1
+    },
+    {
+      "case_id": "copilot-absolute",
+      "edge_count": 3,
+      "expected_sha256": "c13e691ffb6693223cb29411008f607c9609df330aadbaa6f5d88ea27aaec678",
+      "fixture_tree_sha256": "237f9dc0b10c5259f261bb54af2762ee9775081eeff10c13bc1d76facd587585",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "import escape"
+      ],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "copilot-applyto-absent",
+      "edge_count": 0,
+      "expected_sha256": "65be4284752bde8aacc3c5d4822dbaa3033c263d9461ef0642538270f2a1215c",
+      "fixture_tree_sha256": "b3edded2b58f595265e2e61633ceb3e7d498594447f6a513305ef9325c6b4fcc",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 1
+    },
+    {
+      "case_id": "copilot-applyto-match",
+      "edge_count": 0,
+      "expected_sha256": "d22bd70bcddcb2f4a8ce51aecf02b32dabbf2d39e2e81d54b91a9704391482a7",
+      "fixture_tree_sha256": "51e5da605e827f4a08070612109f0d2f79d8c84984a2782f737306c927aee1fb",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "normal",
+      "s01_s25": [
+        "S15"
+      ],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 3
+    },
+    {
+      "case_id": "copilot-applyto-nomatch",
+      "edge_count": 0,
+      "expected_sha256": "95ce144f478a4ab6b01537b7afa1b7da9d84fb8acb05461514d235c0463d4092",
+      "fixture_tree_sha256": "087bd14dfc7215e5f3c3f1039ae96761fb56a44ff510e7b470d8eb2bc8ed7f19",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "boundary",
+      "s01_s25": [
+        "S16"
+      ],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 1
+    },
+    {
+      "case_id": "copilot-basic",
+      "edge_count": 0,
+      "expected_sha256": "5f1c1acdc79c61e19af5b6cbc58c79e16b3b408719d45a34a975554a1698da9c",
+      "fixture_tree_sha256": "3f876b17b5002837e63af0684892ab4ad31075380043e182d0b28d43891e9160",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "global"
+      ],
+      "section": "resolver",
+      "source_count": 8
+    },
+    {
+      "case_id": "copilot-custom-dir",
+      "edge_count": 3,
+      "expected_sha256": "c03d761ce2dddda246d99d5f6929253aa29218b89062a54cfd7218b7e168fdcd",
+      "fixture_tree_sha256": "69a79ee12e5d35cd0e32b112cd7872a59e07d8f81036373c27eedc4062e8d156",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "copilot-custom-dirs",
+      "edge_count": 0,
+      "expected_sha256": "6cf2319b98067ee039eee7f30bc829b8de488280208944340689071a74f2848e",
+      "fixture_tree_sha256": "bca8e2be51b7d93460f13e4964b1bc1a4b7d555f2496294d0366b0327af17716",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 3
+    },
+    {
+      "case_id": "copilot-dedup",
+      "edge_count": 0,
+      "expected_sha256": "a117c7a692441468e83d400778b876e1c27b4ecea616a803f0b17738013652c3",
+      "fixture_tree_sha256": "d21b4d708c41b5a020d5d7dfd8a247d19edcd9caffc31ab521617047e83cd7a1",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "boundary",
+      "s01_s25": [
+        "S10"
+      ],
+      "scenarios_9_1": [
+        "duplicate"
+      ],
+      "section": "resolver",
+      "source_count": 2
+    },
+    {
+      "case_id": "copilot-intermediate",
+      "edge_count": 0,
+      "expected_sha256": "53ef45328e05cacc3001c8c8154dacc9484d8b1e46692f2ae8bcf38b5e8064b1",
+      "fixture_tree_sha256": "15e74d356836554b7c217f01b8bb3bd4aad85ef5e3dfc59a5c82a4c70551c5f2",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "resolver",
+      "source_count": 4
+    },
+    {
+      "case_id": "copilot-no-expand",
+      "edge_count": 0,
+      "expected_sha256": "30a50ee9670be52f79716b047063b93966ec246c3c25881d7e85ae1fa42e3284",
+      "fixture_tree_sha256": "4846292a4158b9919e04e99e7bcbf43754dd88bfc12a2ed0b9834505302766b2",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 3
+    },
+    {
+      "case_id": "copilot-relative",
+      "edge_count": 3,
+      "expected_sha256": "4aff0df042f8211866a314383a2d12b8a1a0491e55315b88584335f04a14ebf9",
+      "fixture_tree_sha256": "bc114fe53a5037133f13459cc9202ce76ef9d4e20312168ad81e3e9a03acc0f4",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "import"
+      ],
+      "section": "imports",
+      "source_count": 2
+    },
+    {
+      "case_id": "copilot-tilde-user",
+      "edge_count": 1,
+      "expected_sha256": "bed597371fd4d8c277954285ff22f4f54bbe0779e01067798113122d08080572",
+      "fixture_tree_sha256": "b9e1abf50c25d2576a724222885092d8a13a7b99994dbbd908723db1d9a6d056",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": "copilot-cli",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "imports",
+      "source_count": 1
+    },
+    {
+      "case_id": "fs/basic",
+      "edge_count": 0,
+      "expected_sha256": "f8efd04415d7df22778e991d1d73c23dbd1e72f74f790926b05542c55bf5f638",
+      "fixture_tree_sha256": "66b3444afebfa7ef8363121d37f3f3f32a3cb681c0503c40a10335556f5eae90",
+      "fs_probe_count": 5,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/deep-chain",
+      "edge_count": 0,
+      "expected_sha256": "c40818de19bb31b2c2d5e0d44faefb4475d350b7e535e6faddcdbcde2ff3b55d",
+      "fixture_tree_sha256": "25703bbf5e05cc16838542b0ba5868761badc21dc1fd271ad4d37f29c9accc98",
+      "fs_probe_count": 2,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "normal",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/dir-symlink",
+      "edge_count": 0,
+      "expected_sha256": "66962145097dc6e030e077a527f62de30b970fb4626afefa44e526a0a10dad27",
+      "fixture_tree_sha256": "4fd75d0c7ba0ddc5eb1d28325d790aa0a4fb6db372e7496f431978fda4849e8b",
+      "fs_probe_count": 2,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/dotdot",
+      "edge_count": 0,
+      "expected_sha256": "dd403b1cd35055b50e73fa174c1ea26112b2416e7cd042bcf78fa79e7dc828d3",
+      "fixture_tree_sha256": "bed3d20c2e95bfe96747f7ac84405fdf9640f02db5b9f00c895be91794c22e9e",
+      "fs_probe_count": 2,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "normal",
+      "s01_s25": [
+        "S20"
+      ],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/missing",
+      "edge_count": 0,
+      "expected_sha256": "03cb8ae16d14b7e9976d87c4fda39604e17b1fa4e4633e70c92da89ac4d17439",
+      "fixture_tree_sha256": "634422b417c6fce879b6c59c786fbb70be425d96ef204eee28c667ba59d84d34",
+      "fs_probe_count": 1,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/separators",
+      "edge_count": 0,
+      "expected_sha256": "4c0ec015e1074c56c477b73193ac331ee44e164935982621206fbc93e1c431ba",
+      "fixture_tree_sha256": "c3e075cda2e2d799187e19fdd0e76a316dde8744f74daef8a980404365b1a568",
+      "fs_probe_count": 2,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "normal",
+      "s01_s25": [
+        "S20"
+      ],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/symlink-broken",
+      "edge_count": 0,
+      "expected_sha256": "a31d6f4c17d3af96f054c5ddc0d602582d119979cbb2ff964a6c661aaeeba1b3",
+      "fixture_tree_sha256": "d9dc0e564cc0f92f856410c47b2aeb6f0fd95e7d8fc26880e206968bfe75caf2",
+      "fs_probe_count": 1,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/symlink-escape",
+      "edge_count": 0,
+      "expected_sha256": "e4161180eb0696091a1334bc5c93f6b238924f23832a91e9423fdce9b0578230",
+      "fixture_tree_sha256": "ee52bc21d0e5768971184198d19767e6cf7e8999ed899b62c7bcb3dd343c09c1",
+      "fs_probe_count": 1,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/symlink-inside",
+      "edge_count": 0,
+      "expected_sha256": "75219a81d1eb8a4ed6fbc0fb0aafebb74188fd8095505a78ca843e81526cc940",
+      "fixture_tree_sha256": "1af26acc7b46956a8a1b3dab9d9245e264ffa01a7194d927d5a9b32aaaa32e7a",
+      "fs_probe_count": 1,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "symlink"
+      ],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/symlink-loop",
+      "edge_count": 0,
+      "expected_sha256": "09733d37f813fd8c7b6c486b3595df2b050b28d3330649b804d24987898b68d0",
+      "fixture_tree_sha256": "b316a0bedd9de4d0f5b2773df2a0e982fa4e00b0e81f69ada97efeced433b944",
+      "fs_probe_count": 2,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/unicode",
+      "edge_count": 0,
+      "expected_sha256": "f3aa640e906fdbd59b6122e9db68665d800e66a1fa519dfa9ff42368bc2a0eed",
+      "fixture_tree_sha256": "a24afe0568b0802d1d3da8f8bc06b8922cd5a55e29f08fd48c3cf34e3ac3b292",
+      "fs_probe_count": 2,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "fs/windows",
+      "edge_count": 0,
+      "expected_sha256": "24948dde57c0fd69789e8dc4faf4dd38132449f2123d00e3f3076124d6ac7aec",
+      "fixture_tree_sha256": "d9d528d393db8d9a9cb7d8eb0e25444a471f16d2233d19a00495e53822678b69",
+      "fs_probe_count": 4,
+      "gate_passed": true,
+      "git_head": null,
+      "harness": null,
+      "layer": "normal",
+      "s01_s25": [
+        "S12"
+      ],
+      "scenarios_9_1": [
+        "junction"
+      ],
+      "section": "fs",
+      "source_count": 0
+    },
+    {
+      "case_id": "s0-case-sensitive",
+      "edge_count": 0,
+      "expected_sha256": "ccabae4f744c9f7840c326200b3a73fd98f09b0dd1b170063cc7529a9141d108",
+      "fixture_tree_sha256": "2e795470fb9d40d0b2bcaaf9e58011bc202f1cc6e1dc4fff52def81098709b27",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "bc966c84355bf4479b31c952bdd7dcfc5d48558b",
+      "harness": "codex",
+      "layer": "boundary",
+      "s01_s25": [
+        "S22"
+      ],
+      "scenarios_9_1": [],
+      "section": "s0",
+      "source_count": 2
+    },
+    {
+      "case_id": "s0-downloads-import",
+      "edge_count": 2,
+      "expected_sha256": "592e2bbed59a7fb534f555d3b95249d07801af75cf3226d1ae06eee9eb39320d",
+      "fixture_tree_sha256": "d516b0e247d816d3d035671c71c83552347f55e2054144fbf028609f5f7d1657",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "40d13ab004ccf1a087fb9e4417174f60db9551dc",
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [
+        "S09",
+        "S19"
+      ],
+      "scenarios_9_1": [
+        "import",
+        "import escape"
+      ],
+      "section": "s0",
+      "source_count": 1
+    },
+    {
+      "case_id": "s0-git-missing-import",
+      "edge_count": 2,
+      "expected_sha256": "7f5fc2d20f52e0984d28d08d9f18a21585d44e00117146c37b17dec322c89ba4",
+      "fixture_tree_sha256": "c830631609e266bc32f81a1e15daf47782de88f76c0447aef6e0f6ab5113e238",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "e7d03d7447f568a272d6ef19baa96eb9adf6dd6d",
+      "harness": "claude-code",
+      "layer": "adversarial",
+      "s01_s25": [
+        "S08",
+        "S23"
+      ],
+      "scenarios_9_1": [
+        "missing"
+      ],
+      "section": "s0",
+      "source_count": 1
+    },
+    {
+      "case_id": "s0-git-modified",
+      "edge_count": 0,
+      "expected_sha256": "e67a48820218a7fa252e60d0f69c0374ae6c519f3698cf1d64d6ee0b0974af28",
+      "fixture_tree_sha256": "ef42a3bd7cc6c32104d29a6a0b59d6c61d282e8d537ad826074268a1ddeace6a",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "557a7bfb71f5942a3736fd4564fd1695a3de4bb4",
+      "harness": "codex",
+      "layer": "boundary",
+      "s01_s25": [
+        "S05"
+      ],
+      "scenarios_9_1": [
+        "modified"
+      ],
+      "section": "s0",
+      "source_count": 3
+    },
+    {
+      "case_id": "s0-git-modified-block",
+      "edge_count": 0,
+      "expected_sha256": "19c2588487d7b8117923f432d15a7585f407269bb2bd1980e0068abbaa3af2d9",
+      "fixture_tree_sha256": "6fd9fc4385c9f5b5c5541242146bf60dbfbdccc6f90424372142144de2939cf7",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "834d8f36f2794691dbf695755ce0526b213f693c",
+      "harness": "codex",
+      "layer": "adversarial",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "modified"
+      ],
+      "section": "s0",
+      "source_count": 3
+    },
+    {
+      "case_id": "s0-git-rename",
+      "edge_count": 0,
+      "expected_sha256": "0453c28d96c7624e9f2d015d71ce8eea0be38be35f23a5df9aad79f8161c3b90",
+      "fixture_tree_sha256": "61b789d6b2f14668ea419b37fd128bac1a2bf01a63fd91afa4e328439c5fc498",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "b049e5ad05c2a1c5815658ad66d549fdd10b2f7a",
+      "harness": "codex",
+      "layer": "adversarial",
+      "s01_s25": [
+        "S24"
+      ],
+      "scenarios_9_1": [
+        "untracked"
+      ],
+      "section": "s0",
+      "source_count": 2
+    },
+    {
+      "case_id": "s0-git-staged-new",
+      "edge_count": 0,
+      "expected_sha256": "1a9b9e64b91a9f3fb2763eb566ceeabc79d7da5d9ba3aea04dec70025cdb76eb",
+      "fixture_tree_sha256": "60092826936ec51b90c27dff2c210bbbe8b510e998cec9e97a48ae714a638e21",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "d97eab82fafaffa9a5f7f59c4d8f7e7d29d1e462",
+      "harness": "codex",
+      "layer": "boundary",
+      "s01_s25": [],
+      "scenarios_9_1": [
+        "modified"
+      ],
+      "section": "s0",
+      "source_count": 2
+    },
+    {
+      "case_id": "s0-git-symlink-escape",
+      "edge_count": 0,
+      "expected_sha256": "5923f5ea86736f0ebcf38217f097205e0d26a5916054ef7cb5cf6b70d96c7ddf",
+      "fixture_tree_sha256": "47e182a9446ee23540d615677b638f1a61df297439a16dcee5e38e1237abcaa4",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "9aed0a9fb5be578725a24b4e57b2731291a4158c",
+      "harness": "codex",
+      "layer": "adversarial",
+      "s01_s25": [
+        "S07"
+      ],
+      "scenarios_9_1": [
+        "symlink"
+      ],
+      "section": "s0",
+      "source_count": 2
+    },
+    {
+      "case_id": "s0-git-symlink-inside",
+      "edge_count": 0,
+      "expected_sha256": "a9e780a49e78b507f64e0fe11421be0f81b381a3434445bd909684dcf2c6eabb",
+      "fixture_tree_sha256": "fb37bc3b5898d2811434fb15abf42614d925602e2da3794d9ce0aea3b607285e",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "2c8f3914af2f0f7d9ba5bd6c34057258790e5d2b",
+      "harness": "codex",
+      "layer": "normal",
+      "s01_s25": [
+        "S06"
+      ],
+      "scenarios_9_1": [
+        "symlink"
+      ],
+      "section": "s0",
+      "source_count": 2
+    },
+    {
+      "case_id": "s0-git-tracked",
+      "edge_count": 0,
+      "expected_sha256": "0f710a39af65dc82bacf2e6a20c3359fff5814a976e2d87f289bbcbd64e08661",
+      "fixture_tree_sha256": "916dcb56609d538ef8b724b7122de92dc6dc40aafdabcc0a0149a94b8b562b01",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "810474a999c0af35dd3b4b3392c2f1f749df5b87",
+      "harness": "codex",
+      "layer": "normal",
+      "s01_s25": [
+        "S01"
+      ],
+      "scenarios_9_1": [
+        "nested"
+      ],
+      "section": "s0",
+      "source_count": 3
+    },
+    {
+      "case_id": "s0-git-unicode",
+      "edge_count": 0,
+      "expected_sha256": "e1de541d5c88326b2b00378e250b1a0a405096c06dc49fe1027a06e2c7b2d80e",
+      "fixture_tree_sha256": "3de630a31ec4c7c27c72cb130303ad7028ddc699ce036297bd17eaccaf5df965",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "d0b7e8b891bfafaa51dc55a3318863bab9d8005c",
+      "harness": "codex",
+      "layer": "normal",
+      "s01_s25": [
+        "S21"
+      ],
+      "scenarios_9_1": [],
+      "section": "s0",
+      "source_count": 2
+    },
+    {
+      "case_id": "s0-git-untracked-block",
+      "edge_count": 0,
+      "expected_sha256": "209621e1d390ef24fef558d5e97c4c0a419d56742e15bcb4c0abdb45bb86767a",
+      "fixture_tree_sha256": "d45861aa875ffcc21146be77f8cc3e080207eefdb13ee58ac1a16f05cf67a736",
+      "fs_probe_count": 0,
+      "gate_passed": true,
+      "git_head": "d5693e9bc6d1348d614363ae551eebfe16ba0d37",
+      "harness": "codex",
+      "layer": "adversarial",
+      "s01_s25": [
+        "S04"
+      ],
+      "scenarios_9_1": [
+        "untracked"
+      ],
+      "section": "s0",
+      "source_count": 3
+    }
+  ],
+  "fixtures": 60,
+  "gate": "S0",
+  "layers": {
+    "adversarial": 20,
+    "boundary": 20,
+    "normal": 20
+  },
+  "project_id": "P028"
+}

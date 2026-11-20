@@ -1,0 +1,32 @@
+{
+  "case_id": "copilot-tilde-user",
+  "expected_edges": [
+    {
+      "allowed": false,
+      "depth": 1,
+      "from_relative_path": "repo/.github/copilot-instructions.md",
+      "reason": "UNRESOLVABLE",
+      "relative_resolved_target": null,
+      "relative_target": null,
+      "syntax": "@~user/evil.md"
+    }
+  ],
+  "expected_not_applicable": [],
+  "expected_source_count": 1,
+  "expected_sources": [
+    {
+      "discovery_rule": "copilot-cli.repo-wide",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/.github/copilot-instructions.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "forbidden_trust": [
+    "NOT_OBSERVED"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). Edges transcribed from the T005 stage expected file; sources/trust/verdict hand-derived from the frozen contracts."
+}

@@ -1,0 +1,25 @@
+{
+  "case_id": "fs/dotdot",
+  "expected_probes": [
+    {
+      "canonical": "{case}/repo/AGENTS.md",
+      "exists": true,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "repo/services/payments/../../AGENTS.md",
+      "resolved": "{case}/repo/AGENTS.md"
+    },
+    {
+      "canonical": "{case}/repo/services/other/keep.txt",
+      "exists": true,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "repo/services/payments/../other/keep.txt",
+      "resolved": "{case}/repo/services/other/keep.txt"
+    }
+  ],
+  "kind": "fs",
+  "notes": "Unified S0 expected index (T007). Canonicalize probes transcribed from the T002 fixture tree; {case} is the case directory. Windows probes are pure-string (real junction/drive resolution is NOT_RUN on Linux)."
+}

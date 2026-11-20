@@ -1,0 +1,26 @@
+{
+  "case_id": "claude-missing",
+  "expected_edge_count": 2,
+  "expected_edges": [
+    {
+      "allowed": false,
+      "depth": 1,
+      "from_relative_path": "repo/CLAUDE.md",
+      "reason": "MISSING",
+      "relative_resolved_target": null,
+      "relative_target": null,
+      "syntax": "@missing.md"
+    },
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "repo/CLAUDE.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/ok.md",
+      "relative_target": "repo/shared/ok.md",
+      "syntax": "@shared/ok.md"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "notes": "Imports-stage expected file: asserts import edges (from + syntax + depth + targets + allowed + reason) and the verdict under synthetic trust (in-repo files are treated as GIT_TRACKED, home files as USER_SCOPE; real Git state is T004/T007's job, not this stage's). No receipt_hash is asserted here."
+}

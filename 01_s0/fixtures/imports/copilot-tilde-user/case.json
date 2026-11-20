@@ -1,0 +1,14 @@
+{
+  "case_id": "copilot-tilde-user",
+  "cwd": "repo",
+  "env": {},
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "Copilot @~user/... reference fails closed: UNRESOLVABLE, no crash (C-08)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "Copilot @~user/... reference fails closed: UNRESOLVABLE, no crash (C-08)",
+  "working_files": []
+}

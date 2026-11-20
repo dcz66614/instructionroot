@@ -1,0 +1,45 @@
+== 0. regenerate windows fixtures ==
+windows receipt cases=15
+  win-case-both
+  win-case-variant
+  win-copilot-drive-ref
+  win-drive-import
+  win-drive-relative-import
+  win-git-case-rename
+  win-git-deleted-chain
+  win-git-deleted-import
+  win-junction-escape
+  win-junction-import-escape
+  win-junction-import-inside
+  win-junction-inside
+  win-tilde-user-import
+  win-unc-import
+  win-unicode-chain
+== 1. receipt cases: 15 ==
+[PASS] win-case-both (PASS, c2f5672aca15)
+[PASS] win-case-variant (PASS, d0f9aa90ae2c)
+[PASS] win-copilot-drive-ref (BLOCK, 6cdc412f2159)
+[PASS] win-drive-import (BLOCK, a6df68286c80)
+[PASS] win-drive-relative-import (BLOCK, 385e924d6d68)
+[PASS] win-git-case-rename (PASS, 87e95d4ab342)
+[PASS] win-git-deleted-chain (PASS, 5c2c449367cb)
+[PASS] win-git-deleted-import (BLOCK, 102a648058fa)
+[PASS] win-junction-escape (BLOCK, a197f5fb610c)
+[PASS] win-junction-import-escape (BLOCK, 06382c65897d)
+[PASS] win-junction-import-inside (PASS, 5358a99dd2b6)
+[PASS] win-junction-inside (PASS, a1d8ca2c4767)
+[PASS] win-tilde-user-import (BLOCK, 13f024d3f219)
+[PASS] win-unc-import (BLOCK, 897f6e6a2297)
+[PASS] win-unicode-chain (PASS, 8ed0206b09a8)
+== 2. pure-string probes: win-probes ==
+[PASS] win-probes (10 probes)
+== 3. determinism spot check (win-drive-import x10+10) ==
+determinism=PASS distinct_hashes=1
+receipt_cases=15 passed=15 failed=0
+source_parity=15/15
+trust_parity=15/15
+edge_parity=15/15
+verdict_parity=15/15
+hash_parity=15/15
+probes=10 passed=True
+RESULT=PASS

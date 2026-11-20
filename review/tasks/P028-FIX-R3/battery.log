@@ -1,0 +1,63 @@
+=== P028 FIX-R3 battery — merged tree, 2026-11-19 ===
+HEAD: 20699ea373718389e03aff544d92768be109ab65
+
+--- pytest ---
+........................................................................ [ 92%]
+.............ssss.....                                                   [100%]
+304 passed, 6 skipped in 8.78s
+
+--- cargo test --locked ---
+test result: ok. 38 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+--- compare_oracle --all ---
+resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+fs_parity=100.0% git_scenarios=PASS
+
+--- S0 gate ---
+== 0. fixture setup: regenerate S0 fixtures ==
+s0 fixtures regenerated (12 cases)
+fixtures=60 layers={'normal': 20, 'boundary': 20, 'adversarial': 20} expected_index=60 synthetic_only=True human_labels=0
+golden_edge_parity=100.0%
+== 6. determinism: 100 runs, same receipt_hash ==
+fail_closed=8/8
+== 8. network_access=0 (static grep + runtime audit hook) ==
+network_tokens=0 shell_true=0 runtime_socket_events=0 network_access=0
+  compare_oracle: source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+  compare_oracle: fs_parity=100.0% git_scenarios=PASS
+
+--- windows corpus ---
+verdict_parity=15/15
+hash_parity=15/15
+probes=10 passed=True
+RESULT=PASS
+
+--- security static check ---
+secret_fixture_leaks=0
+RESULT=PASS
+
+--- CI simulation ---
+.venv/bin/python: can't open file '/home/hatch/workspace/p028-instructionroot/scripts/ci_simulation.py': [Errno 2] No such file or directory
+
+--- dashboard smoke ---
+.venv/bin/python: can't open file '/home/hatch/workspace/p028-instructionroot/scripts/dashboard_smoke.py': [Errno 2] No such file or directory
+
+--- CI simulation ---
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+
+--- dashboard smoke ---
+/ -> 200
+/index.html -> 200
+/app.js -> 200
+/style.css -> 200
+/receipt.json -> 200
+/receipt-pass.json -> 200
+/receipt-block.json -> 200
+
+--- CI simulation (correction) ---
+NOTE: first run used .venv/bin/python, which has no PyYAML; re-ran with system python3 (FIX-R2 precedent):
+receipt_hash: bc5346a530dd4763baae7e0b80ca3274c93bfd7a422f331ca16f64993c7ae14d
+SIMULATION: PASS (2/2 cases)
+=== battery done ===

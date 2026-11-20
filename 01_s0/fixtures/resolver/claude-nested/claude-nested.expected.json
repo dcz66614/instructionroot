@@ -1,0 +1,37 @@
+{
+  "case_id": "claude-nested",
+  "expected_import_candidates": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 4,
+  "expected_sources": [
+    {
+      "discovery_rule": "claude-code.project",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/CLAUDE.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "claude-code.agents-nested",
+      "phase": "on_demand",
+      "precedence_kind": "UNSPECIFIED",
+      "relative_path": "repo/services/AGENTS.md",
+      "scope": "nested"
+    },
+    {
+      "discovery_rule": "claude-code.nested",
+      "phase": "on_demand",
+      "precedence_kind": "UNSPECIFIED",
+      "relative_path": "repo/services/payments/CLAUDE.md",
+      "scope": "nested"
+    },
+    {
+      "discovery_rule": "claude-code.nested",
+      "phase": "on_demand",
+      "precedence_kind": "UNSPECIFIED",
+      "relative_path": "repo/services/payments/CLAUDE.local.md",
+      "scope": "nested"
+    }
+  ],
+  "notes": "Resolver-stage expected file: asserts discovery fields only (rule/scope/phase/precedence_kind/relative_path). trust and verdict are T004/T008 concerns and are asserted by T007's full expected files, not here."
+}

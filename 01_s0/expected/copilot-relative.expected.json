@@ -1,0 +1,62 @@
+{
+  "case_id": "copilot-relative",
+  "expected_edges": [
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "repo/AGENTS.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/rules.md",
+      "relative_target": "repo/shared/rules.md",
+      "syntax": "@shared/rules.md"
+    },
+    {
+      "allowed": true,
+      "depth": 2,
+      "from_relative_path": "repo/shared/rules.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/more.md",
+      "relative_target": "repo/shared/more.md",
+      "syntax": "@more.md"
+    },
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "repo/.github/copilot-instructions.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/repo-wide.md",
+      "relative_target": "repo/shared/repo-wide.md",
+      "syntax": "@../shared/repo-wide.md"
+    }
+  ],
+  "expected_not_applicable": [],
+  "expected_source_count": 2,
+  "expected_sources": [
+    {
+      "discovery_rule": "copilot-cli.repo-wide",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/.github/copilot-instructions.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "discovery_rule": "copilot-cli.agents",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/AGENTS.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    }
+  ],
+  "expected_verdict": "PASS",
+  "forbidden_trust": [
+    "NOT_OBSERVED",
+    "SYMLINK_ESCAPE",
+    "IMPORT_ESCAPE",
+    "OUTSIDE_REPO",
+    "MISSING"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). Edges transcribed from the T005 stage expected file; sources/trust/verdict hand-derived from the frozen contracts."
+}

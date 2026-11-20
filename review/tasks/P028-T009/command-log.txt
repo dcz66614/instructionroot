@@ -1,0 +1,12 @@
+./instructionroot verify --harness codex --cwd fixtures/demo/services/payments --home fixtures/demo/home  # PASS, exit 0
+./instructionroot verify --harness codex --cwd fixtures/demo-block/services/payments --home fixtures/demo-block/home  # BLOCK, exit 20
+./instructionroot export --harness codex --cwd fixtures/demo/services/payments --home fixtures/demo/home --format json --output /tmp/p028t009/demo.json
+./instructionroot export --harness codex --cwd fixtures/demo-block/services/payments --home fixtures/demo-block/home --format json --output /tmp/p028t009/demo-block.json
+node --check web/app.js  # OK
+node /tmp/p028t009/check.mjs  # headless DOM check, PASS + BLOCK, see TASK_RESULT.md
+python3 -m http.server 8765 --directory web  # curl 200s for all 7 files
+grep -rInE "https?://|//cdn|fonts.googleapis|google-analytics|cdn.jsdelivr|unpkg.com" web/  # 0 external URLs (only localhost instruction in README)
+.venv/bin/python -m pytest -q  # 283 passed, 6 skipped
+cargo test --manifest-path 03_oracle/rust/Cargo.toml  # 31 passed (26+5), 0 failed
+.venv/bin/python scripts/compare_oracle.py --all  # all parities 100.0%, exit 0
+.venv/bin/python scripts/s0_gate.py  # RESULT=PASS

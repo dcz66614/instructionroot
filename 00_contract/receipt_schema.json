@@ -1,0 +1,386 @@
+{
+  "schema_name": "P028 InstructionRoot Resolve - Receipt Schema",
+  "receipt_schema_version": 1,
+  "schema_version": 1,
+  "project_id": "P028",
+  "frozen_date": "2026-11-18",
+  "canonicalization": {
+    "scheme": "RFC 8785 JSON Canonicalization Scheme (JCS)",
+    "hash_algorithm": "SHA-256",
+    "receipt_hash_definition": "SHA-256 of the canonical JSON (RFC 8785) of the receipt object with the receipt_hash field itself excluded. All other fields in the receipt are covered by the hash.",
+    "excluded_from_hash": [
+      "receipt_hash"
+    ],
+    "never_in_receipt": [
+      "wall-clock timestamp",
+      "duration",
+      "temporary port",
+      "machine username (unless the user explicitly requests it)",
+      "instruction file contents"
+    ],
+    "note": "Python and Rust implementations must produce byte-identical canonical JSON (key order, number serialisation) per RFC 8785, or receipt_hash parity will fail."
+  },
+  "trust_enum": [
+    "GIT_TRACKED",
+    "GIT_MODIFIED",
+    "GIT_UNTRACKED",
+    "USER_SCOPE",
+    "OUTSIDE_REPO",
+    "SYMLINK_ESCAPE",
+    "IMPORT_ESCAPE",
+    "MISSING",
+    "NOT_OBSERVED"
+  ],
+  "trust_priority": [
+    "IMPORT_ESCAPE",
+    "SYMLINK_ESCAPE",
+    "MISSING",
+    "OUTSIDE_REPO",
+    "GIT_UNTRACKED",
+    "GIT_MODIFIED",
+    "GIT_TRACKED",
+    "USER_SCOPE"
+  ],
+  "trust_priority_note": "Order from PROJECT_BOOK.md §13.4. NOT_OBSERVED has no position in this order (see SPEC-03 in profile_contract.json). The priority resolves which single trust value a source gets when several conditions apply; it is a classification rule, not a judgement that file content is malicious.",
+  "verdict_enum": [
+    "PASS",
+    "WARN",
+    "BLOCK",
+    "INPUT_ERROR",
+    "UNSUPPORTED_PROFILE",
+    "INTERNAL_ERROR"
+  ],
+  "exit_codes": {
+    "PASS": 0,
+    "WARN": 10,
+    "BLOCK": 20,
+    "INPUT_ERROR": 30,
+    "UNSUPPORTED_PROFILE": 40,
+    "INTERNAL_ERROR": 50
+  },
+  "exit_code_note": "From PROJECT_BOOK.md §8.8. Default CI mode: WARN is configurable, BLOCK / INPUT_ERROR / INTERNAL_ERROR must be non-zero; INTERNAL_ERROR is fail-closed.",
+  "receipt": {
+    "type": "object",
+    "required": [
+      "receipt_version",
+      "profile",
+      "workspace",
+      "sources",
+      "edges",
+      "verdict",
+      "receipt_hash"
+    ],
+    "properties": {
+      "receipt_version": {
+        "type": "integer",
+        "const": 1,
+        "description": "Receipt schema version."
+      },
+      "profile": {
+        "type": "object",
+        "required": [
+          "id",
+          "version"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "codex",
+              "claude-code",
+              "copilot-cli"
+            ]
+          },
+          "version": {
+            "type": "string",
+            "enum": [
+              "codex-2026-11",
+              "claude-code-2026-11",
+              "copilot-cli-2026-11"
+            ],
+            "description": "Must match the id: codex -> codex-2026-11, claude-code -> claude-code-2026-11, copilot-cli -> copilot-cli-2026-11."
+          },
+          "rules_hash": {
+            "type": "string",
+            "description": "Optional. The profile rules_hash from profile_contract.json, copied verbatim when present."
+          }
+        }
+      },
+      "workspace": {
+        "type": "object",
+        "required": [
+          "cwd",
+          "repo_root"
+        ],
+        "properties": {
+          "cwd": {
+            "type": "string",
+            "description": "Canonical absolute path of the working directory the harness would start in."
+          },
+          "repo_root": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Canonical absolute path of the git repository top level, or null when the CWD is not inside a git repository."
+          },
+          "home": {
+            "type": "string",
+            "description": "Optional. Canonical absolute path of the user home directory used for user-scope resolution."
+          }
+        }
+      },
+      "sources": {
+        "type": "array",
+        "items": {
+          "$ref": "#/source"
+        },
+        "description": "Effective instruction chain, in harness discovery order. Empty array is valid (no sources discovered)."
+      },
+      "edges": {
+        "type": "array",
+        "items": {
+          "$ref": "#/edge"
+        },
+        "description": "Import/reference edges between sources (and to missing targets)."
+      },
+      "policy": {
+        "type": "object",
+        "description": "Optional. The policy the verdict was computed under.",
+        "required": [
+          "policy_schema_version",
+          "values"
+        ],
+        "properties": {
+          "policy_schema_version": {
+            "type": "integer",
+            "const": 1
+          },
+          "values": {
+            "type": "object",
+            "description": "Policy field values as defined in policy_schema.json (default_policy shape)."
+          }
+        }
+      },
+      "verdict": {
+        "type": "string",
+        "enum": [
+          "PASS",
+          "WARN",
+          "BLOCK",
+          "INPUT_ERROR",
+          "UNSUPPORTED_PROFILE",
+          "INTERNAL_ERROR"
+        ]
+      },
+      "receipt_hash": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$",
+        "description": "Lowercase hex SHA-256 of the canonical receipt JSON with this field excluded."
+      }
+    }
+  },
+  "source": {
+    "type": "object",
+    "required": [
+      "source_id",
+      "raw_path",
+      "canonical_path",
+      "resolved_path",
+      "scope",
+      "phase",
+      "discovery_rule",
+      "precedence",
+      "sha256",
+      "git",
+      "trust"
+    ],
+    "properties": {
+      "source_id": {
+        "type": "string",
+        "pattern": "^src-[0-9]{4}$",
+        "description": "Stable id in discovery order: src-0001, src-0002, ..."
+      },
+      "raw_path": {
+        "type": "string",
+        "description": "Path as discovered (may contain ~ or be relative to the CWD)."
+      },
+      "canonical_path": {
+        "type": "string",
+        "description": "Canonical absolute path, UTF-8, separators normalised; home redacted as <HOME>/... for display only - the hash always uses the unredacted canonical path."
+      },
+      "resolved_path": {
+        "type": "string",
+        "description": "Canonical path after symlink/junction resolution. Equals canonical_path when the file is not a symlink."
+      },
+      "scope": {
+        "type": "string",
+        "enum": [
+          "managed",
+          "user",
+          "project",
+          "nested"
+        ]
+      },
+      "phase": {
+        "type": "string",
+        "enum": [
+          "startup",
+          "on_demand"
+        ]
+      },
+      "discovery_rule": {
+        "type": "string",
+        "description": "Rule id from profile_contract.json, e.g. codex.repo-chain."
+      },
+      "precedence": {
+        "$ref": "#/precedence"
+      },
+      "sha256": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "pattern": "^[0-9a-f]{64}$",
+        "description": "SHA-256 of file bytes; null only when the file is missing (trust MISSING)."
+      },
+      "git": {
+        "$ref": "#/git"
+      },
+      "trust": {
+        "type": "string",
+        "enum": [
+          "GIT_TRACKED",
+          "GIT_MODIFIED",
+          "GIT_UNTRACKED",
+          "USER_SCOPE",
+          "OUTSIDE_REPO",
+          "SYMLINK_ESCAPE",
+          "IMPORT_ESCAPE",
+          "MISSING",
+          "NOT_OBSERVED"
+        ]
+      },
+      "symlink_target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Optional. Resolved target when the source is reached through a symlink/junction; null otherwise."
+      },
+      "is_symlink": {
+        "type": "boolean",
+        "description": "Optional. True when any path component is a symlink/junction."
+      }
+    }
+  },
+  "git": {
+    "type": "object",
+    "required": [
+      "repo",
+      "tracked",
+      "modified",
+      "head_commit"
+    ],
+    "properties": {
+      "repo": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Canonical absolute path of the containing git repository top level, or null when not in a git repository."
+      },
+      "tracked": {
+        "type": "boolean"
+      },
+      "modified": {
+        "type": "boolean",
+        "description": "True when the working-tree file differs from HEAD (git status). False for untracked files."
+      },
+      "head_commit": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Full HEAD commit SHA for the file (git log -1), or null when untracked / not in a repo."
+      }
+    }
+  },
+  "precedence": {
+    "type": "object",
+    "required": [
+      "kind"
+    ],
+    "properties": {
+      "kind": {
+        "type": "string",
+        "enum": [
+          "ORDERED",
+          "BEFORE",
+          "AFTER",
+          "COMBINE_UNORDERED",
+          "UNSPECIFIED"
+        ],
+        "description": "ORDERED: the profile defines an order (see detail). BEFORE/AFTER: relative order against relative_to (the IMPLEMENTATION_PLAN §4.2 spelling). COMBINE_UNORDERED: the profile combines sources without a general precedence order. UNSPECIFIED: the official source defines no precedence - never guessed."
+      },
+      "relative_to": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Optional. source_ids this source is ordered before/after."
+      },
+      "detail": {
+        "type": "string",
+        "description": "Optional. Human-readable statement of the ordering rule and its source."
+      }
+    }
+  },
+  "edge": {
+    "type": "object",
+    "required": [
+      "edge_id",
+      "from",
+      "syntax",
+      "to",
+      "allowed",
+      "reason"
+    ],
+    "properties": {
+      "edge_id": {
+        "type": "string",
+        "pattern": "^edge-[0-9]{4}$"
+      },
+      "from": {
+        "type": "string",
+        "description": "source_id of the importing/referencing source."
+      },
+      "syntax": {
+        "type": "string",
+        "description": "Raw reference text as written, e.g. @../shared/rules.md."
+      },
+      "to": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "source_id of the target when it is itself a receipt source; null when the target is not a source (e.g. missing, or outside the discovered set)."
+      },
+      "resolved_target": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Optional. Canonical absolute path the reference resolves to, or null when it cannot be resolved (missing)."
+      },
+      "allowed": {
+        "type": "boolean",
+        "description": "False when the edge escapes a trust boundary (import escape) or the target is missing."
+      },
+      "reason": {
+        "type": "string",
+        "description": "Machine-readable reason, e.g. WITHIN_REPO, IMPORT_ESCAPE, MISSING, NOT_OBSERVED (approval state unknown)."
+      }
+    }
+  }
+}

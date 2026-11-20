@@ -1,0 +1,16 @@
+{
+  "case_id": "copilot-applyto-absent",
+  "cwd": "repo",
+  "env": {},
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "applyTo absent: behaviour is UNVERIFIED, so the file is excluded, never guessed in",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "applyTo absent: behaviour is UNVERIFIED, so the file is excluded, never guessed in",
+  "working_files": [
+    "repo/src/app.py"
+  ]
+}

@@ -1,0 +1,744 @@
+{
+  "cases": [
+    {
+      "case_id": "win-case-both",
+      "expected_edges": [],
+      "expected_not_applicable": [],
+      "expected_source_count": 2,
+      "expected_sources": [
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        },
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/services/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "PASS",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. S22: services/AGENTS.md and services/AGENTS.MD coexist on Linux; only the exact-case file is discovered.",
+      "reasoning": "Same exact-filename rule as win-case-variant. AGENTS.MD differs in the extension case, so it is not a candidate. Both discovered files are committed and clean.",
+      "windows": "NOT_RUN: this workspace is unrepresentable on Windows -- AGENTS.md and AGENTS.MD cannot coexist in one directory on a case-insensitive filesystem."
+    },
+    {
+      "case_id": "win-case-variant",
+      "expected_edges": [],
+      "expected_not_applicable": [],
+      "expected_source_count": 2,
+      "expected_sources": [
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        },
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/services/payments/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "PASS",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. S22: lowercase services/Agents.md is not discovered on Linux; only the two exact-case AGENTS.md files enter the chain.",
+      "reasoning": "Codex discovery probes the exact filename AGENTS.md per chain directory (profiles/codex.py). On Linux 'Agents.md' is a different filename, so it is never a candidate -- even though it is untracked content in a chain directory. Both discovered files are committed and clean, so GIT_TRACKED / PASS.",
+      "windows": "NOT_RUN: real case-insensitive filesystem matching. On Windows the probe for AGENTS.md would find Agents.md (extra source, GIT_UNTRACKED, WARN). Finding F1: production has no case-insensitive discovery mode."
+    },
+    {
+      "case_id": "win-copilot-drive-ref",
+      "expected_edges": [
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/.github/copilot-instructions.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/ok.md",
+          "relative_target": "repo/shared/ok.md",
+          "syntax": "@../shared/ok.md"
+        },
+        {
+          "allowed": false,
+          "depth": 1,
+          "from_relative_path": "repo/.github/copilot-instructions.md",
+          "reason": "IMPORT_ESCAPE",
+          "relative_resolved_target": "/C:/shared/drive-note.md",
+          "relative_target": "C:/shared/drive-note.md",
+          "syntax": "@C:\\shared\\drive-note.md"
+        }
+      ],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "copilot-cli.repo-wide",
+          "phase": "startup",
+          "precedence_kind": "COMBINE_UNORDERED",
+          "relative_path": "repo/.github/copilot-instructions.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "BLOCK",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. Copilot reference to a Windows drive path -> IMPORT_ESCAPE, BLOCK.",
+      "reasoning": "References resolve relative to the referencing file: the copilot file lives in repo/.github/, so the in-repo control is spelled '@../shared/ok.md' (a bare '@shared/ok.md' would resolve to repo/.github/shared/ok.md and be MISSING). The Copilot syntactic block (_is_copilot_blocked_reference on the raw ref) matches the drive-letter spelling, so the edge is emitted IMPORT_ESCAPE with canonical 'C:/shared/drive-note.md' and resolved '/C:/shared/drive-note.md'. Only the repo-wide file is discovered (home is empty; no AGENTS.md / .github/instructions files exist). Order is not asserted for copilot-cli (COMBINE_UNORDERED).",
+      "windows": "NOT_RUN: real drive-letter resolution. The escape verdict would still hold on Windows (outside the repo)."
+    },
+    {
+      "case_id": "win-drive-import",
+      "expected_edges": [
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/ok.md",
+          "relative_target": "repo/shared/ok.md",
+          "syntax": "@shared/ok.md"
+        },
+        {
+          "allowed": false,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "IMPORT_ESCAPE",
+          "relative_resolved_target": "/C:/shared/drive-note.md",
+          "relative_target": "C:/shared/drive-note.md",
+          "syntax": "@C:\\shared\\drive-note.md"
+        }
+      ],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "claude-code.project",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/CLAUDE.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "BLOCK",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. Claude import of a Windows drive path -> IMPORT_ESCAPE, BLOCK. Pure-string path handling only; no Windows filesystem is involved.",
+      "reasoning": "parse_imports leaves 'C:\\shared\\drive-note.md' intact (no '\\\\' sequence to collapse). lexical_canonical detects a drive-letter spelling and normalises it to 'C:/shared/drive-note.md'; the component-wise resolver yields resolved '/C:/shared/drive-note.md' on Linux. Containment against repo/cwd/home fails, so the edge is IMPORT_ESCAPE. Escape is judged before existence, so the edge is IMPORT_ESCAPE, not MISSING, even though the file exists nowhere in the fixture.",
+      "windows": "NOT_RUN: real drive-letter resolution. On Windows C:\\shared\\drive-note.md would resolve against the C: drive; the escape verdict would still hold (outside the repo)."
+    },
+    {
+      "case_id": "win-drive-relative-import",
+      "expected_edges": [
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/ok.md",
+          "relative_target": "repo/shared/ok.md",
+          "syntax": "@shared/ok.md"
+        },
+        {
+          "allowed": false,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "MISSING",
+          "relative_resolved_target": null,
+          "relative_target": null,
+          "syntax": "@C:shared\\note.md"
+        }
+      ],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "claude-code.project",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/CLAUDE.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "BLOCK",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. Claude import of a drive-relative path -> MISSING, BLOCK (finding F4: the drive-relative rejection is unreachable from the import path).",
+      "reasoning": "The file spells '@C:shared\\note.md'. is_windows_style_path requires a separator after the colon, so 'C:shared\\note.md' is NOT detected as Windows-style; lexical_canonical joins it onto the importing file's directory as a relative path ('repo/C:shared\\note.md', colon and backslash as filename characters on Linux). It is within the repo but does not exist -> MISSING with null targets. normalize_windows_path would reject a drive-relative spelling, but the import path never calls it for this spelling -- the detector gates it out first.",
+      "windows": "NOT_RUN: real drive-relative resolution (on Windows 'C:foo' means 'foo relative to the current directory on drive C:'). The spelling is misclassified before any filesystem access."
+    },
+    {
+      "case_id": "win-git-case-rename",
+      "expected_edges": [],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "PASS",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. S24 (case variant): services/AGENTS.md renamed to Agents.md in the worktree (unstaged); the new spelling is not discovered on Linux -> PASS with one source.",
+      "reasoning": "After the rename, services/ holds Agents.md only. Linux discovery probes the exact name AGENTS.md, so services/ contributes no source. Git records the old path as deleted and the new path as untracked, but neither state creates a source -- the file is undiscoverable, not merely untrusted.",
+      "windows": "NOT_RUN: real Windows Git case-only rename (core.ignorecase). On Windows the rename is a filesystem no-op and the file would still be found as AGENTS.md (tracked, same content)."
+    },
+    {
+      "case_id": "win-git-deleted-chain",
+      "expected_edges": [],
+      "expected_not_applicable": [],
+      "expected_source_count": 2,
+      "expected_sources": [
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        },
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/services/payments/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "PASS",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. S23: tracked services/AGENTS.md deleted in the worktree (unstaged); the chain shrinks to root + payments -> PASS. The deletion is silent: no MISSING source is reported for a chain file (finding F3).",
+      "reasoning": "Discovery probes each chain directory for an existing AGENTS.md; the deleted file does not exist, so it is not a candidate at all. The two surviving files are committed and clean. Git status shows the deletion, but the resolver has no chain-deletion concept -- unlike a missing import target, which IS reported (cf. win-git-deleted-import).",
+      "windows": "NOT_RUN: real Windows Git deletion behaviour. The exercised state is Linux git (deleted, unstaged)."
+    },
+    {
+      "case_id": "win-git-deleted-import",
+      "expected_edges": [
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/ok.md",
+          "relative_target": "repo/shared/ok.md",
+          "syntax": "@shared/ok.md"
+        },
+        {
+          "allowed": false,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "MISSING",
+          "relative_resolved_target": null,
+          "relative_target": null,
+          "syntax": "@shared/gone.md"
+        }
+      ],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "claude-code.project",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/CLAUDE.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "BLOCK",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. S08/S23: claude import of a tracked-then-deleted file -> MISSING, BLOCK. Import-side counterpart of win-git-deleted-chain: a missing import target IS reported.",
+      "reasoning": "shared/gone.md was committed, then deleted in the worktree (unstaged). The import resolves within the repo (WITHIN_REPO containment) but the target does not exist, so imports.py emits MISSING with null targets and allowed=false; any blocked edge blocks the verdict. CLAUDE.md itself is committed and clean.",
+      "windows": "NOT_RUN: real Windows Git deletion behaviour; the exercised state is Linux git (deleted, unstaged)."
+    },
+    {
+      "case_id": "win-junction-escape",
+      "expected_edges": [],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "outside/Downloads/AGENTS.md",
+          "scope": "project",
+          "trust": "OUTSIDE_REPO"
+        }
+      ],
+      "expected_verdict": "BLOCK",
+      "forbidden_trust": [
+        "NOT_OBSERVED"
+      ],
+      "kind": "receipt",
+      "known_parity_gap": {
+        "detail": "production records workspace.cwd lexically (repo/linked); the Oracle records it resolved (outside/Downloads).",
+        "id": "F6",
+        "only_diffs": [
+          "$.workspace.cwd",
+          "$.receipt_hash"
+        ]
+      },
+      "notes": "T011 Windows corpus. S07/S12 junction analogue: repo/linked is a Linux directory symlink to outside/Downloads; discovery runs on the RESOLVED cwd (outside/Downloads), which is outside the repo, so the chain is [cwd] alone and only the Downloads file is discovered (OUTSIDE_REPO, BLOCK). Known parity gap F6 (workspace.cwd only).",
+      "reasoning": "Same CWD-resolution mechanism as win-junction-inside: the resolved CWD is outside/Downloads, outside the repo, so chain_dirs returns [cwd] alone (cwd not under repo_root). Only outside/Downloads/AGENTS.md is discovered; its canonical path contains no symlink component, so trust is OUTSIDE_REPO (not SYMLINK_ESCAPE -- the SYMLINK_ESCAPE derivation needs the canonical path within a root and the resolved path outside it, and here the canonical path is already outside) and the verdict is BLOCK. The repo root file is not in the chain. Known parity gap F6: the only production/Oracle receipt diffs are workspace.cwd + receipt_hash.",
+      "windows": "NOT_RUN: real NTFS junction resolution (reparse point). A real junction to Downloads must BLOCK the same way; only the symlink analogue was executed. Known parity gap F6 (workspace.cwd) applies on Linux too."
+    },
+    {
+      "case_id": "win-junction-import-escape",
+      "expected_edges": [
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/ok.md",
+          "relative_target": "repo/shared/ok.md",
+          "syntax": "@shared/ok.md"
+        },
+        {
+          "allowed": false,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "IMPORT_ESCAPE",
+          "relative_resolved_target": "outside/Downloads/secret.md",
+          "relative_target": "repo/linked/secret.md",
+          "syntax": "@linked/secret.md"
+        }
+      ],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "claude-code.project",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/CLAUDE.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "BLOCK",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. S12 junction analogue on the import path: @linked/secret.md through a dir symlink to outside/Downloads -> IMPORT_ESCAPE, BLOCK.",
+      "reasoning": "@linked/secret.md: canonical repo/linked/secret.md, resolved outside/Downloads/secret.md (the dir symlink is followed) -- outside every approved root -> IMPORT_ESCAPE, allowed=false, BLOCK. @shared/ok.md is the in-repo control. The CWD is not symlinked, so both implementations agree exactly.",
+      "windows": "NOT_RUN: real NTFS junction resolution (reparse point). The Linux dir symlink exercises the identical lexical/resolved + containment path."
+    },
+    {
+      "case_id": "win-junction-import-inside",
+      "expected_edges": [
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/ok.md",
+          "relative_target": "repo/shared/ok.md",
+          "syntax": "@shared/ok.md"
+        },
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/also.md",
+          "relative_target": "repo/linked/also.md",
+          "syntax": "@linked/also.md"
+        }
+      ],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "claude-code.project",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/CLAUDE.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "PASS",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. S12 junction analogue on the import path: @linked/also.md through a dir symlink to in-repo shared -> WITHIN_REPO, PASS.",
+      "reasoning": "@linked/also.md resolves relative to the importing file (repo/): canonical repo/linked/also.md, resolved repo/shared/also.md (the dir symlink is followed). The resolved path is inside the repo and the file exists -> WITHIN_REPO, allowed. @shared/ok.md is the in-repo control. The CWD (repo) is not symlinked, so both implementations agree exactly.",
+      "windows": "NOT_RUN: real NTFS junction resolution (reparse point). The Linux dir symlink exercises the identical lexical/resolved + containment path."
+    },
+    {
+      "case_id": "win-junction-inside",
+      "expected_edges": [],
+      "expected_not_applicable": [],
+      "expected_source_count": 2,
+      "expected_sources": [
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        },
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/shared/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "PASS",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "known_parity_gap": {
+        "detail": "production records workspace.cwd lexically (repo/linked); the Oracle records it resolved (repo/shared).",
+        "id": "F6",
+        "only_diffs": [
+          "$.workspace.cwd",
+          "$.receipt_hash"
+        ]
+      },
+      "notes": "T011 Windows corpus. S12 junction analogue: repo/linked is a Linux directory symlink to in-repo shared; discovery runs on the RESOLVED cwd (repo/shared), so the discovered file is repo/shared/AGENTS.md. Known parity gap F6 (workspace.cwd only).",
+      "reasoning": "discover_with_report canonicalises the caller-supplied CWD and builds the ResolveContext on the RESOLVED cwd (resolver.py: cwd_resolved). The resolved CWD is repo/shared, so chain_dirs yields [repo, repo/shared] and the probed files are repo/AGENTS.md and repo/shared/AGENTS.md -- the chain never contains the symlink component. Both are committed and clean -> GIT_TRACKED / PASS. Known parity gap F6: production's build_receipt records workspace.cwd as the lexical CWD (repo/linked) while the Oracle records the resolved CWD (repo/shared); sources/trust/edges/verdict agree and the only receipt diffs are workspace.cwd + receipt_hash.",
+      "windows": "NOT_RUN: real NTFS junction resolution (reparse point). The Linux dir symlink exercises the same lexical/resolved + containment path. Known parity gap F6 (workspace.cwd) applies on Linux too."
+    },
+    {
+      "case_id": "win-probes",
+      "expected_probes": [
+        {
+          "canonical": "c:/repo/AGENTS.md",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "c:\\repo\\AGENTS.md",
+          "reasoning": "Lowercase drive letter: ntpath.normpath preserves the drive case (no folding); the component-wise resolver yields '/c:/repo/AGENTS.md'. Windows drive letters are case-insensitive, so 'c:' and 'C:' name the same drive but different canonical strings (finding F5).",
+          "resolved": "/c:/repo/AGENTS.md"
+        },
+        {
+          "canonical": "C:/",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "C:\\",
+          "reasoning": "Drive root: ntpath.normpath('C:\\') is 'C:\\' -> 'C:/'. Resolution drops the trailing separator ('/C:' -- one component, '/C:' does not exist on Linux, so the rest is appended lexically).",
+          "resolved": "/C:"
+        },
+        {
+          "canonical": "//server/share/AGENTS.md",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "\\\\server\\share\\repo\\..\\AGENTS.md",
+          "reasoning": "UNC with '..': backslashes become '/', '..' resolves lexically without popping above the share ('//server/share' is the floor). Resolved is the canonical minus one leading slash (S0 fs/windows precedent).",
+          "resolved": "/server/share/AGENTS.md"
+        },
+        {
+          "canonical": "//server/share",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "\\\\server\\share",
+          "reasoning": "Bare UNC root: '\\\\server\\share' -> '//server/share'; resolved '/server/share'. No trailing component to resolve.",
+          "resolved": "/server/share"
+        },
+        {
+          "canonical": "C:/Ünïcode/日本語/AGENTS.md",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "C:\\Ünïcode\\日本語\\AGENTS.md",
+          "reasoning": "Unicode drive path: separators normalise, unicode passes through byte-for-byte (Q3, no NFC/NFD normalisation). Resolved is '/'+canonical.",
+          "resolved": "/C:/Ünïcode/日本語/AGENTS.md"
+        },
+        {
+          "canonical": "{corpus}/C:foo\\bar",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "C:foo\\bar",
+          "reasoning": "Drive-relative spelling through canonicalize: is_windows_style_path requires a separator after the colon, so 'C:foo\\bar' is NOT detected as Windows-style and is joined onto cwd as a relative path (backslash is a filename character on Linux). The drive-relative rejection in normalize_windows_path is NOT reached from canonicalize (finding F4, same mechanism as win-drive-relative-import). {corpus} is the fixtures/windows directory.",
+          "resolved": "{corpus}/C:foo\\bar"
+        },
+        {
+          "canonical": "D:/mixed/separators/AGENTS.md",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "D:/mixed\\separators/AGENTS.md",
+          "reasoning": "Mixed separators: backslashes become '/', forward slashes stay; duplicate separators collapse. Resolved is '/'+canonical.",
+          "resolved": "/D:/mixed/separators/AGENTS.md"
+        },
+        {
+          "canonical": "C:/repo/AGENTS.md",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "C:\\repo\\.\\AGENTS.md",
+          "reasoning": "Single-dot component resolves lexically ('.' drops out). Resolved is '/'+canonical.",
+          "resolved": "/C:/repo/AGENTS.md"
+        },
+        {
+          "canonical": "C:/outside/AGENTS.md",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "C:\\repo\\..\\..\\outside\\AGENTS.md",
+          "reasoning": "'..' never pops above the drive root: 'C:\\repo\\..\\..\\outside' clamps to 'C:\\outside' (ntpath semantics; the Oracle's normpath_posix clamps absolute '..' at the root the same way). Resolved is '/'+canonical.",
+          "resolved": "/C:/outside/AGENTS.md"
+        },
+        {
+          "canonical": "C:/repo/services",
+          "exists": false,
+          "is_broken_symlink": false,
+          "is_loop": false,
+          "is_symlink": false,
+          "raw": "C:\\repo\\services\\",
+          "reasoning": "Trailing separator is removed (except for the filesystem root). Resolved is '/'+canonical.",
+          "resolved": "/C:/repo/services"
+        }
+      ],
+      "kind": "fs",
+      "notes": "T011 Windows corpus. Pure-string probes only: canonicalize/normalize_windows_path on Windows spellings. No filesystem resolution is claimed (exists is always False); real drive-letter / junction / UNC resolution is NOT_RUN on Linux.",
+      "windows": "NOT_RUN: real drive-letter resolution, real UNC share access, real junction resolution. These probes assert only the pure-string normalisation both implementations share."
+    },
+    {
+      "case_id": "win-tilde-user-import",
+      "expected_edges": [
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/ok.md",
+          "relative_target": "repo/shared/ok.md",
+          "syntax": "@shared/ok.md"
+        },
+        {
+          "allowed": false,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "UNRESOLVABLE",
+          "relative_resolved_target": null,
+          "relative_target": null,
+          "syntax": "@~other/shared.md"
+        }
+      ],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "claude-code.project",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/CLAUDE.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "BLOCK",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. Claude import of a ~user path -> UNRESOLVABLE, BLOCK (fail-closed). This is the reachable UNRESOLVABLE case; contrast win-drive-relative-import.",
+      "reasoning": "lexical_canonical rejects '~user' expansion outright (ValueError), so build_import_graph emits UNRESOLVABLE with null targets and allowed=false; any blocked edge blocks the verdict.",
+      "windows": "NOT_RUN: no Windows-specific behaviour; ~user is rejected on every platform by design."
+    },
+    {
+      "case_id": "win-unc-import",
+      "expected_edges": [
+        {
+          "allowed": true,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "WITHIN_REPO",
+          "relative_resolved_target": "repo/shared/ok.md",
+          "relative_target": "repo/shared/ok.md",
+          "syntax": "@shared/ok.md"
+        },
+        {
+          "allowed": false,
+          "depth": 1,
+          "from_relative_path": "repo/CLAUDE.md",
+          "reason": "MISSING",
+          "relative_resolved_target": null,
+          "relative_target": null,
+          "syntax": "@\\server\\share\\note.md"
+        }
+      ],
+      "expected_not_applicable": [],
+      "expected_source_count": 1,
+      "expected_sources": [
+        {
+          "discovery_rule": "claude-code.project",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/CLAUDE.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "BLOCK",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. Claude import of a UNC path as naturally spelled -> MISSING, BLOCK (finding F2: UNC imports are not recognised as UNC).",
+      "reasoning": "The file spells the reference '@\\\\server\\share\\note.md' (two leading backslashes, the natural Windows UNC spelling). parse_imports collapses '\\\\' -> '\\' (backslash-escape removal), yielding '\\server\\share\\note.md' with ONE leading backslash. That is not a Windows-style spelling (the UNC detector needs two), not absolute, so it is joined onto the importing file's directory as a relative path with backslashes in its name and does not exist -> MISSING with null targets. The receipt syntax field carries the POST-collapse reference '@\\server\\share\\note.md'. The pure-string UNC normalisation (win-probes P3/P4) is a separate code path and is unaffected.",
+      "windows": "NOT_RUN: real UNC share access. The misparse happens before any filesystem access, so it would occur on Windows too (a rooted '\\server\\...' path is not a UNC path there either)."
+    },
+    {
+      "case_id": "win-unicode-chain",
+      "expected_edges": [],
+      "expected_not_applicable": [],
+      "expected_source_count": 3,
+      "expected_sources": [
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        },
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/日本語/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        },
+        {
+          "discovery_rule": "codex.repo-chain",
+          "phase": "startup",
+          "precedence_kind": "ORDERED",
+          "relative_path": "repo/日本語/子目录/AGENTS.md",
+          "scope": "project",
+          "trust": "GIT_TRACKED"
+        }
+      ],
+      "expected_verdict": "PASS",
+      "forbidden_trust": [
+        "NOT_OBSERVED",
+        "SYMLINK_ESCAPE",
+        "IMPORT_ESCAPE",
+        "OUTSIDE_REPO",
+        "MISSING"
+      ],
+      "kind": "receipt",
+      "notes": "T011 Windows corpus. S21: unicode chain (日本語/子目录) with AGENTS.md, committed -> PASS.",
+      "reasoning": "Unicode directory names pass through byte-for-byte (contract Q3, no NFC/NFD normalisation). All three chain files are committed and clean.",
+      "windows": "NOT_RUN: real Windows UTF-16/NFC handling. Production does no normalisation on either platform by design (contract Q3); NTFS in practice stores NFC, so a decomposed spelling would be a distinct path on both platforms."
+    }
+  ]
+}

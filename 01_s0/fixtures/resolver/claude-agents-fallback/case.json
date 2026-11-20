@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-agents-fallback",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "no CLAUDE file anywhere: AGENTS.md chain is the fallback",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "no CLAUDE file anywhere: AGENTS.md chain is the fallback",
+  "working_files": []
+}

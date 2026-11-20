@@ -1,0 +1,50 @@
+{
+  "case_id": "claude-nested",
+  "expected_edges": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 4,
+  "expected_sources": [
+    {
+      "discovery_rule": "claude-code.project",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/CLAUDE.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "discovery_rule": "claude-code.agents-nested",
+      "phase": "on_demand",
+      "precedence_kind": "UNSPECIFIED",
+      "relative_path": "repo/services/AGENTS.md",
+      "scope": "nested",
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "discovery_rule": "claude-code.nested",
+      "phase": "on_demand",
+      "precedence_kind": "UNSPECIFIED",
+      "relative_path": "repo/services/payments/CLAUDE.md",
+      "scope": "nested",
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "discovery_rule": "claude-code.nested",
+      "phase": "on_demand",
+      "precedence_kind": "UNSPECIFIED",
+      "relative_path": "repo/services/payments/CLAUDE.local.md",
+      "scope": "nested",
+      "trust": "GIT_TRACKED"
+    }
+  ],
+  "expected_verdict": "WARN",
+  "forbidden_trust": [
+    "NOT_OBSERVED",
+    "SYMLINK_ESCAPE",
+    "IMPORT_ESCAPE",
+    "OUTSIDE_REPO",
+    "MISSING"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). Sources/edges transcribed from the T003 stage expected file; trust/verdict hand-derived from the frozen contracts (see build_s0_expected.py)."
+}

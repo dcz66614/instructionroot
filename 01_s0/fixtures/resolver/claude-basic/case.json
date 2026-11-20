@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-basic",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "managed absent; user + project chain + user/project rules (S01/S02/S03)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "managed absent; user + project chain + user/project rules (S01/S02/S03)",
+  "working_files": []
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "copilot-applyto-match",
+  "cwd": "repo",
+  "env": {},
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "modular instructions whose applyTo matches the working file (S15)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "modular instructions whose applyTo matches the working file (S15)",
+  "working_files": [
+    "repo/src/app.py"
+  ]
+}

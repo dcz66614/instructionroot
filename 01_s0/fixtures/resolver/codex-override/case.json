@@ -1,0 +1,14 @@
+{
+  "case_id": "codex-override",
+  "cwd": "repo/services",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "AGENTS.override.md listed with UNSPECIFIED precedence (UNVERIFIED rule)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "AGENTS.override.md listed with UNSPECIFIED precedence (UNVERIFIED rule)",
+  "working_files": []
+}

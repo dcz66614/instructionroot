@@ -1,0 +1,15 @@
+{
+  "case_id": "win-git-deleted-chain",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "A deleted chain file silently drops out of the chain; no MISSING source is reported (finding F3).",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "tracked services AGENTS.md deleted in worktree: chain shrinks to root + payments -> PASS (S23)",
+  "windows_note": "NOT_RUN: real Windows Git deletion behaviour. The Linux git state (deleted, unstaged) is the exercised state.",
+  "working_files": []
+}

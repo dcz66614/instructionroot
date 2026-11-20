@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-git-symlink-inside",
+  "cwd": "repo/services",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Canonical path is inside the repo and the resolved target is tracked.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "services AGENTS.md is a symlink to an in-repo target -> GIT_TRACKED, PASS (S06)",
+  "working_files": []
+}

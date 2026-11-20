@@ -1,0 +1,664 @@
+{
+  "determinism": {
+    "codex-basic": {
+      "receipt_hash": "649d415f754ce0216400abd8bdf2f29b4d481a6db7b266bf37cec7411197db40",
+      "runs": 100
+    },
+    "s0-git-tracked": {
+      "receipt_hash": "cef656db9669d8d9725308f860c35c5f5104402d5eaea0505dc005349dd80dd0",
+      "runs": 25
+    }
+  },
+  "fail_closed": [
+    {
+      "agree": true,
+      "id": "FC-01",
+      "oracle": "INPUT_ERROR",
+      "oracle_detail": "{\"error\":\"case file /home/hatch/workspace/r20-verification/tmp/s0-gate-tgnk9n9j/fc-case-input.json is not valid JSON: key must be a string at line 1 column 2\",\"verdict\":\"INPUT_ERROR\"}",
+      "oracle_exit": 30,
+      "passed": true,
+      "production": "INPUT_ERROR",
+      "production_detail": "json.load fails: invalid JSON",
+      "title": "case file is not valid JSON"
+    },
+    {
+      "agree": true,
+      "id": "FC-02",
+      "oracle": "UNSUPPORTED_PROFILE",
+      "oracle_detail": "{\"error\":\"profile version \\\"codex-2026-10\\\" does not match frozen \\\"codex-2026-11\\\" for harness \\\"codex\\\"\",\"verdict\":\"UNSUPPORTED_PROFILE\"}",
+      "oracle_exit": 40,
+      "passed": true,
+      "production": "UNSUPPORTED_PROFILE",
+      "production_detail": "profile version 'codex-2026-10' does not match frozen 'codex-2026-11' for harness 'codex'",
+      "title": "profile version mismatch (codex-2026-10)"
+    },
+    {
+      "agree": true,
+      "id": "FC-03",
+      "oracle": "UNSUPPORTED_PROFILE",
+      "oracle_detail": "{\"error\":\"unknown harness: \\\"warp-drive\\\"\",\"verdict\":\"UNSUPPORTED_PROFILE\"}",
+      "oracle_exit": 40,
+      "passed": true,
+      "production": "UNSUPPORTED_PROFILE",
+      "production_detail": "unknown harness: 'warp-drive'",
+      "title": "unknown harness (warp-drive)"
+    },
+    {
+      "agree": true,
+      "id": "FC-04",
+      "oracle": "INPUT_ERROR",
+      "oracle_detail": "{\"error\":\"cwd does not exist or is not a directory: /home/hatch/workspace/p028-instructionroot/01_s0/fixtures/resolver/codex-basic/does-not-exist\",\"verdict\":\"INPUT_ERROR\"}",
+      "oracle_exit": 30,
+      "passed": true,
+      "production": "INPUT_ERROR",
+      "production_detail": "ValueError: production build_receipt failed: ValueError('cwd does not exist or is not a directory: /home/hatch/workspace/p028-instructionroot/01_s0/fixtures/resolver/codex-basic/does-not-exist')",
+      "title": "cwd does not exist"
+    },
+    {
+      "agree": true,
+      "id": "FC-05",
+      "oracle": "INPUT_ERROR",
+      "oracle_detail": "{\"error\":\"unknown policy field(s): unknown_field\",\"verdict\":\"INPUT_ERROR\"}",
+      "oracle_exit": 30,
+      "passed": true,
+      "production": "INPUT_ERROR",
+      "production_detail": "ValueError: production build_receipt failed: ValueError('unknown policy field(s): unknown_field')",
+      "title": "policy has an unknown field"
+    },
+    {
+      "agree": true,
+      "id": "FC-06",
+      "oracle": "INPUT_ERROR",
+      "oracle_detail": "{\"error\":\"policy field \\\"block_repo_untracked\\\" must be a bool\",\"verdict\":\"INPUT_ERROR\"}",
+      "oracle_exit": 30,
+      "passed": true,
+      "production": "INPUT_ERROR",
+      "production_detail": "ValueError: production build_receipt failed: ValueError(\"policy field 'block_repo_untracked' must be a bool\")",
+      "title": "policy field is not a bool"
+    },
+    {
+      "agree": true,
+      "id": "FC-07",
+      "oracle": "INPUT_ERROR",
+      "oracle_detail": "{\"error\":\"repo_root does not exist or is not a directory: /home/hatch/workspace/p028-instructionroot/01_s0/fixtures/resolver/codex-basic/case.json\",\"verdict\":\"INPUT_ERROR\"}",
+      "oracle_exit": 30,
+      "passed": true,
+      "production": "INPUT_ERROR",
+      "production_detail": "ValueError: production build_receipt failed: ValueError('repo_root does not exist or is not a directory: /home/hatch/workspace/p028-instructionroot/01_s0/fixtures/resolver/codex-basic/case.json')",
+      "title": "repo_root points at a file, not a directory"
+    },
+    {
+      "agree": true,
+      "id": "FC-08",
+      "oracle": "INPUT_ERROR",
+      "oracle_detail": "{\"error\":\"case input needs a string \\\"harness\\\"\",\"verdict\":\"INPUT_ERROR\"}",
+      "oracle_exit": 30,
+      "passed": true,
+      "production": "INPUT_ERROR",
+      "production_detail": "KeyError: 'harness'",
+      "title": "case input has no harness field"
+    }
+  ],
+  "fixtures": 60,
+  "fs_cases": [
+    {
+      "case_id": "fs/basic",
+      "failures": [],
+      "passed": true,
+      "probes": 5
+    },
+    {
+      "case_id": "fs/deep-chain",
+      "failures": [],
+      "passed": true,
+      "probes": 2
+    },
+    {
+      "case_id": "fs/dir-symlink",
+      "failures": [],
+      "passed": true,
+      "probes": 2
+    },
+    {
+      "case_id": "fs/dotdot",
+      "failures": [],
+      "passed": true,
+      "probes": 2
+    },
+    {
+      "case_id": "fs/missing",
+      "failures": [],
+      "passed": true,
+      "probes": 1
+    },
+    {
+      "case_id": "fs/separators",
+      "failures": [],
+      "passed": true,
+      "probes": 2
+    },
+    {
+      "case_id": "fs/symlink-broken",
+      "failures": [],
+      "passed": true,
+      "probes": 1
+    },
+    {
+      "case_id": "fs/symlink-escape",
+      "failures": [],
+      "passed": true,
+      "probes": 1
+    },
+    {
+      "case_id": "fs/symlink-inside",
+      "failures": [],
+      "passed": true,
+      "probes": 1
+    },
+    {
+      "case_id": "fs/symlink-loop",
+      "failures": [],
+      "passed": true,
+      "probes": 2
+    },
+    {
+      "case_id": "fs/unicode",
+      "failures": [],
+      "passed": true,
+      "probes": 2
+    },
+    {
+      "case_id": "fs/windows",
+      "failures": [],
+      "passed": true,
+      "probes": 4
+    }
+  ],
+  "gate": "S0",
+  "git_scenarios": 6,
+  "human_labels": 0,
+  "network_access": 0,
+  "per_case": [
+    {
+      "case_id": "claude-agents-fallback",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-agents-fallback-blocked",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-basic",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-code-span",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-cycle",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-depth4",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-depth5",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-escape",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-home-import",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-import-depth4",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-import-depth5",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-malformed",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-missing",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-nested",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-nested-disabled",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-no-import",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-rules-paths",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "claude-symlink-escape",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "codex-basic",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "codex-empty",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "codex-no-import",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "codex-norepo",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "codex-override",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "codex-user-only",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-absolute",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-applyto-absent",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-applyto-match",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-applyto-nomatch",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-basic",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-custom-dir",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-custom-dirs",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-dedup",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-intermediate",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-no-expand",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-relative",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "copilot-tilde-user",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-case-sensitive",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-downloads-import",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-missing-import",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-modified",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-modified-block",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-rename",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-staged-new",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-symlink-escape",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-symlink-inside",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-tracked",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-unicode",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    },
+    {
+      "case_id": "s0-git-untracked-block",
+      "edge_parity": true,
+      "failures": [],
+      "passed": true,
+      "receipt_hash_parity": true,
+      "source_parity": true,
+      "trust_parity": true,
+      "verdict_parity": true
+    }
+  ],
+  "result": "PASS"
+}

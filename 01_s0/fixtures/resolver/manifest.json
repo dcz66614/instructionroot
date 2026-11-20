@@ -1,0 +1,86 @@
+{
+  "cases": [
+    {
+      "case_id": "claude-agents-fallback",
+      "title": "no CLAUDE file anywhere: AGENTS.md chain is the fallback"
+    },
+    {
+      "case_id": "claude-agents-fallback-blocked",
+      "title": "one CLAUDE.md at the root disables the AGENTS.md fallback everywhere"
+    },
+    {
+      "case_id": "claude-basic",
+      "title": "managed absent; user + project chain + user/project rules (S01/S02/S03)"
+    },
+    {
+      "case_id": "claude-import-depth4",
+      "title": "import chain of 4 hops is allowed (SPEC-01: S13 = depth 4 PASS)"
+    },
+    {
+      "case_id": "claude-import-depth5",
+      "title": "import chain of 5 hops: the 5th hop is enumerated but BLOCKed (S14)"
+    },
+    {
+      "case_id": "claude-nested",
+      "title": "working file in a subdir triggers nested CLAUDE.md / AGENTS.md on demand"
+    },
+    {
+      "case_id": "claude-nested-disabled",
+      "title": "allow_nested_on_demand=false: nested sources are excluded, not BLOCKed"
+    },
+    {
+      "case_id": "claude-rules-paths",
+      "title": "paths-scoped rule matching the working file loads on demand; non-matching rule is absent; unparseable frontmatter loads as no-paths"
+    },
+    {
+      "case_id": "codex-basic",
+      "title": "user + repo-root-to-CWD chain, root-to-leaf order (S03/S17)"
+    },
+    {
+      "case_id": "codex-empty",
+      "title": "no instruction files anywhere: empty chain"
+    },
+    {
+      "case_id": "codex-norepo",
+      "title": "non-git workspace (repo_root null, S25): chain is the CWD only"
+    },
+    {
+      "case_id": "codex-override",
+      "title": "AGENTS.override.md listed with UNSPECIFIED precedence (UNVERIFIED rule)"
+    },
+    {
+      "case_id": "codex-user-only",
+      "title": "only the user file exists"
+    },
+    {
+      "case_id": "copilot-applyto-absent",
+      "title": "applyTo absent: behaviour is UNVERIFIED, so the file is excluded, never guessed in"
+    },
+    {
+      "case_id": "copilot-applyto-match",
+      "title": "modular instructions whose applyTo matches the working file (S15)"
+    },
+    {
+      "case_id": "copilot-applyto-nomatch",
+      "title": "applyTo no-match: the file is absent from sources (S16 / SPEC-04)"
+    },
+    {
+      "case_id": "copilot-basic",
+      "title": "user + repo-wide (incl. intermediate dir) + agents + claude + gemini, all COMBINE_UNORDERED"
+    },
+    {
+      "case_id": "copilot-custom-dirs",
+      "title": "COPILOT_CUSTOM_INSTRUCTIONS_DIRS: AGENTS.md + applyTo-gated *.instructions.md"
+    },
+    {
+      "case_id": "copilot-dedup",
+      "title": "same AGENTS.md via agents rule and custom-dirs: one source, second rule recorded (S10)"
+    },
+    {
+      "case_id": "copilot-intermediate",
+      "title": "repo-modular excludes intermediate dirs; repo-wide includes them"
+    }
+  ],
+  "generated_by": "01_s0/fixtures/resolver/build_resolver_fixtures.py",
+  "synthetic": true
+}

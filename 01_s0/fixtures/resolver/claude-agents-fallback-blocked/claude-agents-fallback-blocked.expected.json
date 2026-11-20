@@ -1,0 +1,16 @@
+{
+  "case_id": "claude-agents-fallback-blocked",
+  "expected_import_candidates": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 1,
+  "expected_sources": [
+    {
+      "discovery_rule": "claude-code.project",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/CLAUDE.md",
+      "scope": "project"
+    }
+  ],
+  "notes": "Resolver-stage expected file: asserts discovery fields only (rule/scope/phase/precedence_kind/relative_path). trust and verdict are T004/T008 concerns and are asserted by T007's full expected files, not here."
+}

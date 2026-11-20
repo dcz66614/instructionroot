@@ -1,0 +1,16 @@
+{
+  "case_id": "copilot-applyto-nomatch",
+  "cwd": "repo",
+  "env": {},
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "applyTo no-match: the file is absent from sources (S16 / SPEC-04)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "applyTo no-match: the file is absent from sources (S16 / SPEC-04)",
+  "working_files": [
+    "repo/src/app.py"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "codex-empty",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "no instruction files anywhere: empty chain",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "no instruction files anywhere: empty chain",
+  "working_files": []
+}

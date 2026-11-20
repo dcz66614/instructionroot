@@ -1,0 +1,14 @@
+{
+  "case_id": "codex-user-only",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "only the user file exists",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "only the user file exists",
+  "working_files": []
+}

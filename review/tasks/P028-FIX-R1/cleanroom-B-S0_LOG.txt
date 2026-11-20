@@ -1,0 +1,117 @@
+P028 S0 GATE -- T007
+workdir=/home/hatch/workspace/r20-verification/p028-fixr1-b
+== 0. fixture setup: regenerate S0 fixtures ==
+s0 cases=12
+  s0-case-sensitive
+  s0-downloads-import
+  s0-git-missing-import
+  s0-git-modified
+  s0-git-modified-block
+  s0-git-rename
+  s0-git-staged-new
+  s0-git-symlink-escape
+  s0-git-symlink-inside
+  s0-git-tracked
+  s0-git-unicode
+  s0-git-untracked-block
+s0 fixtures regenerated (12 cases)
+== 0b. fixture setup: ensure fixture workspace dirs ==
+fixture workspace dirs ensured (cases=48 created=0)
+== 0c. fixture setup: ensure git workspace ==
+git workspace: existing .git, leaving untouched
+== 1. corpus inventory ==
+fixtures=60 layers={'normal': 20, 'boundary': 20, 'adversarial': 20} expected_index=60 synthetic_only=True human_labels=0
+== 2. golden stages (run_golden.py) ==
+cases=20 passed=20 failed=0
+golden_source_order=100.0%
+golden_source_set=100.0%
+cases=16 passed=16 failed=0
+golden_edge_parity=100.0%
+golden_escape_detection=100.0%
+oracle binary: /home/hatch/workspace/r20-verification/p028-fixr1-b/03_oracle/rust/target/release/instructionroot-oracle
+== 3. unified-index check: 48 receipt cases (production + Oracle) ==
+receipt_cases=48 passed=48 failed=0
+source_ok=48/48
+trust_ok=48/48
+edge_ok=48/48
+verdict_ok=48/48
+hash_ok=48/48
+== 4. fs index check: 12 canonicalize cases (production + Oracle) ==
+fs_cases=12 passed=12 fs_probes=25
+== 5. git/trust scenarios (compare_oracle.py) ==
+git_scenarios=6 PASS
+== 6. determinism: 100 runs, same receipt_hash ==
+codex-basic: 100 production + 100 oracle runs, hash=9c5a9742ee7f0490 (all identical)
+s0-git-tracked: 25 production + 25 oracle runs, hash=0e27c718fc4f1d13 (all identical)
+== 7. fail-closed suite FC-01..FC-08 (malformed input never PASSes) ==
+[PASS] FC-01: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- case file is not valid JSON
+[PASS] FC-02: production=UNSUPPORTED_PROFILE oracle=UNSUPPORTED_PROFILE (exit 40) agree=True -- profile version mismatch (codex-2026-10)
+[PASS] FC-03: production=UNSUPPORTED_PROFILE oracle=UNSUPPORTED_PROFILE (exit 40) agree=True -- unknown harness (warp-drive)
+[PASS] FC-04: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- cwd does not exist
+[PASS] FC-05: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- policy has an unknown field
+[PASS] FC-06: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- policy field is not a bool
+[PASS] FC-07: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- repo_root points at a file, not a directory
+[PASS] FC-08: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- case input has no harness field
+fail_closed=8/8
+== 8. network_access=0 (static grep + runtime audit hook) ==
+network_tokens=0 shell_true=0 runtime_socket_events=0 network_access=0
+== 9. coverage: 12 boundary scenarios + S01-S25 ==
+  scenario nested                 -> claude-nested, codex-basic, s0-git-tracked
+  scenario global                 -> codex-basic, claude-basic, copilot-basic
+  scenario untracked              -> s0-git-untracked-block, s0-git-rename
+  scenario modified               -> s0-git-modified, s0-git-modified-block, s0-git-staged-new
+  scenario symlink                -> s0-git-symlink-inside, s0-git-symlink-escape, fs/symlink-inside
+  scenario junction               -> fs/windows
+  scenario import                 -> claude-depth4, copilot-relative, s0-downloads-import
+  scenario import escape          -> claude-escape, s0-downloads-import, copilot-absolute
+  scenario missing                -> claude-missing, s0-git-missing-import, claude-import-depth4
+  scenario duplicate              -> copilot-dedup
+  scenario ambiguous precedence   -> codex-override, claude-nested
+  scenario unsupported profile    -> FC-02, FC-03
+  S01  -> codex-basic, s0-git-tracked
+  S02  -> codex-basic
+  S03  -> codex-basic
+  S04  -> s0-git-untracked-block
+  S05  -> s0-git-modified
+  S06  -> s0-git-symlink-inside
+  S07  -> s0-git-symlink-escape
+  S08  -> s0-git-missing-import
+  S09  -> s0-downloads-import
+  S10  -> copilot-dedup
+  S11  -> codex-override
+  S12  -> fs/windows
+  S13  -> claude-depth4
+  S14  -> claude-depth5
+  S15  -> copilot-applyto-match
+  S16  -> copilot-applyto-nomatch
+  S17  -> codex-basic
+  S18  -> codex-basic
+  S19  -> s0-downloads-import
+  S20  -> fs/dotdot, fs/separators
+  S21  -> s0-git-unicode
+  S22  -> s0-case-sensitive
+  S23  -> s0-git-missing-import, unit:test_deleted_tracked_file
+  S24  -> s0-git-rename
+  S25  -> codex-norepo
+known_escape_detection=15/15
+junction: fs/windows pure-string probes executed; real junction resolution NOT_RUN on Linux (T011, Windows runner) -- not faked
+== 10. regression: pytest + cargo test + compare_oracle --all ==
+  pytest: ................................................................ssss.... [ 99%]
+  pytest: .                                                                        [100%]
+  pytest: 283 passed, 6 skipped in 7.21s
+  cargo: test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+  cargo: test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+  compare_oracle: resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+  compare_oracle: source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+  compare_oracle: fs_parity=100.0% git_scenarios=PASS
+== manifest: review/S0_FIXTURE_MANIFEST.json ==
+manifest entries=60
+S0_GATE
+fixtures=60
+production_oracle_parity=100%
+receipt_hash_parity=100%
+determinism=100/100
+fail_closed=PASS
+network_access=0
+human_labels=0
+RESULT=PASS

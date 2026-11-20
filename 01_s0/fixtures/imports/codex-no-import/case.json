@@ -1,0 +1,14 @@
+{
+  "case_id": "codex-no-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Codex documents no @-import syntax: @ text produces no edges",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "Codex documents no @-import syntax: @ text produces no edges",
+  "working_files": []
+}

@@ -1,0 +1,15 @@
+{
+  "case_id": "win-drive-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "Drive-letter import escapes (resolved /C:/... is outside every approved root). Pure-string path handling only; no Windows filesystem is involved.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "claude CLAUDE.md imports C:\\shared\\drive-note.md -> IMPORT_ESCAPE, BLOCK",
+  "windows_note": "NOT_RUN: real drive-letter resolution. On Windows C:\\shared\\drive-note.md would resolve against the C: drive; the escape verdict would still hold (outside the repo).",
+  "working_files": []
+}

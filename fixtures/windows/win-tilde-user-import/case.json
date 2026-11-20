@@ -1,0 +1,15 @@
+{
+  "case_id": "win-tilde-user-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "~user expansion is unsupported: the edge is UNRESOLVABLE (fail-closed), BLOCK.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "claude CLAUDE.md imports ~other/shared.md -> UNRESOLVABLE, BLOCK",
+  "windows_note": "NOT_RUN: no Windows-specific behaviour; ~user is rejected on every platform by design.",
+  "working_files": []
+}

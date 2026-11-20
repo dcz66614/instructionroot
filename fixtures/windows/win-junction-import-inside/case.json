@@ -1,0 +1,15 @@
+{
+  "case_id": "win-junction-import-inside",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "Junction analogue on the import path (CWD is not symlinked, so both implementations agree).",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "claude import @linked/also.md through a dir symlink to in-repo shared -> WITHIN_REPO, PASS (junction analogue)",
+  "windows_note": "NOT_RUN: real NTFS junction resolution (reparse point). The Linux dir symlink exercises the identical lexical/resolved + containment path.",
+  "working_files": []
+}

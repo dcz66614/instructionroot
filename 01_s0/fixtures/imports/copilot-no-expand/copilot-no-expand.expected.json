@@ -1,0 +1,7 @@
+{
+  "case_id": "copilot-no-expand",
+  "expected_edge_count": 0,
+  "expected_edges": [],
+  "expected_verdict": "PASS",
+  "notes": "Imports-stage expected file: asserts import edges (from + syntax + depth + targets + allowed + reason) and the verdict under synthetic trust (in-repo files are treated as GIT_TRACKED, home files as USER_SCOPE; real Git state is T004/T007's job, not this stage's). No receipt_hash is asserted here."
+}

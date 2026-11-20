@@ -1,0 +1,14 @@
+{
+  "case_id": "copilot-absolute",
+  "cwd": "repo",
+  "env": {},
+  "harness": "copilot-cli",
+  "home": "home",
+  "notes": "absolute path and ~/ reference are not loaded (IMPORT_ESCAPE)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "copilot-cli-2026-11",
+  "repo_root": "repo",
+  "title": "absolute path and ~/ reference are not loaded (IMPORT_ESCAPE)",
+  "working_files": []
+}

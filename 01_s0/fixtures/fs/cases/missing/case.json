@@ -1,0 +1,6 @@
+{
+  "case_id": "missing",
+  "os": "linux",
+  "synthetic": true,
+  "title": "empty tree; tests address paths that do not exist"
+}

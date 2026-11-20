@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-missing",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "missing import BLOCKs (S08); in-repo import PASS",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "missing import BLOCKs (S08); in-repo import PASS",
+  "working_files": []
+}

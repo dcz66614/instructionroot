@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-downloads-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "In-repo import is allowed; the Downloads import escapes and blocks.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "claude CLAUDE.md imports ../outside/Downloads file -> IMPORT_ESCAPE, BLOCK (S09/S19)",
+  "working_files": []
+}

@@ -1,0 +1,16 @@
+{
+  "case_id": "s0-git-untracked-block",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "SPEC-02: default policy would WARN; this policy escalates to BLOCK.",
+  "os": "linux",
+  "policy": {
+    "block_repo_untracked": true
+  },
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "untracked payments AGENTS.md + block_repo_untracked=true -> BLOCK (S04 policy variant)",
+  "working_files": []
+}

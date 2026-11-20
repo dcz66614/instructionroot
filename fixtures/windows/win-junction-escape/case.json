@@ -1,0 +1,15 @@
+{
+  "case_id": "win-junction-escape",
+  "cwd": "repo/linked",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Junction analogue (see win-junction-inside); the resolved CWD is outside the repo, so the chain is [cwd] alone and only the Downloads file is discovered (OUTSIDE_REPO, BLOCK). Known parity gap F6: production records workspace.cwd lexically, the Oracle resolved, so the receipt hashes differ.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "repo/linked is a dir symlink to outside/Downloads -> SYMLINK_ESCAPE, BLOCK (junction analogue)",
+  "windows_note": "NOT_RUN: real NTFS junction resolution. A real junction to Downloads must BLOCK the same way; only the symlink analogue was executed. Known parity gap F6 (workspace.cwd) applies on Linux too.",
+  "working_files": []
+}

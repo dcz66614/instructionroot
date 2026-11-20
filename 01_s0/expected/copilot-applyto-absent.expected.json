@@ -1,0 +1,31 @@
+{
+  "case_id": "copilot-applyto-absent",
+  "expected_edges": [],
+  "expected_not_applicable": [
+    {
+      "reason": "APPLYTO_ABSENT_UNVERIFIED",
+      "relative_path": "repo/.github/instructions/plain.instructions.md"
+    }
+  ],
+  "expected_source_count": 1,
+  "expected_sources": [
+    {
+      "discovery_rule": "copilot-cli.repo-wide",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/.github/copilot-instructions.md",
+      "scope": "project",
+      "trust": "GIT_TRACKED"
+    }
+  ],
+  "expected_verdict": "PASS",
+  "forbidden_trust": [
+    "NOT_OBSERVED",
+    "SYMLINK_ESCAPE",
+    "IMPORT_ESCAPE",
+    "OUTSIDE_REPO",
+    "MISSING"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). Sources/edges transcribed from the T003 stage expected file; trust/verdict hand-derived from the frozen contracts (see build_s0_expected.py)."
+}

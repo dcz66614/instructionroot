@@ -1,0 +1,11 @@
+.gitignore
+review/COORDINATOR_LOG.md
+review/S0_GATE.md
+review/S0_LOG.txt
+review/S0_ORACLE_SUMMARY.json
+02_src/instructionroot/__main__.py
+02_src/instructionroot/cli.py
+05_tests/unit/test_cli.py
+fixtures/
+instructionroot
+review/tasks/P028-T008/

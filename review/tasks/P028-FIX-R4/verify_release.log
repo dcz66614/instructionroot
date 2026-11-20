@@ -1,0 +1,7 @@
+[PASS] manifest_entries — 5 entries checked
+[PASS] zips_unzip — 2 zips clean
+[PASS] source_zip_matches_freeze_commit — 549 files, all hashes match
+[PASS] bundle_contents — 7 members, byte-identical except SHA256SUMS.txt (inner copy omits the bundle's own entry, as documented)
+[PASS] sha256sums_covers_release_dir — 6 entries, all match
+[PASS] wheel_install_reproduces_demo_hash — wheel instructionroot-1.0.0-py3-none-any.whl; installed verify hash efd5e4a02f41; repo launcher hash efd5e4a02f41
+VERIFY_RELEASE: PASS (6/6 checks passed)

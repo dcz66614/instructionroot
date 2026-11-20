@@ -1,0 +1,31 @@
+# P028 InstructionRoot Resolve — packaging (T012).
+#
+# Layout is non-standard: production sources live in 02_src/ (the task
+# workspaces of the factory plan), so setuptools is pointed at that
+# directory. The installed console script `instructionroot` replaces the
+# bare `./instructionroot` launcher (T008 note D4) — no PYTHONPATH export
+# is needed once installed. Stdlib only: no third-party dependencies.
+# License: MIT (see LICENSE). Version tracks instructionroot.cli:CLI_VERSION.
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "instructionroot"
+version = "1.0.0"
+description = "Determine which instruction files a coding-agent harness would load for a CWD, with provenance and a deterministic receipt. Local only, no network, no LLM."
+readme = { text = "InstructionRoot Resolve: harness instruction-chain preflight. See 06_docs/PROFILES.md and the CLI `--help` text. Full README is owned by T013.", content-type = "text/plain" }
+license = { text = "MIT" }
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+instructionroot = "instructionroot.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "02_src" }
+
+[tool.setuptools.packages.find]
+where = ["02_src"]
+include = ["instructionroot*"]

@@ -1,0 +1,53 @@
+{
+  "case_id": "claude-depth5",
+  "expected_edge_count": 5,
+  "expected_edges": [
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "repo/CLAUDE.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/a.md",
+      "relative_target": "repo/shared/a.md",
+      "syntax": "@shared/a.md"
+    },
+    {
+      "allowed": true,
+      "depth": 2,
+      "from_relative_path": "repo/shared/a.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/b.md",
+      "relative_target": "repo/shared/b.md",
+      "syntax": "@b.md"
+    },
+    {
+      "allowed": true,
+      "depth": 3,
+      "from_relative_path": "repo/shared/b.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/c.md",
+      "relative_target": "repo/shared/c.md",
+      "syntax": "@c.md"
+    },
+    {
+      "allowed": true,
+      "depth": 4,
+      "from_relative_path": "repo/shared/c.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/d.md",
+      "relative_target": "repo/shared/d.md",
+      "syntax": "@d.md"
+    },
+    {
+      "allowed": false,
+      "depth": 5,
+      "from_relative_path": "repo/shared/d.md",
+      "reason": "DEPTH_EXCEEDED",
+      "relative_resolved_target": "repo/shared/e.md",
+      "relative_target": "repo/shared/e.md",
+      "syntax": "@e.md"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "notes": "Imports-stage expected file: asserts import edges (from + syntax + depth + targets + allowed + reason) and the verdict under synthetic trust (in-repo files are treated as GIT_TRACKED, home files as USER_SCOPE; real Git state is T004/T007's job, not this stage's). No receipt_hash is asserted here."
+}

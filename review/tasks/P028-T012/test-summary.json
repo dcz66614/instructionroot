@@ -1,0 +1,9 @@
+{
+  "task": "P028-T012",
+  "security_static_check": {"exit": 0, "result": "PASS", "files_scanned": 859, "shell_true": 0, "network_runtime": 0, "telemetry": 0, "secret_fixture_leaks": 0},
+  "pytest": {"passed": 283, "skipped": 6, "failed": 0},
+  "cargo_test": {"passed": 31, "failed": 0},
+  "compare_oracle_all": {"source_parity": "100%", "trust_parity": "100%", "edge_parity": "100%", "verdict_parity": "100%", "hash_parity": "100%", "git_scenarios": "PASS"},
+  "s0_gate": {"result": "FAIL", "scope": "section 8 only", "cause": "12 network-token hits in scripts/security_static_check.py (checker literal token lists); gate exclusion list needs extending (coordinator gate-maintenance fix)"},
+  "packaging": {"wheel": "instructionroot-1.0.0-py3-none-any.whl", "wheel_sha256": "1e12d28887002f48a9471dc03f8c93a6b5189419ca558cc6cde01de4f0656253", "console_entry_point": "instructionroot.cli:main", "installed_and_verified": true}
+}

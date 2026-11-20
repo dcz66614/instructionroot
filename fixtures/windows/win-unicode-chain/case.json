@@ -1,0 +1,15 @@
+{
+  "case_id": "win-unicode-chain",
+  "cwd": "repo/\u65e5\u672c\u8a9e/\u5b50\u76ee\u5f55",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Unicode is passed through byte-for-byte (Q3); no NFC/NFD normalisation.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "unicode chain (\u65e5\u672c\u8a9e/\u5b50\u76ee\u5f55) with AGENTS.md, committed -> PASS (S21)",
+  "windows_note": "NOT_RUN: real Windows UTF-16/NFC handling. Production does no normalisation on either platform by design (contract Q3).",
+  "working_files": []
+}

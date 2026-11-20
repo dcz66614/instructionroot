@@ -1,0 +1,13 @@
+[package]
+name = "instructionroot-oracle"
+version = "0.1.0"
+edition = "2021"
+description = "Independent Rust Oracle for P028 InstructionRoot Resolve: harness resolution, trust classification, import edges, canonical receipt (RFC 8785 JCS), SHA-256. No Python, no network."
+license = "MIT"
+
+[dependencies]
+serde_json = "1"
+sha2 = "0.10"
+
+[profile.release]
+debug = false

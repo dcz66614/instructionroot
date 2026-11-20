@@ -1,0 +1,8 @@
+web/index.html
+web/app.js
+web/style.css
+web/README.md
+web/receipt.json
+web/receipt-pass.json
+web/receipt-block.json
+review/tasks/P028-T009/TASK_RESULT.md

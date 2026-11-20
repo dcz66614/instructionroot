@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-case-sensitive",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Linux matching is case-sensitive; the lowercase file never enters the chain.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "lowercase services/agents.md is not discovered on Linux -> PASS (S22)",
+  "working_files": []
+}

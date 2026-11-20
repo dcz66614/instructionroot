@@ -1,0 +1,6 @@
+{
+  "case_id": "symlink-broken",
+  "os": "linux",
+  "synthetic": true,
+  "title": "symlink -> missing target"
+}

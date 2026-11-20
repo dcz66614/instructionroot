@@ -1,0 +1,17 @@
+# P028 InstructionRoot Resolve — pre-commit hooks (T010).
+#
+# Exposes the same `verify` gate as the GitHub Action, through the same
+# entry point (scripts/run-verify.sh), so the two can never drift apart.
+# The hook verifies the effective instruction chain for the configured
+# harness (workflow_dispatch-style env overrides aside, the repo config
+# .instructionroot.json wins) and fails the commit on BLOCK (exit 20)
+# and on WARN (exit 10) unless "allow_warn": true is set in the config.
+# pass_filenames is false and always_run is true because verify gates a
+# working directory, not individual changed files.
+- id: instructionroot-verify
+  name: instructionroot verify
+  description: Verify the effective instruction chain and fail on BLOCK (or WARN unless allow_warn is set).
+  entry: scripts/run-verify.sh
+  language: script
+  pass_filenames: false
+  always_run: true

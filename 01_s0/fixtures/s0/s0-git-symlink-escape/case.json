@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-git-symlink-escape",
+  "cwd": "repo/services",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Synthetic Downloads placeholder only; no malicious payload.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "services AGENTS.md is a symlink to outside/Downloads -> SYMLINK_ESCAPE, BLOCK (S07)",
+  "working_files": []
+}

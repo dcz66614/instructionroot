@@ -1,0 +1,6 @@
+{
+  "case_id": "symlink-escape",
+  "os": "linux",
+  "synthetic": true,
+  "title": "in-repo symlink -> outside-repo target (S07 shape)"
+}

@@ -1,0 +1,6 @@
+{
+  "case_id": "symlink-loop",
+  "os": "linux",
+  "synthetic": true,
+  "title": "a <-> b symlink loop (must not hang)"
+}

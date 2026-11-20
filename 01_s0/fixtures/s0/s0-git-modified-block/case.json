@@ -1,0 +1,16 @@
+{
+  "case_id": "s0-git-modified-block",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Same tree as s0-git-modified; only the policy escalates WARN to BLOCK.",
+  "os": "linux",
+  "policy": {
+    "block_repo_modified": true
+  },
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "tracked file modified + block_repo_modified=true -> BLOCK (S05 policy variant)",
+  "working_files": []
+}

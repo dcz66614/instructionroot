@@ -1,0 +1,50 @@
+{
+  "case_id": "copilot-custom-dir",
+  "expected_edges": [
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "extra/AGENTS.md",
+      "reason": "WITHIN_CUSTOM_DIR",
+      "relative_resolved_target": "extra/local.md",
+      "relative_target": "extra/local.md",
+      "syntax": "@local.md"
+    },
+    {
+      "allowed": true,
+      "depth": 1,
+      "from_relative_path": "extra/AGENTS.md",
+      "reason": "WITHIN_REPO",
+      "relative_resolved_target": "repo/shared/x.md",
+      "relative_target": "repo/shared/x.md",
+      "syntax": "@../repo/shared/x.md"
+    },
+    {
+      "allowed": false,
+      "depth": 1,
+      "from_relative_path": "extra/AGENTS.md",
+      "reason": "IMPORT_ESCAPE",
+      "relative_resolved_target": "outside/y.md",
+      "relative_target": "outside/y.md",
+      "syntax": "@../outside/y.md"
+    }
+  ],
+  "expected_not_applicable": [],
+  "expected_source_count": 1,
+  "expected_sources": [
+    {
+      "discovery_rule": "copilot-cli.custom-dirs",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "extra/AGENTS.md",
+      "scope": "project",
+      "trust": "OUTSIDE_REPO"
+    }
+  ],
+  "expected_verdict": "BLOCK",
+  "forbidden_trust": [
+    "NOT_OBSERVED"
+  ],
+  "kind": "receipt",
+  "notes": "Unified S0 expected index (T007). Edges transcribed from the T005 stage expected file; sources/trust/verdict hand-derived from the frozen contracts."
+}

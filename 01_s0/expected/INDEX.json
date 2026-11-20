@@ -1,0 +1,366 @@
+{
+  "cases": [
+    {
+      "case_id": "claude-agents-fallback",
+      "file": "claude-agents-fallback.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "claude-agents-fallback-blocked",
+      "file": "claude-agents-fallback-blocked.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "claude-basic",
+      "file": "claude-basic.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "claude-import-depth4",
+      "file": "claude-import-depth4.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "claude-import-depth5",
+      "file": "claude-import-depth5.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "claude-nested",
+      "file": "claude-nested.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "claude-nested-disabled",
+      "file": "claude-nested-disabled.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "claude-rules-paths",
+      "file": "claude-rules-paths.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "codex-basic",
+      "file": "codex-basic.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "codex-empty",
+      "file": "codex-empty.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "codex-norepo",
+      "file": "codex-norepo.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "codex-override",
+      "file": "codex-override.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "codex-user-only",
+      "file": "codex-user-only.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "copilot-applyto-absent",
+      "file": "copilot-applyto-absent.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "copilot-applyto-match",
+      "file": "copilot-applyto-match.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "copilot-applyto-nomatch",
+      "file": "copilot-applyto-nomatch.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "copilot-basic",
+      "file": "copilot-basic.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "copilot-custom-dirs",
+      "file": "copilot-custom-dirs.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "copilot-dedup",
+      "file": "copilot-dedup.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "copilot-intermediate",
+      "file": "copilot-intermediate.expected.json",
+      "kind": "receipt",
+      "section": "resolver"
+    },
+    {
+      "case_id": "claude-code-span",
+      "file": "claude-code-span.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-cycle",
+      "file": "claude-cycle.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-depth4",
+      "file": "claude-depth4.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-depth5",
+      "file": "claude-depth5.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-escape",
+      "file": "claude-escape.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-home-import",
+      "file": "claude-home-import.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-malformed",
+      "file": "claude-malformed.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-missing",
+      "file": "claude-missing.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-no-import",
+      "file": "claude-no-import.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "claude-symlink-escape",
+      "file": "claude-symlink-escape.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "codex-no-import",
+      "file": "codex-no-import.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "copilot-absolute",
+      "file": "copilot-absolute.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "copilot-custom-dir",
+      "file": "copilot-custom-dir.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "copilot-no-expand",
+      "file": "copilot-no-expand.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "copilot-relative",
+      "file": "copilot-relative.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "copilot-tilde-user",
+      "file": "copilot-tilde-user.expected.json",
+      "kind": "receipt",
+      "section": "imports"
+    },
+    {
+      "case_id": "s0-case-sensitive",
+      "file": "s0-case-sensitive.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-downloads-import",
+      "file": "s0-downloads-import.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-missing-import",
+      "file": "s0-git-missing-import.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-modified",
+      "file": "s0-git-modified.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-modified-block",
+      "file": "s0-git-modified-block.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-rename",
+      "file": "s0-git-rename.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-staged-new",
+      "file": "s0-git-staged-new.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-symlink-escape",
+      "file": "s0-git-symlink-escape.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-symlink-inside",
+      "file": "s0-git-symlink-inside.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-tracked",
+      "file": "s0-git-tracked.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-unicode",
+      "file": "s0-git-unicode.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "s0-git-untracked-block",
+      "file": "s0-git-untracked-block.expected.json",
+      "kind": "receipt",
+      "section": "s0"
+    },
+    {
+      "case_id": "fs/basic",
+      "file": "fs__basic.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/deep-chain",
+      "file": "fs__deep-chain.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/dir-symlink",
+      "file": "fs__dir-symlink.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/dotdot",
+      "file": "fs__dotdot.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/missing",
+      "file": "fs__missing.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/separators",
+      "file": "fs__separators.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/symlink-broken",
+      "file": "fs__symlink-broken.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/symlink-escape",
+      "file": "fs__symlink-escape.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/symlink-inside",
+      "file": "fs__symlink-inside.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/symlink-loop",
+      "file": "fs__symlink-loop.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/unicode",
+      "file": "fs__unicode.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    },
+    {
+      "case_id": "fs/windows",
+      "file": "fs__windows.expected.json",
+      "kind": "fs",
+      "section": "fs"
+    }
+  ],
+  "generated_by": "scripts/build_s0_expected.py",
+  "synthetic": true
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-escape",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "dotdot escape + absolute outside escape BLOCK; in-repo import PASS (S09)",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "dotdot escape + absolute outside escape BLOCK; in-repo import PASS (S09)",
+  "working_files": []
+}

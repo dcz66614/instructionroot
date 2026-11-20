@@ -1,0 +1,54 @@
+{
+  "cases": [
+    {
+      "case_id": "s0-case-sensitive",
+      "title": "lowercase services/agents.md is not discovered on Linux -> PASS (S22)"
+    },
+    {
+      "case_id": "s0-downloads-import",
+      "title": "claude CLAUDE.md imports ../outside/Downloads file -> IMPORT_ESCAPE, BLOCK (S09/S19)"
+    },
+    {
+      "case_id": "s0-git-missing-import",
+      "title": "claude CLAUDE.md imports a missing file -> MISSING, BLOCK (S08, real git)"
+    },
+    {
+      "case_id": "s0-git-modified",
+      "title": "tracked payments AGENTS.md modified in the worktree -> WARN (S05)"
+    },
+    {
+      "case_id": "s0-git-modified-block",
+      "title": "tracked file modified + block_repo_modified=true -> BLOCK (S05 policy variant)"
+    },
+    {
+      "case_id": "s0-git-rename",
+      "title": "services/ renamed to services-renamed: new path is untracked -> WARN (S24)"
+    },
+    {
+      "case_id": "s0-git-staged-new",
+      "title": "staged-new services AGENTS.md: tracked + modified -> WARN (T004 ruling)"
+    },
+    {
+      "case_id": "s0-git-symlink-escape",
+      "title": "services AGENTS.md is a symlink to outside/Downloads -> SYMLINK_ESCAPE, BLOCK (S07)"
+    },
+    {
+      "case_id": "s0-git-symlink-inside",
+      "title": "services AGENTS.md is a symlink to an in-repo target -> GIT_TRACKED, PASS (S06)"
+    },
+    {
+      "case_id": "s0-git-tracked",
+      "title": "codex chain, all files git-tracked and clean (S01/S02/S17, real git)"
+    },
+    {
+      "case_id": "s0-git-unicode",
+      "title": "unicode directory (\u4e2d\u6587) with AGENTS.md, committed -> PASS (S21)"
+    },
+    {
+      "case_id": "s0-git-untracked-block",
+      "title": "untracked payments AGENTS.md + block_repo_untracked=true -> BLOCK (S04 policy variant)"
+    }
+  ],
+  "generated_by": "01_s0/fixtures/s0/build_s0_fixtures.py",
+  "synthetic": true
+}

@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-git-tracked",
+  "cwd": "repo/services/payments",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Real-git counterpart of codex-basic: every source GIT_TRACKED.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "codex chain, all files git-tracked and clean (S01/S02/S17, real git)",
+  "working_files": []
+}

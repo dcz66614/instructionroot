@@ -1,0 +1,65 @@
+{
+  "case_id": "copilot-basic",
+  "expected_import_candidates": [],
+  "expected_not_applicable": [],
+  "expected_source_count": 8,
+  "expected_sources": [
+    {
+      "discovery_rule": "copilot-cli.user",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "home/.copilot/copilot-instructions.md",
+      "scope": "user"
+    },
+    {
+      "discovery_rule": "copilot-cli.repo-wide",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/.github/copilot-instructions.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "copilot-cli.repo-wide",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/services/.github/copilot-instructions.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "copilot-cli.agents",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/AGENTS.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "copilot-cli.claude",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/CLAUDE.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "copilot-cli.gemini",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/GEMINI.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "copilot-cli.claude",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/services/.claude/CLAUDE.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "copilot-cli.agents",
+      "phase": "startup",
+      "precedence_kind": "COMBINE_UNORDERED",
+      "relative_path": "repo/services/payments/AGENTS.md",
+      "scope": "project"
+    }
+  ],
+  "notes": "Resolver-stage expected file: asserts discovery fields only (rule/scope/phase/precedence_kind/relative_path). trust and verdict are T004/T008 concerns and are asserted by T007's full expected files, not here."
+}

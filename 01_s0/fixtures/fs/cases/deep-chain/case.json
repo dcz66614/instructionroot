@@ -1,0 +1,6 @@
+{
+  "case_id": "deep-chain",
+  "os": "linux",
+  "synthetic": true,
+  "title": "a/b/c/d/e/f chain"
+}

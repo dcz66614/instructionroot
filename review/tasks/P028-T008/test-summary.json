@@ -1,0 +1,23 @@
+{
+  "task_id": "P028-T008",
+  "date": "2026-11-18",
+  "pytest": {"passed": 267, "skipped": 2, "failed": 0, "note": "239 pre-existing + 28 new CLI tests"},
+  "cargo_test": {"passed": 31, "failed": 0, "suites": ["26 passed", "5 passed"]},
+  "compare_oracle_all": {"exit": 0, "source_parity": 100.0, "trust_parity": 100.0, "edge_parity": 100.0, "verdict_parity": 100.0, "hash_parity": 100.0, "fs_parity": 100.0, "git_scenarios": "PASS"},
+  "s0_gate": {"exit": 0, "result": "PASS"},
+  "acceptance": {
+    "help_exit": 0,
+    "profile_list_exit": 0,
+    "verify_demo_exit": 0,
+    "verify_demo_receipt_hash": "efd5e4a02f41935b71e97cb40979fe9d48050e506001bfb0d47d7af81d3b9f90",
+    "verify_demo_block_exit": 20,
+    "verify_demo_block_receipt_hash": "aeb13c64e6c46988a2b80429c9927ba590bd62d1db43f3a62dfce94f95741d8a",
+    "oracle_demo": "PARITY",
+    "oracle_demo_block": "PARITY",
+    "unknown_harness_exit": 40,
+    "unknown_profile_version_exit": 40,
+    "missing_cwd_exit": 30,
+    "malformed_policy_exit": 30,
+    "warn_exit": 10
+  }
+}

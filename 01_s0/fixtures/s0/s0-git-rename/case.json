@@ -1,0 +1,14 @@
+{
+  "case_id": "s0-git-rename",
+  "cwd": "repo/services-renamed",
+  "env": {},
+  "harness": "codex",
+  "home": "home",
+  "notes": "Rename provenance: the moved file is GIT_UNTRACKED under its new path.",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "codex-2026-11",
+  "repo_root": "repo",
+  "title": "services/ renamed to services-renamed: new path is untracked -> WARN (S24)",
+  "working_files": []
+}

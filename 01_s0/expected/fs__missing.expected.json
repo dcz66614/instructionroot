@@ -1,0 +1,16 @@
+{
+  "case_id": "fs/missing",
+  "expected_probes": [
+    {
+      "canonical": "{case}/repo/nope.md",
+      "exists": false,
+      "is_broken_symlink": false,
+      "is_loop": false,
+      "is_symlink": false,
+      "raw": "repo/nope.md",
+      "resolved": "{case}/repo/nope.md"
+    }
+  ],
+  "kind": "fs",
+  "notes": "Unified S0 expected index (T007). Canonicalize probes transcribed from the T002 fixture tree; {case} is the case directory. Windows probes are pure-string (real junction/drive resolution is NOT_RUN on Linux)."
+}

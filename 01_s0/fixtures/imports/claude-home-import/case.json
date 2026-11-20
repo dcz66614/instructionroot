@@ -1,0 +1,14 @@
+{
+  "case_id": "claude-home-import",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "import resolving inside the home directory is WITHIN_HOME",
+  "os": "linux",
+  "policy": "default",
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "import resolving inside the home directory is WITHIN_HOME",
+  "working_files": []
+}

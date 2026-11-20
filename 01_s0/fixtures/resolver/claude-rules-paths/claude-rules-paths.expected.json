@@ -1,0 +1,42 @@
+{
+  "case_id": "claude-rules-paths",
+  "expected_import_candidates": [],
+  "expected_not_applicable": [
+    {
+      "reason": "PATH_SCOPED_NO_MATCH",
+      "relative_path": "repo/.claude/rules/docs-only.md"
+    }
+  ],
+  "expected_source_count": 4,
+  "expected_sources": [
+    {
+      "discovery_rule": "claude-code.project",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/CLAUDE.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "claude-code.rules-startup",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/.claude/rules/always.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "claude-code.rules-startup",
+      "phase": "startup",
+      "precedence_kind": "ORDERED",
+      "relative_path": "repo/.claude/rules/broken.md",
+      "scope": "project"
+    },
+    {
+      "discovery_rule": "claude-code.rules-path-scoped",
+      "phase": "on_demand",
+      "precedence_kind": "UNSPECIFIED",
+      "relative_path": "repo/.claude/rules/python-only.md",
+      "scope": "project"
+    }
+  ],
+  "notes": "Resolver-stage expected file: asserts discovery fields only (rule/scope/phase/precedence_kind/relative_path). trust and verdict are T004/T008 concerns and are asserted by T007's full expected files, not here."
+}

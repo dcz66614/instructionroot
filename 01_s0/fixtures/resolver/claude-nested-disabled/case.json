@@ -1,0 +1,18 @@
+{
+  "case_id": "claude-nested-disabled",
+  "cwd": "repo",
+  "env": {},
+  "harness": "claude-code",
+  "home": "home",
+  "notes": "allow_nested_on_demand=false: nested sources are excluded, not BLOCKed",
+  "os": "linux",
+  "policy": {
+    "allow_nested_on_demand": false
+  },
+  "profile_version": "claude-code-2026-11",
+  "repo_root": "repo",
+  "title": "allow_nested_on_demand=false: nested sources are excluded, not BLOCKed",
+  "working_files": [
+    "repo/services/payments/app.py"
+  ]
+}
