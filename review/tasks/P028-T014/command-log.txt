@@ -1,0 +1,812 @@
+=== T014 battery started 2026-11-18T07:53:55Z ===
+--- 1 pytest ---
+........................................................................ [ 24%]
+..........................................................ss............ [ 49%]
+........................................................................ [ 74%]
+................................................................ssss.... [ 99%]
+.                                                                        [100%]
+283 passed, 6 skipped in 6.47s
+pytest exit=0
+--- 2 cargo test ---
+test paths::tests::lexical_errors ... ok
+test paths::tests::windows_drive_resolves_like_python ... ok
+test paths::tests::windows_spellings ... ok
+test textscan::tests::frontmatter_unparseable_is_absent ... ok
+test textscan::tests::frontmatter_scalars_and_lists ... ok
+test textscan::tests::glob_basename_and_doublestar ... ok
+test textscan::tests::imports_skip_code_and_quotes ... ok
+test trust::tests::managed_scope_maps_to_user_scope_r004 ... ok
+test trust::tests::git_states_map_to_r001_r002_r003 ... ok
+test trust::tests::missing_outranks_git_state ... ok
+test trust::tests::no_git_state_is_r009 ... ok
+test trust::tests::priority_order_is_first_match_wins ... ok
+test trust::tests::r010_annotates_only_r001_and_r004 ... ok
+test trust::tests::user_scope_and_outside_repo ... ok
+test trust::tests::symlink_escape_derived_from_roots ... ok
+test trust::tests::verdict_derivation ... ok
+
+test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/cli.rs (03_oracle/rust/target/debug/build/instructionroot-oracle/30fcc5430f8955ee/out/cli-30fcc5430f8955ee)
+
+running 5 tests
+test canonicalize_loop_and_windows ... ok
+test resolve_error_exit_codes ... ok
+test resolve_claude_chain_pass_and_deterministic ... ok
+test resolve_import_escape_blocks ... ok
+test resolve_copilot_relative_expands_and_absolute_blocks ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+cargo exit=0
+--- 3 compare_oracle --all ---
+resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+fs_parity=100.0% git_scenarios=PASS
+compare exit=0
+--- 4 S0 gate ---
+P028 S0 GATE -- T007
+workdir=/home/hatch/workspace/p028-instructionroot
+== 0. fixture setup: regenerate S0 fixtures ==
+s0 cases=12
+  s0-case-sensitive
+  s0-downloads-import
+  s0-git-missing-import
+  s0-git-modified
+  s0-git-modified-block
+  s0-git-rename
+  s0-git-staged-new
+  s0-git-symlink-escape
+  s0-git-symlink-inside
+  s0-git-tracked
+  s0-git-unicode
+  s0-git-untracked-block
+s0 fixtures regenerated (12 cases)
+== 1. corpus inventory ==
+fixtures=60 layers={'normal': 20, 'boundary': 20, 'adversarial': 20} expected_index=60 synthetic_only=True human_labels=0
+== 2. golden stages (run_golden.py) ==
+cases=20 passed=20 failed=0
+golden_source_order=100.0%
+golden_source_set=100.0%
+cases=16 passed=16 failed=0
+golden_edge_parity=100.0%
+golden_escape_detection=100.0%
+oracle binary: /home/hatch/workspace/p028-instructionroot/03_oracle/rust/target/release/instructionroot-oracle
+== 3. unified-index check: 48 receipt cases (production + Oracle) ==
+receipt_cases=48 passed=48 failed=0
+source_ok=48/48
+trust_ok=48/48
+edge_ok=48/48
+verdict_ok=48/48
+hash_ok=48/48
+== 4. fs index check: 12 canonicalize cases (production + Oracle) ==
+fs_cases=12 passed=12 fs_probes=25
+== 5. git/trust scenarios (compare_oracle.py) ==
+[PASS] git/trust scenarios (6)
+git_scenarios=6 PASS
+== 6. determinism: 100 runs, same receipt_hash ==
+codex-basic: 100 production + 100 oracle runs, hash=649d415f754ce021 (all identical)
+s0-git-tracked: 25 production + 25 oracle runs, hash=cef656db9669d8d9 (all identical)
+== 7. fail-closed suite FC-01..FC-08 (malformed input never PASSes) ==
+[PASS] FC-01: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- case file is not valid JSON
+[PASS] FC-02: production=UNSUPPORTED_PROFILE oracle=UNSUPPORTED_PROFILE (exit 40) agree=True -- profile version mismatch (codex-2026-10)
+[PASS] FC-03: production=UNSUPPORTED_PROFILE oracle=UNSUPPORTED_PROFILE (exit 40) agree=True -- unknown harness (warp-drive)
+[PASS] FC-04: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- cwd does not exist
+[PASS] FC-05: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- policy has an unknown field
+[PASS] FC-06: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- policy field is not a bool
+[PASS] FC-07: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- repo_root points at a file, not a directory
+[PASS] FC-08: production=INPUT_ERROR oracle=INPUT_ERROR (exit 30) agree=True -- case input has no harness field
+fail_closed=8/8
+== 8. network_access=0 (static grep + runtime audit hook) ==
+network_tokens=0 shell_true=0 runtime_socket_events=0 network_access=0
+== 9. coverage: 12 boundary scenarios + S01-S25 ==
+  scenario nested                 -> claude-nested, codex-basic, s0-git-tracked
+  scenario global                 -> codex-basic, claude-basic, copilot-basic
+  scenario untracked              -> s0-git-untracked-block, s0-git-rename
+  scenario modified               -> s0-git-modified, s0-git-modified-block, s0-git-staged-new
+  scenario symlink                -> s0-git-symlink-inside, s0-git-symlink-escape, fs/symlink-inside
+  scenario junction               -> fs/windows
+  scenario import                 -> claude-depth4, copilot-relative, s0-downloads-import
+  scenario import escape          -> claude-escape, s0-downloads-import, copilot-absolute
+  scenario missing                -> claude-missing, s0-git-missing-import, claude-import-depth4
+  scenario duplicate              -> copilot-dedup
+  scenario ambiguous precedence   -> codex-override, claude-nested
+  scenario unsupported profile    -> FC-02, FC-03
+  S01  -> codex-basic, s0-git-tracked
+  S02  -> codex-basic
+  S03  -> codex-basic
+  S04  -> s0-git-untracked-block
+  S05  -> s0-git-modified
+  S06  -> s0-git-symlink-inside
+  S07  -> s0-git-symlink-escape
+  S08  -> s0-git-missing-import
+  S09  -> s0-downloads-import
+  S10  -> copilot-dedup
+  S11  -> codex-override
+  S12  -> fs/windows
+  S13  -> claude-depth4
+  S14  -> claude-depth5
+  S15  -> copilot-applyto-match
+  S16  -> copilot-applyto-nomatch
+  S17  -> codex-basic
+  S18  -> codex-basic
+  S19  -> s0-downloads-import
+  S20  -> fs/dotdot, fs/separators
+  S21  -> s0-git-unicode
+  S22  -> s0-case-sensitive
+  S23  -> s0-git-missing-import, unit:test_deleted_tracked_file
+  S24  -> s0-git-rename
+  S25  -> codex-norepo
+known_escape_detection=15/15
+junction: fs/windows pure-string probes executed; real junction resolution NOT_RUN on Linux (T011, Windows runner) -- not faked
+== 10. regression: pytest + cargo test + compare_oracle --all ==
+  pytest: ................................................................ssss.... [ 99%]
+  pytest: .                                                                        [100%]
+  pytest: 283 passed, 6 skipped in 6.23s
+  cargo: test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+  cargo: test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+  compare_oracle: resolver_cases=20 imports_cases=16 fs_cases=12 fs_probes=25
+  compare_oracle: source_parity=100.0% trust_parity=100.0% edge_parity=100.0% verdict_parity=100.0% hash_parity=100.0%
+  compare_oracle: fs_parity=100.0% git_scenarios=PASS
+== manifest: review/S0_FIXTURE_MANIFEST.json ==
+manifest entries=60
+S0_GATE
+fixtures=60
+production_oracle_parity=100%
+receipt_hash_parity=100%
+determinism=100/100
+fail_closed=PASS
+network_access=0
+human_labels=0
+RESULT=PASS
+s0 exit=0
+--- 5 windows corpus ---
+== 0. regenerate windows fixtures ==
+windows receipt cases=15
+  win-case-both
+  win-case-variant
+  win-copilot-drive-ref
+  win-drive-import
+  win-drive-relative-import
+  win-git-case-rename
+  win-git-deleted-chain
+  win-git-deleted-import
+  win-junction-escape
+  win-junction-import-escape
+  win-junction-import-inside
+  win-junction-inside
+  win-tilde-user-import
+  win-unc-import
+  win-unicode-chain
+== 1. receipt cases: 15 ==
+[PASS] win-case-both (PASS, c2f5672aca15)
+[PASS] win-case-variant (PASS, d0f9aa90ae2c)
+[PASS] win-copilot-drive-ref (BLOCK, 6cdc412f2159)
+[PASS] win-drive-import (BLOCK, a6df68286c80)
+[PASS] win-drive-relative-import (BLOCK, 385e924d6d68)
+[PASS] win-git-case-rename (PASS, 87e95d4ab342)
+[PASS] win-git-deleted-chain (PASS, 5c2c449367cb)
+[PASS] win-git-deleted-import (BLOCK, 102a648058fa)
+[PASS] win-junction-escape (BLOCK, a197f5fb610c)
+[PASS] win-junction-import-escape (BLOCK, 06382c65897d)
+[PASS] win-junction-import-inside (PASS, 5358a99dd2b6)
+[PASS] win-junction-inside (PASS, a1d8ca2c4767)
+[PASS] win-tilde-user-import (BLOCK, 13f024d3f219)
+[PASS] win-unc-import (BLOCK, 897f6e6a2297)
+[PASS] win-unicode-chain (PASS, 8ed0206b09a8)
+== 2. pure-string probes: win-probes ==
+[PASS] win-probes (10 probes)
+== 3. determinism spot check (win-drive-import x10+10) ==
+determinism=PASS distinct_hashes=1
+receipt_cases=15 passed=15 failed=0
+source_parity=15/15
+trust_parity=15/15
+edge_parity=15/15
+verdict_parity=15/15
+hash_parity=15/15
+probes=10 passed=True
+RESULT=PASS
+windows exit=0
+--- 6 security ---
+P028 T012 security_static_check
+root=/home/hatch/workspace/p028-instructionroot
+files_scanned=863
+
+== 1. shell ==
+subprocess/os-spawn/eval/exec call sites: 33
+  01_s0/fixtures/s0/build_s0_fixtures.py:52 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  02_src/instructionroot/cli.py:652 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  02_src/instructionroot/cli.py:735 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  02_src/instructionroot/cli.py:865 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  02_src/instructionroot/git.py:140 subprocess.run :: shell=False (explicit)
+  03_oracle/rust/src/git.rs:100 Command::new('git') (no shell)
+  03_oracle/rust/tests/cli.rs:31 Command::new('git') (no shell)
+  05_tests/unit/test_cli.py:31 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  05_tests/unit/test_cli.py:38 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  05_tests/unit/test_git.py:53 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  05_tests/unit/test_trust.py:421 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  fixtures/build_demo_fixtures.py:61 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  fixtures/build_demo_fixtures.py:77 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  fixtures/windows/build_windows_fixtures.py:69 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  instructionroot:0 shell launcher: execs python3 -m instructionroot only (eval/curl/wget found: False)
+  scripts/compare_oracle.py:200 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/compare_oracle.py:220 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/compare_oracle.py:221 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/compare_oracle.py:236 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/compare_oracle.py:883 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/run-verify.sh:0 shell launcher: execs python3 -m instructionroot only (eval/curl/wget found: False)
+  scripts/run_windows_corpus.py:366 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:626 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:657 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:759 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:938 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:951 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:963 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:995 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/s0_gate.py:1146 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/simulate_ci.py:90 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/simulate_ci.py:168 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+  scripts/simulate_ci.py:173 subprocess.run :: no shell= kwarg (subprocess default shell=False)
+shell=True violations (AST): 0
+shell=True violations (raw code sweep): 0
+
+== 2. network ==
+production network findings: 0
+test/support-only network findings (listed separately, not counted): 0
+accepted local same-origin web fetches (relative receipt file): 1
+  ACCEPTED web/app.js:389 local same-origin fetch (relative receipt file, no external URL): return fetch(fileName).then(function (response) {
+network violations (raw code sweep): 0
+
+== 3. telemetry ==
+telemetry findings: 0
+
+== 4. secrets in receipts/fixtures ==
+secret findings (all scopes): 0
+accepted placeholder assignments: 0
+
+== 5. raw-text sweep: accepted hits (string/comment/docs/data) ==
+accepted raw hits: 502
+  ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:201 shell token 'shell=True' :: shell=True [documentation-prose: documentation prose describing the rule]
+  ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:202 shell token 'os.system(' :: os.system(...) [documentation-prose: documentation prose describing the rule]
+  ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:1032 shell token 'shell=True' :: - `shell=True` 搜索； [documentation-prose: documentation prose describing the rule]
+  ACCEPTED 00_contract/receipt_schema.json:18 network token 'requests' :: "machine username (unless the user explicitly requests it)", [data-value: JSON data value, not executed code]
+  ACCEPTED 05_tests/unit/test_git.py:275 shell token 'shell=True' :: subcommand names, no shell=True, and do use shell=False.""" [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text, "%s contains shell=True" % name [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text, "%s contains shell=True" % name [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED README.md:368 network token 'requests' :: `main`, pull requests, and `workflow_dispatch` with `harness`/`cwd` inputs). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED README.md:417 network token 'requests' :: requests — the only fetch is a relative fetch of a local receipt file): [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/COORDINATOR_LOG.md:25 network token 'import socket' :: - 2026-11-18 ~08:03 GMT：**FIX-GATE-EXCL PASS（已亲自核对）**：diff 仅两处——excluded 集合（gate 自身 + security_stati [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/COORDINATOR_LOG.md:25 network token 'socket.' :: - 2026-11-18 ~08:03 GMT：**FIX-GATE-EXCL PASS（已亲自核对）**：diff 仅两处——excluded 集合（gate 自身 + security_stati [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/COORDINATOR_LOG.md:25 shell token 'shell=True' :: - 2026-11-18 ~08:03 GMT：**FIX-GATE-EXCL PASS（已亲自核对）**：diff 仅两处——excluded 集合（gate 自身 + security_stati [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T004/TASK_RESULT.md:47 shell token 'shell=True' :: $ grep -nE 'fetch|pull|push|checkout|reset|clean|shell=True|os\.system' \ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:205 shell token 'shell=True' :: - 安全静态检查：新模块与改动的 runner / 生成器中 `shell=True` / [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'requests' :: `os.system` / `urllib` / `requests` / `socket` 匹配数为 0；无网络调用， [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'urllib' :: `os.system` / `urllib` / `requests` / `socket` 匹配数为 0；无网络调用， [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:52 shell token 'shell=True' :: if "shell=True" in path.read_text(encoding="utf-8", errors="replace"): [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:59 shell token 'shell=True' :: (network-token scan and `shell=True` scan). The second scan needed the [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:60 shell token 'shell=True' :: same exclusion too: the checker also contains literal `"shell=True"` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:92 network token 'socket.' :: - Created `scripts/_probe_socket.py` containing a literal [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:93 network token 'import socket' :: `import socket` (plus `socket.socket()` use). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:93 network token 'socket.' :: `import socket` (plus `socket.socket()` use). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:95 network token 'import socket' :: `network token: scripts/_probe_socket.py: import socket` and [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:95 network token 'socket.' :: `network token: scripts/_probe_socket.py: import socket` and [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:96 network token 'socket.' :: `network token: scripts/_probe_socket.py: socket.` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:96 network token 'socket.' :: `network token: scripts/_probe_socket.py: socket.` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007-FIX-GATE-EXCL/TASK_RESULT.md:107 network token 'import socket' :: | Probe file with `import socket` | gate exit 1, `RESULT=FAIL`, 2 hits on the probe file; deleted, g [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T007/TASK_RESULT.md:32 shell token 'shell=True' :: - network_access=0 (static grep over 02_src + 03_oracle/rust/src + scripts, 0 tokens, 0 `shell=True` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T009/TASK_RESULT.md:78 network token 'requests' :: ### Zero external requests [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T009/command-log.txt:7 network token 'curl' :: python3 -m http.server 8765 --directory web  # curl 200s for all 7 files [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'curl' :: `curl` / `wget`, which the gate's static grep (`scripts/*.py`) flags. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'wget' :: `curl` / `wget`, which the gate's static grep (`scripts/*.py`) flags. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'curl' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'import socket' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'urllib' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'wget' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T010/command-log.txt:19 shell token 'shell=True' :: grep -rn -E "import socket|urllib|...|curl|wget|shell=True" <T010 files>  # no gate tokens in T010 f [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'curl' :: (no `eval`/`curl`/`wget`). Accepted. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'wget' :: (no `eval`/`curl`/`wget`). Accepted. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'curl' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'requests' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'socket.' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'urllib' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 shell token 'shell=True' :: (`shell=True`, `urllib`, `requests`, `socket.`, `curl`, …) occurring [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:75 network token 'requests' :: logs, and JSON data values (e.g. the word "requests" in [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:81 network token 'requests' :: file. Plan §14 forbids *external* network requests; this is the [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:54 network token 'urllib' :: network token: scripts/security_static_check.py: urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:55 network token 'http.client' :: network token: scripts/security_static_check.py: http.client [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:56 network token 'httpx' :: network token: scripts/security_static_check.py: httpx [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:57 network token 'requests' :: network token: scripts/security_static_check.py: requests [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:58 network token 'urlopen' :: network token: scripts/security_static_check.py: urlopen [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:59 network token 'socket.' :: network token: scripts/security_static_check.py: socket. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:60 network token 'TcpStream' :: network token: scripts/security_static_check.py: TcpStream [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:61 network token 'reqwest' :: network token: scripts/security_static_check.py: reqwest [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:62 network token 'std::net' :: network token: scripts/security_static_check.py: std::net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:64 network token 'curl' :: network token: scripts/security_static_check.py: curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:65 network token 'wget' :: network token: scripts/security_static_check.py: wget [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:21 network token 'curl' :: instructionroot:0 shell launcher: execs python3 -m instructionroot only (eval/curl/wget found: False [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:21 network token 'wget' :: instructionroot:0 shell launcher: execs python3 -m instructionroot only (eval/curl/wget found: False [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:27 network token 'curl' :: scripts/run-verify.sh:0 shell launcher: execs python3 -m instructionroot only (eval/curl/wget found: [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:27 network token 'wget' :: scripts/run-verify.sh:0 shell launcher: execs python3 -m instructionroot only (eval/curl/wget found: [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:40 shell token 'shell=True' :: shell=True violations (AST): 0 [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:41 shell token 'shell=True' :: shell=True violations (raw code sweep): 0 [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:59 shell token 'shell=True' :: ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:201 shell token 'shell=True' :: shell=True [documentatio [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:59 shell token 'shell=True' :: ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:201 shell token 'shell=True' :: shell=True [documentatio [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:60 shell token 'os.system(' :: ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:202 shell token 'os.system(' :: os.system(...) [document [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:60 shell token 'os.system(' :: ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:202 shell token 'os.system(' :: os.system(...) [document [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:61 shell token 'shell=True' :: ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:1032 shell token 'shell=True' :: - `shell=True` 搜索； [doc [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:61 shell token 'shell=True' :: ACCEPTED 00_contract/IMPLEMENTATION_PLAN.md:1032 shell token 'shell=True' :: - `shell=True` 搜索； [doc [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:62 network token 'requests' :: ACCEPTED 00_contract/receipt_schema.json:18 network token 'requests' :: "machine username (unless th [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:62 network token 'requests' :: ACCEPTED 00_contract/receipt_schema.json:18 network token 'requests' :: "machine username (unless th [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:63 shell token 'shell=True' :: ACCEPTED 05_tests/unit/test_git.py:275 shell token 'shell=True' :: subcommand names, no shell=True,  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:63 shell token 'shell=True' :: ACCEPTED 05_tests/unit/test_git.py:275 shell token 'shell=True' :: subcommand names, no shell=True,  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:64 shell token 'shell=True' :: ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text,  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:64 shell token 'shell=True' :: ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text,  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:64 shell token 'shell=True' :: ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text,  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:65 shell token 'shell=True' :: ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text,  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:65 shell token 'shell=True' :: ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text,  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:65 shell token 'shell=True' :: ACCEPTED 05_tests/unit/test_git.py:281 shell token 'shell=True' :: assert "shell=True" not in text,  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:66 network token 'urllib' :: ACCEPTED review/S0_LOG.txt:53 network token 'urllib' :: network token: scripts/security_static_check [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:66 network token 'urllib' :: ACCEPTED review/S0_LOG.txt:53 network token 'urllib' :: network token: scripts/security_static_check [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:67 network token 'http.client' :: ACCEPTED review/S0_LOG.txt:54 network token 'http.client' :: network token: scripts/security_static_ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:67 network token 'http.client' :: ACCEPTED review/S0_LOG.txt:54 network token 'http.client' :: network token: scripts/security_static_ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:68 network token 'httpx' :: ACCEPTED review/S0_LOG.txt:55 network token 'httpx' :: network token: scripts/security_static_check. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:68 network token 'httpx' :: ACCEPTED review/S0_LOG.txt:55 network token 'httpx' :: network token: scripts/security_static_check. [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:69 network token 'requests' :: ACCEPTED review/S0_LOG.txt:56 network token 'requests' :: network token: scripts/security_static_che [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:69 network token 'requests' :: ACCEPTED review/S0_LOG.txt:56 network token 'requests' :: network token: scripts/security_static_che [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:70 network token 'urlopen' :: ACCEPTED review/S0_LOG.txt:57 network token 'urlopen' :: network token: scripts/security_static_chec [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:70 network token 'urlopen' :: ACCEPTED review/S0_LOG.txt:57 network token 'urlopen' :: network token: scripts/security_static_chec [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:71 network token 'socket.' :: ACCEPTED review/S0_LOG.txt:58 network token 'socket.' :: network token: scripts/security_static_chec [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:71 network token 'socket.' :: ACCEPTED review/S0_LOG.txt:58 network token 'socket.' :: network token: scripts/security_static_chec [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:72 network token 'TcpStream' :: ACCEPTED review/S0_LOG.txt:59 network token 'TcpStream' :: network token: scripts/security_static_ch [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:72 network token 'TcpStream' :: ACCEPTED review/S0_LOG.txt:59 network token 'TcpStream' :: network token: scripts/security_static_ch [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:73 network token 'reqwest' :: ACCEPTED review/S0_LOG.txt:60 network token 'reqwest' :: network token: scripts/security_static_chec [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:73 network token 'reqwest' :: ACCEPTED review/S0_LOG.txt:60 network token 'reqwest' :: network token: scripts/security_static_chec [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:74 network token 'std::net' :: ACCEPTED review/S0_LOG.txt:61 network token 'std::net' :: network token: scripts/security_static_che [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:74 network token 'std::net' :: ACCEPTED review/S0_LOG.txt:61 network token 'std::net' :: network token: scripts/security_static_che [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:75 network token 'curl' :: ACCEPTED review/S0_LOG.txt:63 network token 'curl' :: network token: scripts/security_static_check.p [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:75 network token 'curl' :: ACCEPTED review/S0_LOG.txt:63 network token 'curl' :: network token: scripts/security_static_check.p [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:76 network token 'wget' :: ACCEPTED review/S0_LOG.txt:64 network token 'wget' :: network token: scripts/security_static_check.p [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:76 network token 'wget' :: ACCEPTED review/S0_LOG.txt:64 network token 'wget' :: network token: scripts/security_static_check.p [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:77 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T004/TASK_RESULT.md:47 shell token 'shell=True' :: $ grep -nE 'fetch|pull [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:77 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T004/TASK_RESULT.md:47 shell token 'shell=True' :: $ grep -nE 'fetch|pull [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:78 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:205 shell token 'shell=True' :: - 安全静态检查：新模块与改动的 runn [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:78 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:205 shell token 'shell=True' :: - 安全静态检查：新模块与改动的 runn [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:79 network token 'requests' :: ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'requests' :: `os.system` / `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:79 network token 'requests' :: ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'requests' :: `os.system` / `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:79 network token 'urllib' :: ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'requests' :: `os.system` / `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:80 network token 'requests' :: ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'urllib' :: `os.system` / `urllib`  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:80 network token 'urllib' :: ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'urllib' :: `os.system` / `urllib`  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:80 network token 'urllib' :: ACCEPTED review/tasks/P028-T005/TASK_RESULT.md:206 network token 'urllib' :: `os.system` / `urllib`  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:81 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T007/TASK_RESULT.md:32 shell token 'shell=True' :: - network_access=0 (st [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:81 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T007/TASK_RESULT.md:32 shell token 'shell=True' :: - network_access=0 (st [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:82 network token 'requests' :: ACCEPTED review/tasks/P028-T009/TASK_RESULT.md:78 network token 'requests' :: ### Zero external requ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:82 network token 'requests' :: ACCEPTED review/tasks/P028-T009/TASK_RESULT.md:78 network token 'requests' :: ### Zero external requ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:83 network token 'curl' :: ACCEPTED review/tasks/P028-T009/command-log.txt:7 network token 'curl' :: python3 -m http.server 876 [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:83 network token 'curl' :: ACCEPTED review/tasks/P028-T009/command-log.txt:7 network token 'curl' :: python3 -m http.server 876 [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:84 network token 'curl' :: ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'curl' :: `curl` / `wget`, which th [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:84 network token 'curl' :: ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'curl' :: `curl` / `wget`, which th [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:84 network token 'wget' :: ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'curl' :: `curl` / `wget`, which th [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:85 network token 'curl' :: ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'wget' :: `curl` / `wget`, which th [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:85 network token 'wget' :: ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'wget' :: `curl` / `wget`, which th [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:85 network token 'wget' :: ACCEPTED review/tasks/P028-T010/TASK_RESULT.md:237 network token 'wget' :: `curl` / `wget`, which th [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:86 network token 'curl' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'curl' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:86 network token 'curl' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'curl' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:86 network token 'import socket' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'curl' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:86 network token 'urllib' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'curl' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:86 network token 'wget' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'curl' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:86 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'curl' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:87 network token 'curl' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'import socket' :: grep -rn -E "imp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:87 network token 'import socket' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'import socket' :: grep -rn -E "imp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:87 network token 'import socket' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'import socket' :: grep -rn -E "imp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:87 network token 'urllib' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'import socket' :: grep -rn -E "imp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:87 network token 'wget' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'import socket' :: grep -rn -E "imp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:87 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'import socket' :: grep -rn -E "imp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:88 network token 'curl' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'urllib' :: grep -rn -E "import soc [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:88 network token 'import socket' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'urllib' :: grep -rn -E "import soc [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:88 network token 'urllib' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'urllib' :: grep -rn -E "import soc [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:88 network token 'urllib' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'urllib' :: grep -rn -E "import soc [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:88 network token 'wget' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'urllib' :: grep -rn -E "import soc [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:88 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'urllib' :: grep -rn -E "import soc [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:89 network token 'curl' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'wget' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:89 network token 'import socket' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'wget' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:89 network token 'urllib' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'wget' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:89 network token 'wget' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'wget' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:89 network token 'wget' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'wget' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:89 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 network token 'wget' :: grep -rn -E "import socke [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:90 network token 'curl' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 shell token 'shell=True' :: grep -rn -E "import s [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:90 network token 'import socket' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 shell token 'shell=True' :: grep -rn -E "import s [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:90 network token 'urllib' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 shell token 'shell=True' :: grep -rn -E "import s [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:90 network token 'wget' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 shell token 'shell=True' :: grep -rn -E "import s [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:90 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 shell token 'shell=True' :: grep -rn -E "import s [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:90 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T010/command-log.txt:19 shell token 'shell=True' :: grep -rn -E "import s [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:91 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'curl' :: (no `eval`/`curl`/`wget`). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:91 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'curl' :: (no `eval`/`curl`/`wget`). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:91 network token 'wget' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'curl' :: (no `eval`/`curl`/`wget`). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:92 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'wget' :: (no `eval`/`curl`/`wget`). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:92 network token 'wget' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'wget' :: (no `eval`/`curl`/`wget`). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:92 network token 'wget' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:69 network token 'wget' :: (no `eval`/`curl`/`wget`). [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:93 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'curl' :: (`shell=True`, `urllib`, ` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:93 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'curl' :: (`shell=True`, `urllib`, ` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:93 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'curl' :: (`shell=True`, `urllib`, ` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:93 network token 'socket.' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'curl' :: (`shell=True`, `urllib`, ` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:93 network token 'urllib' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'curl' :: (`shell=True`, `urllib`, ` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:93 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'curl' :: (`shell=True`, `urllib`, ` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:94 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'requests' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:94 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'requests' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:94 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'requests' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:94 network token 'socket.' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'requests' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:94 network token 'urllib' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'requests' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:94 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'requests' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:95 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'socket.' :: (`shell=True`, `urllib` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:95 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'socket.' :: (`shell=True`, `urllib` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:95 network token 'socket.' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'socket.' :: (`shell=True`, `urllib` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:95 network token 'socket.' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'socket.' :: (`shell=True`, `urllib` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:95 network token 'urllib' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'socket.' :: (`shell=True`, `urllib` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:95 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'socket.' :: (`shell=True`, `urllib` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:96 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'urllib' :: (`shell=True`, `urllib`, [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:96 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'urllib' :: (`shell=True`, `urllib`, [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:96 network token 'socket.' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'urllib' :: (`shell=True`, `urllib`, [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:96 network token 'urllib' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'urllib' :: (`shell=True`, `urllib`, [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:96 network token 'urllib' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'urllib' :: (`shell=True`, `urllib`, [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:96 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 network token 'urllib' :: (`shell=True`, `urllib`, [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:97 network token 'curl' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 shell token 'shell=True' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:97 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 shell token 'shell=True' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:97 network token 'socket.' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 shell token 'shell=True' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:97 network token 'urllib' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 shell token 'shell=True' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:97 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 shell token 'shell=True' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:97 shell token 'shell=True' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:71 shell token 'shell=True' :: (`shell=True`, `urllib [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:98 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:75 network token 'requests' :: logs, and JSON data va [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:98 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:75 network token 'requests' :: logs, and JSON data va [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:99 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:81 network token 'requests' :: file. Plan §14 forbids [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:99 network token 'requests' :: ACCEPTED review/tasks/P028-T012/TASK_RESULT.md:81 network token 'requests' :: file. Plan §14 forbids [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:100 network token 'urllib' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:54 network token 'urllib' :: netw [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:100 network token 'urllib' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:54 network token 'urllib' :: netw [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:101 network token 'http.client' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:55 network token 'http.client' :: [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:101 network token 'http.client' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:55 network token 'http.client' :: [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:102 network token 'httpx' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:56 network token 'httpx' :: netwo [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:102 network token 'httpx' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:56 network token 'httpx' :: netwo [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:103 network token 'requests' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:57 network token 'requests' :: ne [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:103 network token 'requests' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:57 network token 'requests' :: ne [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:104 network token 'urlopen' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:58 network token 'urlopen' :: net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:104 network token 'urlopen' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:58 network token 'urlopen' :: net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:105 network token 'socket.' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:59 network token 'socket.' :: net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:105 network token 'socket.' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:59 network token 'socket.' :: net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:106 network token 'TcpStream' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:60 network token 'TcpStream' :: n [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:106 network token 'TcpStream' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:60 network token 'TcpStream' :: n [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:107 network token 'reqwest' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:61 network token 'reqwest' :: net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:107 network token 'reqwest' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:61 network token 'reqwest' :: net [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:108 network token 'std::net' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:62 network token 'std::net' :: ne [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:108 network token 'std::net' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:62 network token 'std::net' :: ne [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:109 network token 'curl' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:64 network token 'curl' :: networ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:109 network token 'curl' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:64 network token 'curl' :: networ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:110 network token 'wget' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:65 network token 'wget' :: networ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:110 network token 'wget' :: ACCEPTED review/tasks/P028-T012/s0_gate_FAIL_on_checker_tokens.txt:65 network token 'wget' :: networ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:111 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:215 network token 'socket.' :: if event.startswith("socket."): [string-o [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:111 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:215 network token 'socket.' :: if event.startswith("socket."): [string-o [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:112 network token 'from socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'from socket' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:112 network token 'from socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'from socket' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:112 network token 'http.client' :: ACCEPTED scripts/s0_gate.py:846 network token 'from socket' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:112 network token 'httpx' :: ACCEPTED scripts/s0_gate.py:846 network token 'from socket' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:112 network token 'import socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'from socket' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:112 network token 'urllib' :: ACCEPTED scripts/s0_gate.py:846 network token 'from socket' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:113 network token 'from socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'http.client' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:113 network token 'http.client' :: ACCEPTED scripts/s0_gate.py:846 network token 'http.client' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:113 network token 'http.client' :: ACCEPTED scripts/s0_gate.py:846 network token 'http.client' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:113 network token 'httpx' :: ACCEPTED scripts/s0_gate.py:846 network token 'http.client' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:113 network token 'import socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'http.client' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:113 network token 'urllib' :: ACCEPTED scripts/s0_gate.py:846 network token 'http.client' :: "import socket", "from socket", "urll [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:114 network token 'from socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'httpx' :: "import socket", "from socket", "urllib", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:114 network token 'http.client' :: ACCEPTED scripts/s0_gate.py:846 network token 'httpx' :: "import socket", "from socket", "urllib", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:114 network token 'httpx' :: ACCEPTED scripts/s0_gate.py:846 network token 'httpx' :: "import socket", "from socket", "urllib", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:114 network token 'httpx' :: ACCEPTED scripts/s0_gate.py:846 network token 'httpx' :: "import socket", "from socket", "urllib", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:114 network token 'import socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'httpx' :: "import socket", "from socket", "urllib", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:114 network token 'urllib' :: ACCEPTED scripts/s0_gate.py:846 network token 'httpx' :: "import socket", "from socket", "urllib", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:115 network token 'from socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'import socket' :: "import socket", "from socket", "ur [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:115 network token 'http.client' :: ACCEPTED scripts/s0_gate.py:846 network token 'import socket' :: "import socket", "from socket", "ur [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:115 network token 'httpx' :: ACCEPTED scripts/s0_gate.py:846 network token 'import socket' :: "import socket", "from socket", "ur [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:115 network token 'import socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'import socket' :: "import socket", "from socket", "ur [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:115 network token 'import socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'import socket' :: "import socket", "from socket", "ur [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:115 network token 'urllib' :: ACCEPTED scripts/s0_gate.py:846 network token 'import socket' :: "import socket", "from socket", "ur [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:116 network token 'from socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'urllib' :: "import socket", "from socket", "urllib",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:116 network token 'http.client' :: ACCEPTED scripts/s0_gate.py:846 network token 'urllib' :: "import socket", "from socket", "urllib",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:116 network token 'httpx' :: ACCEPTED scripts/s0_gate.py:846 network token 'urllib' :: "import socket", "from socket", "urllib",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:116 network token 'import socket' :: ACCEPTED scripts/s0_gate.py:846 network token 'urllib' :: "import socket", "from socket", "urllib",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:116 network token 'urllib' :: ACCEPTED scripts/s0_gate.py:846 network token 'urllib' :: "import socket", "from socket", "urllib",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:116 network token 'urllib' :: ACCEPTED scripts/s0_gate.py:846 network token 'urllib' :: "import socket", "from socket", "urllib",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:117 network token 'TcpStream' :: ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpS [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:117 network token 'TcpStream' :: ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpS [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:117 network token 'requests' :: ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpS [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:117 network token 'reqwest' :: ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpS [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:117 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpS [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:117 network token 'std::net' :: ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpS [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:117 network token 'urlopen' :: ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpS [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:118 network token 'TcpStream' :: ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:118 network token 'requests' :: ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:118 network token 'requests' :: ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:118 network token 'reqwest' :: ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:118 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:118 network token 'std::net' :: ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:118 network token 'urlopen' :: ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:119 network token 'TcpStream' :: ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:119 network token 'requests' :: ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:119 network token 'reqwest' :: ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:119 network token 'reqwest' :: ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:119 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:119 network token 'std::net' :: ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:119 network token 'urlopen' :: ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:120 network token 'TcpStream' :: ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:120 network token 'requests' :: ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:120 network token 'reqwest' :: ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:120 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:120 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:120 network token 'std::net' :: ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:120 network token 'urlopen' :: ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:121 network token 'TcpStream' :: ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:121 network token 'requests' :: ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:121 network token 'reqwest' :: ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:121 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:121 network token 'std::net' :: ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:121 network token 'std::net' :: ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:121 network token 'urlopen' :: ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpSt [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:122 network token 'TcpStream' :: ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:122 network token 'requests' :: ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:122 network token 'reqwest' :: ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:122 network token 'socket.' :: ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:122 network token 'std::net' :: ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:122 network token 'urlopen' :: ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:122 network token 'urlopen' :: ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStr [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:123 network token 'curl' :: ACCEPTED scripts/s0_gate.py:848 network token 'curl' :: "UdpSocket", "curl", "wget", [string-or-comm [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:123 network token 'curl' :: ACCEPTED scripts/s0_gate.py:848 network token 'curl' :: "UdpSocket", "curl", "wget", [string-or-comm [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:123 network token 'wget' :: ACCEPTED scripts/s0_gate.py:848 network token 'curl' :: "UdpSocket", "curl", "wget", [string-or-comm [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:124 network token 'curl' :: ACCEPTED scripts/s0_gate.py:848 network token 'wget' :: "UdpSocket", "curl", "wget", [string-or-comm [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:124 network token 'wget' :: ACCEPTED scripts/s0_gate.py:848 network token 'wget' :: "UdpSocket", "curl", "wget", [string-or-comm [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:124 network token 'wget' :: ACCEPTED scripts/s0_gate.py:848 network token 'wget' :: "UdpSocket", "curl", "wget", [string-or-comm [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:125 shell token 'shell=True' :: ACCEPTED scripts/s0_gate.py:876 shell token 'shell=True' :: if "shell=True" in path.read_text(encodi [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:125 shell token 'shell=True' :: ACCEPTED scripts/s0_gate.py:876 shell token 'shell=True' :: if "shell=True" in path.read_text(encodi [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:126 shell token 'shell=True' :: ACCEPTED scripts/s0_gate.py:883 shell token 'shell=True' :: raise GateFailure("shell=True found: %r" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:126 shell token 'shell=True' :: ACCEPTED scripts/s0_gate.py:883 shell token 'shell=True' :: raise GateFailure("shell=True found: %r" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:127 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:15 shell token 'shell=True' :: ``shell=True`` would flag t [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:127 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:15 shell token 'shell=True' :: ``shell=True`` would flag t [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:128 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:128 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:128 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:128 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:129 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:129 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:129 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:129 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:130 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:130 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:130 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:130 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:131 network token 'http.client' :: ACCEPTED scripts/security_static_check.py:97 network token 'http.client' :: "http.client", "http.ser [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:131 network token 'http.client' :: ACCEPTED scripts/security_static_check.py:97 network token 'http.client' :: "http.client", "http.ser [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:132 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:98 network token 'httpx' :: "requests", "httpx", "aiohttp" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:132 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:98 network token 'httpx' :: "requests", "httpx", "aiohttp" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:132 network token 'requests' :: ACCEPTED scripts/security_static_check.py:98 network token 'httpx' :: "requests", "httpx", "aiohttp" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:132 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:98 network token 'httpx' :: "requests", "httpx", "aiohttp" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:133 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:98 network token 'requests' :: "requests", "httpx", "aioht [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:133 network token 'requests' :: ACCEPTED scripts/security_static_check.py:98 network token 'requests' :: "requests", "httpx", "aioht [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:133 network token 'requests' :: ACCEPTED scripts/security_static_check.py:98 network token 'requests' :: "requests", "httpx", "aioht [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:133 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:98 network token 'requests' :: "requests", "httpx", "aioht [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:134 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:98 network token 'urllib' :: "requests", "httpx", "aiohttp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:134 network token 'requests' :: ACCEPTED scripts/security_static_check.py:98 network token 'urllib' :: "requests", "httpx", "aiohttp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:134 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:98 network token 'urllib' :: "requests", "httpx", "aiohttp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:134 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:98 network token 'urllib' :: "requests", "httpx", "aiohttp [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:135 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:103 network token 'httpx' :: "socket.", "urllib.", "reques [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:135 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:103 network token 'httpx' :: "socket.", "urllib.", "reques [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:135 network token 'requests' :: ACCEPTED scripts/security_static_check.py:103 network token 'httpx' :: "socket.", "urllib.", "reques [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:135 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:103 network token 'httpx' :: "socket.", "urllib.", "reques [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:135 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:103 network token 'httpx' :: "socket.", "urllib.", "reques [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:136 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:103 network token 'requests' :: "socket.", "urllib.", "req [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:136 network token 'requests' :: ACCEPTED scripts/security_static_check.py:103 network token 'requests' :: "socket.", "urllib.", "req [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:136 network token 'requests' :: ACCEPTED scripts/security_static_check.py:103 network token 'requests' :: "socket.", "urllib.", "req [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:136 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:103 network token 'requests' :: "socket.", "urllib.", "req [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:136 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:103 network token 'requests' :: "socket.", "urllib.", "req [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:137 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:103 network token 'socket.' :: "socket.", "urllib.", "requ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:137 network token 'requests' :: ACCEPTED scripts/security_static_check.py:103 network token 'socket.' :: "socket.", "urllib.", "requ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:137 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:103 network token 'socket.' :: "socket.", "urllib.", "requ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:137 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:103 network token 'socket.' :: "socket.", "urllib.", "requ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:137 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:103 network token 'socket.' :: "socket.", "urllib.", "requ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:138 network token 'httpx' :: ACCEPTED scripts/security_static_check.py:103 network token 'urllib' :: "socket.", "urllib.", "reque [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:138 network token 'requests' :: ACCEPTED scripts/security_static_check.py:103 network token 'urllib' :: "socket.", "urllib.", "reque [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:138 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:103 network token 'urllib' :: "socket.", "urllib.", "reque [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:138 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:103 network token 'urllib' :: "socket.", "urllib.", "reque [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:138 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:103 network token 'urllib' :: "socket.", "urllib.", "reque [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:139 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:139 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:139 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:139 network token 'urlopen' :: ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:140 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:140 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:140 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:140 network token 'urlopen' :: ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:141 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:104 network token 'urlopen' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:141 network token 'socket.' :: ACCEPTED scripts/security_static_check.py:104 network token 'urlopen' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:141 network token 'urlopen' :: ACCEPTED scripts/security_static_check.py:104 network token 'urlopen' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:141 network token 'urlopen' :: ACCEPTED scripts/security_static_check.py:104 network token 'urlopen' :: "urlopen", "socket.socket", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:142 network token 'std::net' :: ACCEPTED scripts/security_static_check.py:107 network token 'std::net' :: re.compile(r"\bstd::net\b" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:142 network token 'std::net' :: ACCEPTED scripts/security_static_check.py:107 network token 'std::net' :: re.compile(r"\bstd::net\b" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:143 network token 'TcpStream' :: ACCEPTED scripts/security_static_check.py:108 network token 'TcpStream' :: re.compile(r"\bTcpStream\ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:143 network token 'TcpStream' :: ACCEPTED scripts/security_static_check.py:108 network token 'TcpStream' :: re.compile(r"\bTcpStream\ [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:144 network token 'reqwest' :: ACCEPTED scripts/security_static_check.py:112 network token 'reqwest' :: re.compile(r"\breqwest\b"), [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:144 network token 'reqwest' :: ACCEPTED scripts/security_static_check.py:112 network token 'reqwest' :: re.compile(r"\breqwest\b"), [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:145 network token 'curl' :: ACCEPTED scripts/security_static_check.py:117 network token 'curl' :: "reqwest", "hyper", "tokio", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:145 network token 'curl' :: ACCEPTED scripts/security_static_check.py:117 network token 'curl' :: "reqwest", "hyper", "tokio", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:145 network token 'reqwest' :: ACCEPTED scripts/security_static_check.py:117 network token 'curl' :: "reqwest", "hyper", "tokio", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:146 network token 'curl' :: ACCEPTED scripts/security_static_check.py:117 network token 'reqwest' :: "reqwest", "hyper", "tokio" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:146 network token 'reqwest' :: ACCEPTED scripts/security_static_check.py:117 network token 'reqwest' :: "reqwest", "hyper", "tokio" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:146 network token 'reqwest' :: ACCEPTED scripts/security_static_check.py:117 network token 'reqwest' :: "reqwest", "hyper", "tokio" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:147 telemetry token 'mixpanel' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'mixpanel' :: "sentry_sdk", "posthog", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:147 telemetry token 'mixpanel' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'mixpanel' :: "sentry_sdk", "posthog", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:147 telemetry token 'posthog' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'mixpanel' :: "sentry_sdk", "posthog", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:147 telemetry token 'sentry' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'mixpanel' :: "sentry_sdk", "posthog", [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:148 telemetry token 'mixpanel' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'posthog' :: "sentry_sdk", "posthog",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:148 telemetry token 'posthog' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'posthog' :: "sentry_sdk", "posthog",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:148 telemetry token 'posthog' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'posthog' :: "sentry_sdk", "posthog",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:148 telemetry token 'sentry' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'posthog' :: "sentry_sdk", "posthog",  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:149 telemetry token 'mixpanel' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'sentry' :: "sentry_sdk", "posthog", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:149 telemetry token 'posthog' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'sentry' :: "sentry_sdk", "posthog", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:149 telemetry token 'sentry' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'sentry' :: "sentry_sdk", "posthog", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:149 telemetry token 'sentry' :: ACCEPTED scripts/security_static_check.py:131 telemetry token 'sentry' :: "sentry_sdk", "posthog", " [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:150 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:178 network token 'urllib' :: ("network", re.compile(r"url [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:150 network token 'urllib' :: ACCEPTED scripts/security_static_check.py:178 network token 'urllib' :: ("network", re.compile(r"url [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:151 network token 'urlopen' :: ACCEPTED scripts/security_static_check.py:182 network token 'urlopen' :: ("network", re.compile(r"ur [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:151 network token 'urlopen' :: ACCEPTED scripts/security_static_check.py:182 network token 'urlopen' :: ("network", re.compile(r"ur [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:152 network token 'TcpStream' :: ACCEPTED scripts/security_static_check.py:184 network token 'TcpStream' :: ("network", re.compile(r" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:152 network token 'TcpStream' :: ACCEPTED scripts/security_static_check.py:184 network token 'TcpStream' :: ("network", re.compile(r" [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:153 network token 'reqwest' :: ACCEPTED scripts/security_static_check.py:185 network token 'reqwest' :: ("network", re.compile(r"re [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:153 network token 'reqwest' :: ACCEPTED scripts/security_static_check.py:185 network token 'reqwest' :: ("network", re.compile(r"re [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:154 network token 'std::net' :: ACCEPTED scripts/security_static_check.py:186 network token 'std::net' :: ("network", re.compile(r"s [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:154 network token 'std::net' :: ACCEPTED scripts/security_static_check.py:186 network token 'std::net' :: ("network", re.compile(r"s [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:155 telemetry token 'sentry' :: ACCEPTED scripts/security_static_check.py:189 telemetry token 'sentry' :: ("telemetry", re.compile(r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:155 telemetry token 'sentry' :: ACCEPTED scripts/security_static_check.py:189 telemetry token 'sentry' :: ("telemetry", re.compile(r [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:156 telemetry token 'posthog' :: ACCEPTED scripts/security_static_check.py:190 telemetry token 'posthog' :: ("telemetry", re.compile( [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:156 telemetry token 'posthog' :: ACCEPTED scripts/security_static_check.py:190 telemetry token 'posthog' :: ("telemetry", re.compile( [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:157 telemetry token 'mixpanel' :: ACCEPTED scripts/security_static_check.py:191 telemetry token 'mixpanel' :: ("telemetry", re.compile [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:157 telemetry token 'mixpanel' :: ACCEPTED scripts/security_static_check.py:191 telemetry token 'mixpanel' :: ("telemetry", re.compile [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:158 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:343 shell token 'shell=True' :: ``shell=True`` (or a non-c [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:158 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:343 shell token 'shell=True' :: ``shell=True`` (or a non-c [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:159 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:373 shell token 'shell=True' :: status = "shell=True  <--  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:159 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:373 shell token 'shell=True' :: status = "shell=True  <--  [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:160 network token 'curl' :: ACCEPTED scripts/security_static_check.py:396 network token 'curl' :: # Shell launcher(s) at repo ro [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:160 network token 'curl' :: ACCEPTED scripts/security_static_check.py:396 network token 'curl' :: # Shell launcher(s) at repo ro [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:160 network token 'wget' :: ACCEPTED scripts/security_static_check.py:396 network token 'curl' :: # Shell launcher(s) at repo ro [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:161 network token 'curl' :: ACCEPTED scripts/security_static_check.py:396 network token 'wget' :: # Shell launcher(s) at repo ro [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:161 network token 'wget' :: ACCEPTED scripts/security_static_check.py:396 network token 'wget' :: # Shell launcher(s) at repo ro [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:161 network token 'wget' :: ACCEPTED scripts/security_static_check.py:396 network token 'wget' :: # Shell launcher(s) at repo ro [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:162 network token 'curl' :: ACCEPTED scripts/security_static_check.py:408 network token 'curl' :: "only (eval/curl/wget found: % [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:162 network token 'curl' :: ACCEPTED scripts/security_static_check.py:408 network token 'curl' :: "only (eval/curl/wget found: % [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:162 network token 'wget' :: ACCEPTED scripts/security_static_check.py:408 network token 'curl' :: "only (eval/curl/wget found: % [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:163 network token 'curl' :: ACCEPTED scripts/security_static_check.py:408 network token 'wget' :: "only (eval/curl/wget found: % [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:163 network token 'wget' :: ACCEPTED scripts/security_static_check.py:408 network token 'wget' :: "only (eval/curl/wget found: % [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:163 network token 'wget' :: ACCEPTED scripts/security_static_check.py:408 network token 'wget' :: "only (eval/curl/wget found: % [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:164 network token 'curl' :: ACCEPTED scripts/security_static_check.py:448 network token 'curl' :: # tool (curl/wget/...) as argv [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:164 network token 'curl' :: ACCEPTED scripts/security_static_check.py:448 network token 'curl' :: # tool (curl/wget/...) as argv [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:164 network token 'wget' :: ACCEPTED scripts/security_static_check.py:448 network token 'curl' :: # tool (curl/wget/...) as argv [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:165 network token 'curl' :: ACCEPTED scripts/security_static_check.py:448 network token 'wget' :: # tool (curl/wget/...) as argv [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:165 network token 'wget' :: ACCEPTED scripts/security_static_check.py:448 network token 'wget' :: # tool (curl/wget/...) as argv [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:165 network token 'wget' :: ACCEPTED scripts/security_static_check.py:448 network token 'wget' :: # tool (curl/wget/...) as argv [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:166 network token 'curl' :: ACCEPTED scripts/security_static_check.py:455 network token 'curl' :: if el.split("/")[-1] in ("curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:166 network token 'curl' :: ACCEPTED scripts/security_static_check.py:455 network token 'curl' :: if el.split("/")[-1] in ("curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:166 network token 'wget' :: ACCEPTED scripts/security_static_check.py:455 network token 'curl' :: if el.split("/")[-1] in ("curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:167 network token 'curl' :: ACCEPTED scripts/security_static_check.py:455 network token 'wget' :: if el.split("/")[-1] in ("curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:167 network token 'wget' :: ACCEPTED scripts/security_static_check.py:455 network token 'wget' :: if el.split("/")[-1] in ("curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:167 network token 'wget' :: ACCEPTED scripts/security_static_check.py:455 network token 'wget' :: if el.split("/")[-1] in ("curl [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:168 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:661 shell token 'shell=True' :: numbers (a shell=True in c [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:168 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:661 shell token 'shell=True' :: numbers (a shell=True in c [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:169 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:927 shell token 'shell=True' :: print("shell=True violatio [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:169 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:927 shell token 'shell=True' :: print("shell=True violatio [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:170 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:930 shell token 'shell=True' :: print("shell=True violatio [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:170 shell token 'shell=True' :: ACCEPTED scripts/security_static_check.py:930 shell token 'shell=True' :: print("shell=True violatio [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:171 network token 'requests' :: ACCEPTED web/README.md:18 network token 'requests' :: `receipt.edges` arrays, so they cannot disagre [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:171 network token 'requests' :: ACCEPTED web/README.md:18 network token 'requests' :: `receipt.edges` arrays, so they cannot disagre [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:172 network token 'requests' :: ACCEPTED web/app.js:5 network token 'requests' :: * that served this page. No CDN, fonts, analytics, [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:172 network token 'requests' :: ACCEPTED web/app.js:5 network token 'requests' :: * that served this page. No CDN, fonts, analytics, [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T012/security_static_check.txt:173 network token 'requests' :: ACCEPTED web/index.html:38 network token 'requests' :: <p class="scope-note" id="scope-note">This da [documentation-prose: documentation prose describing the rule]
+  ACCEPTED review/tasks/P028-T013/TASK_RESULT.md:44 network token 'curl' :: | Dashboard | `python3 -m http.server 8765 --directory web` + curl | HTTP 200 on `/`, `receipt.json` [documentation-prose: documentation prose describing the rule]
+  ACCEPTED scripts/s0_gate.py:215 network token 'socket.' :: if event.startswith("socket."): [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'from socket' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'http.client' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'httpx' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'import socket' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:846 network token 'urllib' :: "import socket", "from socket", "urllib", "http.client", "httpx", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'TcpStream' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'requests' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'reqwest' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'socket.' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'std::net' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:847 network token 'urlopen' :: "requests", "urlopen", "socket.", "TcpStream", "reqwest", "std::net", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:848 network token 'curl' :: "UdpSocket", "curl", "wget", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:848 network token 'wget' :: "UdpSocket", "curl", "wget", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:883 shell token 'shell=True' :: if "shell=True" in path.read_text(encoding="utf-8", errors="replace"): [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/s0_gate.py:890 shell token 'shell=True' :: raise GateFailure("shell=True found: %r" % (shell_true,)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:15 shell token 'shell=True' :: ``shell=True`` would flag the *check-pattern string literals* inside [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.request", "urllib.error", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.request", "urllib.error", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:96 network token 'urllib' :: "socket", "urllib", "urllib.request", "urllib.error", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:97 network token 'http.client' :: "http.client", "http.server", "http.cookiejar", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:98 network token 'httpx' :: "requests", "httpx", "aiohttp", "urllib3", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:98 network token 'requests' :: "requests", "httpx", "aiohttp", "urllib3", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:98 network token 'urllib' :: "requests", "httpx", "aiohttp", "urllib3", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:103 network token 'httpx' :: "socket.", "urllib.", "requests.", "httpx.", "aiohttp.", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:103 network token 'requests' :: "socket.", "urllib.", "requests.", "httpx.", "aiohttp.", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:103 network token 'socket.' :: "socket.", "urllib.", "requests.", "httpx.", "aiohttp.", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:103 network token 'urllib' :: "socket.", "urllib.", "requests.", "httpx.", "aiohttp.", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", "socket.create_connection", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:104 network token 'socket.' :: "urlopen", "socket.socket", "socket.create_connection", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:104 network token 'urlopen' :: "urlopen", "socket.socket", "socket.create_connection", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:107 network token 'std::net' :: re.compile(r"\bstd::net\b"), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:108 network token 'TcpStream' :: re.compile(r"\bTcpStream\b"), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:112 network token 'reqwest' :: re.compile(r"\breqwest\b"), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:117 network token 'curl' :: "reqwest", "hyper", "tokio", "curl", "ureq", "tungstenite", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:117 network token 'reqwest' :: "reqwest", "hyper", "tokio", "curl", "ureq", "tungstenite", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:131 telemetry token 'mixpanel' :: "sentry_sdk", "posthog", "mixpanel", "segment", "analytics", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:131 telemetry token 'posthog' :: "sentry_sdk", "posthog", "mixpanel", "segment", "analytics", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:131 telemetry token 'sentry' :: "sentry_sdk", "posthog", "mixpanel", "segment", "analytics", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:178 network token 'urllib' :: ("network", re.compile(r"urllib")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:182 network token 'urlopen' :: ("network", re.compile(r"urlopen")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:184 network token 'TcpStream' :: ("network", re.compile(r"TcpStream")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:185 network token 'reqwest' :: ("network", re.compile(r"reqwest")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:186 network token 'std::net' :: ("network", re.compile(r"std::net")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:189 telemetry token 'sentry' :: ("telemetry", re.compile(r"sentry")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:190 telemetry token 'posthog' :: ("telemetry", re.compile(r"posthog")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:191 telemetry token 'mixpanel' :: ("telemetry", re.compile(r"mixpanel")), [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:343 shell token 'shell=True' :: ``shell=True`` (or a non-constant ``shell=``) in real code. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:373 shell token 'shell=True' :: status = "shell=True  <-- VIOLATION" [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:396 network token 'curl' :: # Shell launcher(s) at repo root: eval / curl / wget would be a finding. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:396 network token 'wget' :: # Shell launcher(s) at repo root: eval / curl / wget would be a finding. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:408 network token 'curl' :: "only (eval/curl/wget found: %s)" % bad)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:408 network token 'wget' :: "only (eval/curl/wget found: %s)" % bad)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:448 network token 'curl' :: # tool (curl/wget/...) as argv[0] would be a network call. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:448 network token 'wget' :: # tool (curl/wget/...) as argv[0] would be a network call. [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:455 network token 'curl' :: if el.split("/")[-1] in ("curl", "wget", "nc", "telnet", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:455 network token 'wget' :: if el.split("/")[-1] in ("curl", "wget", "nc", "telnet", [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:661 shell token 'shell=True' :: numbers (a shell=True in code would land here as well as in AST). [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:927 shell token 'shell=True' :: print("shell=True violations (AST): %d" % len(shell_true)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED scripts/security_static_check.py:930 shell token 'shell=True' :: print("shell=True violations (raw code sweep): %d" % len(extra_shell)) [string-or-comment: check-pattern string literal (the pattern being searched for), not a call]
+  ACCEPTED web/README.md:18 network token 'requests' :: `receipt.edges` arrays, so they cannot disagree. No external requests: [documentation-prose: documentation prose describing the rule]
+  ACCEPTED web/app.js:5 network token 'requests' :: * that served this page. No CDN, fonts, analytics, or other requests. [comment: comment describing the rule]
+  ACCEPTED web/index.html:38 network token 'requests' :: <p class="scope-note" id="scope-note">This dashboard only shows <em>which</em> instruction files a h [documentation-prose: documentation prose describing the rule]
+
+== 6. license / packaging ==
+  LICENSE present: MIT License, grant clause present
+  CLI_VERSION=1.0.0
+  pyproject name=instructionroot
+  pyproject version=1.0.0 (== CLI_VERSION)
+  pyproject license=MIT
+  requires-python=>=3.12
+  console entry point: instructionroot = instructionroot.cli:main
+  entry-point target instructionroot.cli:main resolves (callable)
+  dependencies=[] (stdlib only)
+  build-system: setuptools
+  oracle Cargo.toml license=MIT
+license_package_ok=true
+
+== 7. receipt privacy (PROJECT_BOOK §18.1/§18.2) ==
+  receipt JSON files checked: 64 (no content/username/commit-message keys, no multiline values)
+  receipt.py source fields ['canonical_path', 'discovery_rule', 'git', 'is_symlink', 'phase', 'precedence', 'raw_path', 'resolved_path', 'scope', 'sha256', 'source_id', 'symlink_target', 'trust']: no content field (paths/hashes/git/trust only)
+  cli.py uses redact_home ($HOME shown as <HOME>/...)
+receipt_privacy_ok=true
+
+shell_true=0
+network_runtime=0
+telemetry=0
+secret_fixture_leaks=0
+RESULT=PASS
+security exit=0
+--- 7 simulate_ci (system python3) ---
+config validation: OK (workflow YAML parses, uses: pinned to 40-char SHA, permissions contents: read only, pre-commit hook -> run-verify.sh)
+case PASS  expected_exit=0 actual_exit=0 verdict_found=True -> OK
+   discovered_by: codex.repo-chain
+   sha256: a236caf43109
+
+receipt_hash: 741cfb7bc9b7db2d596b88e334c6e6e50d34a688de21c9866790d9e62dd8aa23
+case BLOCK expected_exit=20 actual_exit=20 verdict_found=True -> OK
+   discovered_by: codex.repo-chain
+   sha256: 853797948eb0
+
+receipt_hash: 7791816fbb114cd890b3a9a20b481c3dc972e21bb3dd061178a415def511a75f
+SIMULATION: PASS (2/2 cases)
+ci exit=0
+=== battery done 2026-11-18T07:54:39Z ===

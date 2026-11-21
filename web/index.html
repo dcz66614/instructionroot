@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InstructionRoot Resolve — Effective Instruction Chain</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="verdict-header" class="verdict-header">
+  <div class="brand">
+    <h1>INSTRUCTIONROOT</h1>
+    <p class="subtitle">Effective Instruction Chain</p>
+  </div>
+  <div class="verdict-box" id="verdict-box">
+    <span class="verdict-label">Verdict</span>
+    <span class="verdict-value" id="verdict-value">Loading…</span>
+    <span class="verdict-meta" id="verdict-meta"></span>
+  </div>
+</header>
+
+<div id="block-banner" class="block-banner" hidden>
+  <strong>BLOCKED — do not run this harness in this workspace.</strong>
+  <span id="block-banner-text"></span>
+</div>
+
+<nav class="receipt-switcher" aria-label="Sample receipt">
+  <span>Receipt:</span>
+  <button type="button" id="load-pass" data-receipt="receipt-pass.json">PASS demo</button>
+  <button type="button" id="load-block" data-receipt="receipt-block.json">BLOCK demo</button>
+  <button type="button" id="load-default" data-receipt="receipt.json">receipt.json</button>
+  <label class="file-label">Open local receipt
+    <input type="file" id="receipt-file" accept=".json,application/json">
+  </label>
+  <button type="button" id="export-button">Export receipt (JSON)</button>
+</nav>
+
+<p class="scope-note" id="scope-note">This dashboard only shows <em>which</em> instruction files a harness would load, where they came from, and whether they cross a trust boundary. It does not judge instruction content as malicious, does not call a model, and does not execute instructions. All data comes from the local receipt file; this page makes no network requests.</p>
+
+<main class="layout">
+  <section class="col" aria-labelledby="tree-heading">
+    <h2 id="tree-heading">Source tree</h2>
+    <div id="source-tree" class="source-tree"></div>
+    <h2 id="badges-heading">Trust badges</h2>
+    <div id="trust-badges" class="trust-badges"></div>
+  </section>
+
+  <section class="col" aria-labelledby="chain-heading">
+    <h2 id="chain-heading">Effective chain</h2>
+    <ol id="effective-chain" class="effective-chain"></ol>
+    <h2 id="graph-heading">Import graph</h2>
+    <div id="import-graph" class="import-graph"></div>
+  </section>
+
+  <aside class="col" aria-labelledby="why-heading">
+    <h2 id="why-heading">Why</h2>
+    <div id="why-panel" class="why-panel">
+      <p>Select a source in the tree, chain, or graph to see why it was discovered, why it has its trust value, and why it blocks (if it does).</p>
+    </div>
+    <h2 id="raw-heading">Raw JSON</h2>
+    <pre id="raw-json" class="raw-json"></pre>
+  </aside>
+</main>
+
+<footer>
+  <p id="receipt-meta"></p>
+  <p>Receipt schema v1. Deterministic receipt: the SHA-256 covers the canonical receipt with the receipt_hash field itself excluded. Instruction file contents are never included in a receipt.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

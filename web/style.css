@@ -1,0 +1,175 @@
+/* InstructionRoot Resolve — static dashboard (T009). No external resources. */
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #555555;
+  --border: #cccccc;
+  --panel: #f6f8fa;
+  --pass: #1a7f37;
+  --pass-bg: #dafbe1;
+  --warn: #9a6700;
+  --warn-bg: #fff8c5;
+  --block: #cf222e;
+  --block-bg: #ffebe9;
+  --accent: #0969da;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 1em 1.5em 2em;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.45;
+}
+code { font-size: 0.85em; overflow-wrap: anywhere; }
+button, .file-label {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--fg);
+  border-radius: 4px;
+  padding: 0.35em 0.7em;
+}
+button:hover, .file-label:hover { border-color: var(--accent); }
+button[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 1px; }
+.file-label input { display: none; }
+
+/* (1) Verdict header */
+.verdict-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1em;
+  border-bottom: 3px solid var(--border);
+  padding-bottom: 0.75em;
+}
+.verdict-header h1 { margin: 0; font-size: 1.6em; letter-spacing: 0.04em; }
+.subtitle { margin: 0.15em 0 0; color: var(--muted); }
+.verdict-box { text-align: right; }
+.verdict-label { display: block; font-size: 0.8em; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.verdict-value { font-size: 2em; font-weight: 800; }
+.verdict-meta { display: block; font-size: 0.85em; color: var(--muted); }
+.verdict-header.verdict-PASS .verdict-value { color: var(--pass); }
+.verdict-header.verdict-WARN .verdict-value { color: var(--warn); }
+.verdict-header.verdict-BLOCK .verdict-value { color: var(--block); }
+.verdict-header.verdict-BLOCK { border-bottom-color: var(--block); }
+
+/* BLOCK prominence: banner + blocked rows everywhere */
+.block-banner {
+  margin-top: 1em;
+  padding: 0.8em 1em;
+  background: var(--block-bg);
+  border: 2px solid var(--block);
+  border-radius: 4px;
+  color: var(--block);
+  font-size: 1.05em;
+}
+.blocked, .is-blocked {
+  background: var(--block-bg) !important;
+  border-color: var(--block) !important;
+}
+.blocked .block-tag, .block-tag {
+  display: inline-block;
+  background: var(--block);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.75em;
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  margin-left: 0.5em;
+  text-transform: uppercase;
+}
+
+.receipt-switcher { display: flex; flex-wrap: wrap; gap: 0.5em; align-items: center; margin: 1em 0; }
+.scope-note { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; padding: 0.6em 0.9em; }
+
+/* Three-column layout: tree | chain+graph | why+raw (PROJECT_BOOK §10.1) */
+.layout { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 1.25em; align-items: start; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+.col h2 { font-size: 1.1em; border-bottom: 1px solid var(--border); padding-bottom: 0.25em; }
+
+/* (2) Source tree */
+.source-tree ul { list-style: none; margin: 0; padding-left: 1.2em; }
+.source-tree > ul { padding-left: 0; }
+.source-tree li { margin: 0.25em 0; }
+.tree-group { font-weight: 700; }
+.tree-item {
+  display: inline-block;
+  padding: 0.15em 0.4em;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.tree-item:hover, .tree-item.selected { border-color: var(--accent); }
+.tree-item .trust { font-size: 0.8em; color: var(--muted); }
+
+/* (4) Trust badges */
+.trust-badges { display: flex; flex-wrap: wrap; gap: 0.4em; }
+.badge {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.2em 0.65em;
+  font-size: 0.85em;
+  background: var(--panel);
+}
+.badge.blocking { border-color: var(--block); color: var(--block); font-weight: 700; }
+
+/* (3) Effective chain */
+.effective-chain { list-style: none; margin: 0; padding: 0; }
+.chain-card {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.6em 0.8em;
+  margin-bottom: 0.6em;
+  cursor: pointer;
+  background: var(--bg);
+}
+.chain-card:hover, .chain-card.selected { border-color: var(--accent); }
+.chain-card .path { font-weight: 700; overflow-wrap: anywhere; }
+.chain-card dl { display: grid; grid-template-columns: auto 1fr; gap: 0.1em 0.8em; margin: 0.4em 0 0; font-size: 0.9em; }
+.chain-card dt { color: var(--muted); }
+.chain-card dd { margin: 0; overflow-wrap: anywhere; }
+
+/* (5) Import graph — rendered from the same receipt.sources / receipt.edges
+   arrays as the tree and chain (single source of truth; see app.js). */
+.import-graph .graph-node {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.4em 0.6em;
+  margin: 0;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  background: var(--bg);
+}
+.import-graph .graph-node:hover, .import-graph .graph-node.selected { border-color: var(--accent); }
+.import-graph .graph-arrow { text-align: center; color: var(--muted); line-height: 1.1; margin: 0.1em 0; }
+.import-graph .graph-edge { font-size: 0.9em; padding: 0.3em 0.6em; border-left: 3px solid var(--border); margin: 0.4em 0; overflow-wrap: anywhere; }
+.import-graph .graph-edge.blocked-edge { border-left-color: var(--block); background: var(--block-bg); }
+.import-graph .empty-note { color: var(--muted); }
+
+/* (6) Why panel */
+.why-panel { border: 1px solid var(--border); border-radius: 4px; padding: 0.8em; background: var(--panel); }
+.why-panel h3 { margin: 0 0 0.4em; font-size: 1em; overflow-wrap: anywhere; }
+.why-panel h4 { margin: 0.8em 0 0.2em; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.why-panel p { margin: 0.2em 0; overflow-wrap: anywhere; }
+
+/* (7) Raw JSON */
+.raw-json {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.8em;
+  overflow: auto;
+  max-height: 480px;
+  font-size: 0.8em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+footer { margin-top: 1.5em; border-top: 1px solid var(--border); padding-top: 0.75em; color: var(--muted); font-size: 0.9em; }
+footer p { overflow-wrap: anywhere; }

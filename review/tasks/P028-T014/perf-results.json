@@ -1,0 +1,166 @@
+{
+  "runs": [
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 1,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 7.794
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 2,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 7.733
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 3,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 6.119
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 4,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 5.187
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 5,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 5.072
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 6,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 4.794
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 7,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 7.005
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 8,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 7.697
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 9,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 6.863
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 10,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 5.031
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 11,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 5.281
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 12,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 4.958
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 13,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 5.008
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 14,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 7.837
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 15,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 7.828
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 16,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 5.716
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 17,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 5.077
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 18,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 4.739
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 19,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 5.131
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 20,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 4.802
+    },
+    {
+      "exit": 20,
+      "receipt_hash": "5cd2933b2e2caabf05aa592376480f7a0476bb98431f85e027e45e84d1a62d6f",
+      "run": 21,
+      "verdict": "BLOCK (exit 20)",
+      "wall_s": 4.923
+    }
+  ],
+  "stats": {
+    "distinct_receipt_hashes": 1,
+    "exits": [
+      20
+    ],
+    "max_s": 7.837,
+    "mean_s": 5.933,
+    "min_s": 4.739,
+    "n": 21,
+    "p50_s": 5.187,
+    "p95_s": 7.828,
+    "verdicts": [
+      "BLOCK (exit 20)"
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "edges": [],
+  "policy": {
+    "policy_schema_version": 1,
+    "values": {
+      "allow_additional_directories": false,
+      "allow_managed_scope": true,
+      "allow_nested_on_demand": true,
+      "allow_repo_tracked": true,
+      "allow_user_scope": true,
+      "block_import_escape": true,
+      "block_missing_reference": true,
+      "block_outside_repo": true,
+      "block_repo_modified": false,
+      "block_repo_untracked": false,
+      "block_symlink_escape": true,
+      "treat_warn_as_block": false,
+      "warn_on_unspecified_precedence": true
+    }
+  },
+  "profile": {
+    "id": "codex",
+    "rules_hash": "sha256:a0a03c1cdd77f8d9110ccbc77dae937e30e288a2609e6b04b60d26d15af5dc23",
+    "version": "codex-2026-11"
+  },
+  "receipt_hash": "aeb13c64e6c46988a2b80429c9927ba590bd62d1db43f3a62dfce94f95741d8a",
+  "receipt_version": 1,
+  "sources": [
+    {
+      "canonical_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/home/.codex/AGENTS.md",
+      "discovery_rule": "codex.user",
+      "git": {
+        "head_commit": "abf817656b0db836b30d43fa998844f5bb0ce520",
+        "modified": false,
+        "repo": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block",
+        "tracked": true
+      },
+      "is_symlink": false,
+      "phase": "startup",
+      "precedence": {
+        "detail": "First in the chain: global instructions are injected before repo instructions.",
+        "kind": "ORDERED"
+      },
+      "raw_path": "~/.codex/AGENTS.md",
+      "resolved_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/home/.codex/AGENTS.md",
+      "scope": "user",
+      "sha256": "9b0b0f60c90db017d0b39745e847ce6d9f31c6dcd56e10c5f2b821989835db98",
+      "source_id": "src-0001",
+      "symlink_target": null,
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "canonical_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/AGENTS.md",
+      "discovery_rule": "codex.repo-chain",
+      "git": {
+        "head_commit": "abf817656b0db836b30d43fa998844f5bb0ce520",
+        "modified": false,
+        "repo": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block",
+        "tracked": true
+      },
+      "is_symlink": false,
+      "phase": "startup",
+      "precedence": {
+        "detail": "Root-to-leaf order: global first, then repo root, then each deeper directory; later (deeper) directories override earlier ones.",
+        "kind": "ORDERED"
+      },
+      "raw_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/AGENTS.md",
+      "resolved_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/AGENTS.md",
+      "scope": "project",
+      "sha256": "957cc2968932c2cf661f4dda41aeed07ad461f5eb57bde5a19f8a1fd33e3a41b",
+      "source_id": "src-0002",
+      "symlink_target": null,
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "canonical_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/services/AGENTS.md",
+      "discovery_rule": "codex.repo-chain",
+      "git": {
+        "head_commit": "abf817656b0db836b30d43fa998844f5bb0ce520",
+        "modified": false,
+        "repo": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block",
+        "tracked": true
+      },
+      "is_symlink": false,
+      "phase": "startup",
+      "precedence": {
+        "detail": "Root-to-leaf order: global first, then repo root, then each deeper directory; later (deeper) directories override earlier ones.",
+        "kind": "ORDERED"
+      },
+      "raw_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/services/AGENTS.md",
+      "resolved_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/services/AGENTS.md",
+      "scope": "project",
+      "sha256": "32d1e6497a63c5c897d7868b863c81ad68030b2e3380c410510a113b275fc08b",
+      "source_id": "src-0003",
+      "symlink_target": null,
+      "trust": "GIT_TRACKED"
+    },
+    {
+      "canonical_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/services/payments/AGENTS.md",
+      "discovery_rule": "codex.repo-chain",
+      "git": {
+        "head_commit": null,
+        "modified": false,
+        "repo": null,
+        "tracked": false
+      },
+      "is_symlink": true,
+      "phase": "startup",
+      "precedence": {
+        "detail": "Root-to-leaf order: global first, then repo root, then each deeper directory; later (deeper) directories override earlier ones.",
+        "kind": "ORDERED"
+      },
+      "raw_path": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/services/payments/AGENTS.md",
+      "resolved_path": "/home/hatch/workspace/p028-instructionroot/fixtures/outside/AGENTS.md",
+      "scope": "project",
+      "sha256": "853797948eb0790055e6e842fa41fb05caf5a544671513b297367af8cee5fe5f",
+      "source_id": "src-0004",
+      "symlink_target": "../../../outside/AGENTS.md",
+      "trust": "SYMLINK_ESCAPE"
+    }
+  ],
+  "verdict": "BLOCK",
+  "workspace": {
+    "cwd": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/services/payments",
+    "home": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block/home",
+    "repo_root": "/home/hatch/workspace/p028-instructionroot/fixtures/demo-block"
+  }
+}
