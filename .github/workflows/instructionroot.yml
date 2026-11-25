@@ -1,0 +1,61 @@
+# P028 InstructionRoot Resolve — CI gate (T010).
+#
+# Runs the repo's own CLI (./instructionroot) against the checked-out
+# repository and fails the job when verify exits non-zero (BLOCK = 20,
+# WARN = 10 unless allow_warn is set in .instructionroot.json).
+#
+# Security properties (plan section 15.2):
+# - No instruction contents are uploaded anywhere: the job produces no
+#   artifacts and runs no upload step; verify only prints paths, hashes,
+#   Git state and trust labels (see PROJECT_BOOK.md section 18).
+# - No third-party tools are installed: the only action is a pinned
+#   actions/checkout; the verify step uses the runner's system python3
+#   and the repo's own stdlib-only CLI. No package installs, no fetches.
+# - Every `uses:` line is pinned to a full 40-char commit SHA (no
+#   floating tags). actions/checkout@11bd719... = v4.2.2.
+# - Repository access is read-only: permissions: contents: read, and
+#   checkout is run with persist-credentials: false.
+# - Harness is configurable: workflow_dispatch inputs (harness, cwd)
+#   override the repo config file .instructionroot.json; on push /
+#   pull_request the inputs are empty and the config file (or the
+#   codex / "." defaults) applies.
+name: instructionroot
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      harness:
+        description: "Harness profile to verify (codex, claude-code, copilot-cli)"
+        required: false
+        default: "codex"
+        type: choice
+        options:
+          - codex
+          - claude-code
+          - copilot-cli
+      cwd:
+        description: "Working directory to verify, relative to the repository root"
+        required: false
+        default: "."
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Verify effective instruction chain
+        env:
+          INSTRUCTIONROOT_HARNESS: ${{ inputs.harness }}
+          INSTRUCTIONROOT_CWD: ${{ inputs.cwd }}
+        run: ./scripts/run-verify.sh
