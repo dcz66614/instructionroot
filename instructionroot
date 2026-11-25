@@ -1,0 +1,11 @@
+#!/bin/sh
+# P028 InstructionRoot Resolve — CLI launcher (T008).
+# Runs the production CLI from this work directory with no install step:
+#   ./instructionroot --help
+#   ./instructionroot verify --harness codex --cwd fixtures/demo
+# Requires: python3 (>= 3.12) and a git binary on PATH. No network.
+set -e
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+PYTHONPATH="$ROOT/02_src${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONPATH
+exec python3 -m instructionroot "$@"
