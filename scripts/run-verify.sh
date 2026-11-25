@@ -104,4 +104,7 @@ case "$ALLOW_WARN" in
     true|1|yes) set -- "$@" --allow-warn ;;
 esac
 
-exec "$ROOT/instructionroot" "$@"
+# Run the launcher via sh: it lands as 100644 on the web upload path,
+# so exec'ing it directly fails with exit 126 (no exec bit).
+# Post-freeze fix 2026-11-25 (Sam approved); freeze unchanged.
+exec sh "$ROOT/instructionroot" "$@"
