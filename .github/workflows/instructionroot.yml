@@ -58,4 +58,7 @@ jobs:
         env:
           INSTRUCTIONROOT_HARNESS: ${{ inputs.harness }}
           INSTRUCTIONROOT_CWD: ${{ inputs.cwd }}
-        run: ./scripts/run-verify.sh
+        # Run via sh: the web upload lands files as 100644, so
+        # ./scripts/run-verify.sh fails with exit 126 (no exec bit).
+        # Post-freeze fix 2026-11-25 (Sam approved); freeze unchanged.
+        run: sh scripts/run-verify.sh
